@@ -1,0 +1,68 @@
+{
+  "groups": [
+    {
+      "heading": { "en": "HKUST Members", "zh": "科大成員" },
+      "members": [
+        { "name": "James Simpson", "affiliation": { "en": "Division of Humanities, HKUST", "zh": "香港科技大學人文學部" } },
+        { "name": "Steve Haonan Ma", "affiliation": { "en": "Division of Humanities, HKUST", "zh": "香港科技大學人文學部" } },
+        { "name": "Yifan Wang", "affiliation": { "en": "Library, HKUST", "zh": "香港科技大學圖書館" } },
+        { "name": "Yan Hon Michael Chung", "affiliation": { "en": "Division of Humanities, HKUST", "zh": "香港科技大學人文學部" } },
+        { "name": "Thorben Pelzer", "affiliation": { "en": "Division of Humanities, HKUST", "zh": "香港科技大學人文學部" } }
+      ]
+    },
+    {
+      "heading": { "en": "Other Members", "zh": "其他成員" },
+      "members": [
+        { "name": "Feng Zhiwei", "affiliation": { "en": "The Chinese Information Processing Society of China / The Institute of Applied Linguistics, Ministry of Education of China", "zh": "中國中文信息學會、教育部語言文字應用研究所" } },
+        { "name": "Yulin Yuan", "affiliation": { "en": "Department of Chinese Language and Literature, University of Macao", "zh": "澳門大學中國語言文學系" } },
+        { "name": "Congjun Long", "affiliation": { "en": "Institute of Ethnology and Anthropology, Chinese Academy of Social Sciences", "zh": "中國社會科學院民族學與人類學研究所" } },
+        { "name": "Bin Li", "affiliation": { "en": "Research Centre for Language Big Data and Computational Humanities, Nanjing Normal University", "zh": "南京師範大學語言大數據與計算人文研究中心" } },
+        { "name": "Gaoqi Rao", "affiliation": { "en": "Institute of International Education of Chinese Language, Beijing Language and Culture University", "zh": "北京語言大學國際中文教育研究院" } },
+        { "name": "Yudong Liu", "affiliation": { "en": "Department of Computer Science, Western Washington University", "zh": "西華盛頓大學計算機科學系" } },
+        { "name": "Wang Dongbo", "affiliation": { "en": "College of Information Management, Nanjing Agricultural University", "zh": "南京農業大學信息管理學院" } },
+        { "name": "Alaa Mamdouh Akef", "affiliation": { "en": "School of Foreign Languages, Peking University", "zh": "北京大學外國語學院" } },
+        { "name": "Sun Fenglan", "affiliation": { "en": "Foreign Language Teaching and Research Press", "zh": "外語教學與研究出版社" } },
+        { "name": "Marco Passarotti", "affiliation": { "en": "Catholic University of the Sacred Heart", "zh": "天主教聖心大學" } },
+        { "name": "Nianwen Xue", "affiliation": { "en": "Department of Computer Science, Brandeis University", "zh": "布蘭迪斯大學計算機科學系" } },
+        { "name": "Di Jiang", "affiliation": { "en": "Institute of Ethnology and Anthropology, Chinese Academy of Social Sciences", "zh": "中國社會科學院民族學與人類學研究所" } },
+        { "name": "Haitao Liu", "affiliation": { "en": "Fudan University", "zh": "復旦大學" } },
+        { "name": "Wei Huang", "affiliation": { "en": "Beijing Language and Culture University", "zh": "北京語言大學" } },
+        { "name": "Melissa Terras", "affiliation": { "en": "College of Art, University of Edinburgh", "zh": "愛丁堡大學藝術學院" } },
+        { "name": "Seth Mehl", "affiliation": { "en": "School of History, Philosophy and Digital Humanities, University of Sheffield", "zh": "謝菲爾德大學歷史、哲學與數碼人文學院" } },
+        { "name": "Simon Mahony", "affiliation": { "en": "Department of Information Studies, University College London", "zh": "倫敦大學學院信息研究系" } },
+        { "name": "Joe Nockles", "affiliation": { "en": "School of Humanities, University of Glasgow", "zh": "格拉斯哥大學人文學院" } },
+        { "name": "Jessica Witte", "affiliation": { "en": "Centre for Digital Narrative, University of Bergen", "zh": "卑爾根大學數碼敍事研究中心" } },
+        { "name": "Claire Warwick", "affiliation": { "en": "Department of English, Durham University", "zh": "杜倫大學英文系" } },
+        { "name": "Stuart Dunn", "affiliation": { "en": "Faculty of Arts & Humanities, King's College London", "zh": "倫敦國王學院人文藝術學院" } },
+        { "name": "Quinn Dombrowski", "affiliation": { "en": "Division of Literatures, Cultures, and Languages, Stanford University", "zh": "史丹福大學文學、文化與語言學院" } },
+        { "name": "Simon Burrows", "affiliation": { "en": "School of Humanities and Communication Arts, Western Sydney University", "zh": "西雪梨大學人文與傳播藝術學院" } },
+        { "name": "Claudia Corbetta", "affiliation": { "en": "University of Bergamo, Italy", "zh": "意大利貝加莫大學" } },
+        { "name": "Francesco Mambrini", "affiliation": { "en": "Catholic University of the Sacred Heart", "zh": "天主教聖心大學" } },
+        { "name": "Jin Gao", "affiliation": { "en": "Centre for Digital Humanities, University College London", "zh": "倫敦大學學院數碼人文中心" } },
+        { "name": "Masayuki Asahara", "affiliation": { "en": "National Institute for Japanese Language and Linguistics, Japan", "zh": "日本國立國語研究所" } },
+        { "name": "Shahar Spencer", "affiliation": { "en": "The Hebrew University of Jerusalem, Israel", "zh": "以色列耶路撒冷希伯來大學" } },
+        { "name": "Stéphane Polis", "affiliation": { "en": "University of Liège, Belgium", "zh": "比利時列日大學" } },
+        { "name": "Toon Van Hal", "affiliation": { "en": "KU Leuven", "zh": "比利時魯汶大學" } },
+        { "name": "Shuangcheng Bai", "affiliation": { "en": "School of Computer Science and Technology, Inner Mongolia Normal University", "zh": "內蒙古師範大學計算機科學與技術學院" } },
+        { "name": "Xiaopeng Bai", "affiliation": { "en": "Department of Chinese Language and Literature, East China Normal University", "zh": "華東師範大學中國語言文學系" } },
+        { "name": "Renfen Hu", "affiliation": { "en": "College of International Education of Chinese Language, Beijing Normal University", "zh": "北京師範大學國際中文教育學院" } },
+        { "name": "Shujian Huang", "affiliation": { "en": "Department of Computer Science and Technology, Nanjing University", "zh": "南京大學計算機科學與技術系" } },
+        { "name": "Yunfei Long", "affiliation": { "en": "School of Electronic Engineering and Computer Science, Queen Mary University of London", "zh": "倫敦瑪麗女王大學電子工程與計算機科學學院" } },
+        { "name": "Shehui Liang", "affiliation": { "en": "College of International Cultural Education, Nanjing Normal University", "zh": "南京師範大學國際文化教育學院" } },
+        { "name": "Huidan Liu", "affiliation": { "en": "Institute of Software, Chinese Academy of Sciences", "zh": "中國科學院軟件研究所" } },
+        { "name": "Liu Liu", "affiliation": { "en": "School of Information Management, Nanjing Agricultural University", "zh": "南京農業大學信息管理學院" } },
+        { "name": "Pengyuan Liu", "affiliation": { "en": "School of Information Science, Beijing Language and Culture University", "zh": "北京語言大學信息科學學院" } },
+        { "name": "Longlong Ma", "affiliation": { "en": "University of Chinese Academy of Sciences", "zh": "中國科學院大學" } },
+        { "name": "Kunyu Qi", "affiliation": { "en": "China National Institute for Minority Information Technology, Northwest Minzu University", "zh": "西北民族大學中國民族信息技術研究院" } },
+        { "name": "Qi Rao", "affiliation": { "en": "College of Chinese Language and Literature, Central China Normal University", "zh": "華中師範大學中國語言文學學院" } },
+        { "name": "Si Shen", "affiliation": { "en": "School of Economics and Management, Nanjing University of Science and Technology", "zh": "南京理工大學經濟管理學院" } },
+        { "name": "Wei Shen", "affiliation": { "en": "National Centre for Linguistics and Language Education, Central China Normal University", "zh": "華中師範大學語言與語言教育研究中心" } },
+        { "name": "Qi Su", "affiliation": { "en": "School of Foreign Languages, Peking University", "zh": "北京大學外國語學院" } },
+        { "name": "Yang Tao", "affiliation": { "en": "China Electronic Standardization Institute", "zh": "中國電子技術標準化研究院" } },
+        { "name": "Lulu Wang", "affiliation": { "en": "School of Humanities, Communication University of China", "zh": "中國傳媒大學人文學院" } },
+        { "name": "Meng Wang", "affiliation": { "en": "School of Humanities, Jiangnan University", "zh": "江南大學人文學院" } },
+        { "name": "Xiaobing Zhao", "affiliation": { "en": "Minzu University of China", "zh": "中央民族大學" } }
+      ]
+    }
+  ]
+}

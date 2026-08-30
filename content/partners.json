@@ -1,0 +1,154 @@
+[
+  {
+    "mark": "FLTRP",
+    "name": {
+      "en": "Foreign Language Teaching and Research Press",
+      "zh": "外語教學與研究出版社有限責任公司(外研社)"
+    },
+    "logo": "assets/img/partners/fltrp.png"
+  },
+  {
+    "mark": "UM",
+    "name": {
+      "en": "University of Macau",
+      "zh": "澳門大學"
+    },
+    "logo": "assets/img/partners/university-of-macau.png"
+  },
+  {
+    "mark": "Soton",
+    "name": {
+      "en": "University of Southampton",
+      "zh": "南安普敦大學"
+    },
+    "logo": "assets/img/partners/southampton.svg"
+  },
+  {
+    "mark": "Essex",
+    "name": {
+      "en": "University of Essex",
+      "zh": "艾塞克斯大學"
+    },
+    "logo": "assets/img/partners/essex.svg"
+  },
+  {
+    "mark": "PKU",
+    "name": {
+      "en": "Peking University",
+      "zh": "北京大學"
+    },
+    "logo": "assets/img/partners/peking.png"
+  },
+  {
+    "mark": "QMUL",
+    "name": {
+      "en": "Queen Mary University of London",
+      "zh": "倫敦瑪麗女王大學"
+    },
+    "logo": "assets/img/partners/qmul.png"
+  },
+  {
+    "mark": "HUST",
+    "name": {
+      "en": "Huazhong University of Science and Technology",
+      "zh": "華中科技大學"
+    },
+    "logo": "assets/img/partners/hust.png"
+  },
+  {
+    "mark": "WWU",
+    "name": {
+      "en": "Western Washington University",
+      "zh": "西華盛頓大學"
+    },
+    "logo": "assets/img/partners/western-washington.svg"
+  },
+  {
+    "mark": "NNU",
+    "name": {
+      "en": "Nanjing Normal University",
+      "zh": "南京師範大學"
+    },
+    "logo": "assets/img/partners/nanjing-normal.png"
+  },
+  {
+    "mark": "NAU",
+    "name": {
+      "en": "Nanjing Agricultural University",
+      "zh": "南京農業大學"
+    },
+    "logo": "assets/img/partners/nanjing-agricultural.png"
+  },
+  {
+    "mark": "NTU",
+    "name": {
+      "en": "Nanyang Technological University",
+      "zh": "南洋理工大學"
+    },
+    "logo": "assets/img/partners/ntu.png"
+  },
+  {
+    "mark": "LU",
+    "name": {
+      "en": "Lingnan University",
+      "zh": "嶺南大學"
+    },
+    "logo": "assets/img/partners/lingnan.png"
+  },
+  {
+    "mark": "XJU",
+    "name": {
+      "en": "Xinjiang University",
+      "zh": "新疆大學"
+    },
+    "logo": "assets/img/partners/xinjiang.png"
+  },
+  {
+    "mark": "Harvard",
+    "name": {
+      "en": "Harvard University",
+      "zh": "哈佛大學"
+    },
+    "logo": "assets/img/partners/harvard.svg"
+  },
+  {
+    "mark": "BLCU",
+    "name": {
+      "en": "Beijing Language and Culture University",
+      "zh": "北京語言大學"
+    },
+    "logo": "assets/img/partners/blcu.png"
+  },
+  {
+    "mark": "HKU",
+    "name": {
+      "en": "University of Hong Kong",
+      "zh": "香港大學"
+    },
+    "logo": "assets/img/partners/hku.svg"
+  },
+  {
+    "mark": "PolyU",
+    "name": {
+      "en": "Hong Kong Polytechnic University",
+      "zh": "香港理工大學"
+    },
+    "logo": "assets/img/partners/polyu.png"
+  },
+  {
+    "mark": "HKBU",
+    "name": {
+      "en": "Hong Kong Baptist University",
+      "zh": "香港浸會大學"
+    },
+    "logo": "assets/img/partners/hkbu.png"
+  },
+  {
+    "mark": "BNBU",
+    "name": {
+      "en": "BNU-HKBU United International College",
+      "zh": "北師香港浸會大學"
+    },
+    "logo": "assets/img/partners/bnbu.png"
+  }
+]
