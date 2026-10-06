@@ -44,7 +44,12 @@
     "logos": {
       "ust": "assets/img/ust-logo.png",
       "project": "assets/img/project-logo.png"
-    }
+    },
+    "projectGroups": [
+      { "key": "colab", "heading": { "en": "HDT CoLab", "zh": "HDT CoLab" }, "subtitle": { "en": "HDT CoLab explores the development and application of digital tools for research and teaching in the humanities, and opens those tools to the whole community.", "zh": "HDT CoLab 旨在探索人文學研究與教學領域的數碼工具開發與應用，並將這些工具開放給整個社群。" } },
+      { "key": "seed", "heading": { "en": "DHI Seed Fund Projects", "zh": "DHI 種子基金資助項目" }, "subtitle": { "en": "Seed-funded research projects that build digital methods, tools and collections for the humanities.", "zh": "由種子基金資助，為人文研究開發數碼方法、工具與典藏的研究項目。" } },
+      { "key": "student", "heading": { "en": "Digital Humanities Teaching Support Projects", "zh": "數碼人文教學支援項目" }, "subtitle": { "en": "Course-based projects by HKUST students, produced with the platform's digital humanities teaching programme.", "zh": "由平台數碼人文教學計劃支援、科大學生完成的課程項目。" } }
+    ]
   },
   "en": {
     "brand": "HDTP",
@@ -57,6 +62,7 @@
       { "label": "Events", "href": "events.html" },
       { "label": "Conferences", "href": "conferences.html" },
       { "label": "Teaching", "href": "teaching.html" },
+      { "label": "Projects", "href": "projects.html" },
       { "label": "Publications", "href": "publications.html" },
       { "label": "Members", "href": "members.html" }
     ],
@@ -110,10 +116,13 @@
       "conferencesSubtitle": "Academic conferences and symposia hosted or co-organized by the platform.",
       "teaching": "Teaching",
       "teachingSubtitle": "Courses and training that bring digital methods into the classroom.",
+      "projects": "Projects",
+      "projectsSubtitle": "We support a range of digital humanities infrastructure and, through experiment and exploration, move the humanities forward.",
       "publications": "Publications",
       "publicationsSubtitle": "Books, articles, and research outputs from the platform's members.",
       "backToConferences": "← Back to all conferences",
       "backToTeaching": "← Back to all teaching",
+      "backToProjects": "← Back to all projects",
       "backToPublications": "← Back to all publications",
       "viewPublication": "View publication →",
       "visitWebsite": "Visit conference website →",
@@ -155,6 +164,7 @@
       { "label": "活動", "href": "events.html" },
       { "label": "學術會議", "href": "conferences.html" },
       { "label": "教學", "href": "teaching.html" },
+      { "label": "項目", "href": "projects.html" },
       { "label": "出版物", "href": "publications.html" },
       { "label": "成員", "href": "members.html" }
     ],
@@ -208,10 +218,13 @@
       "conferencesSubtitle": "由平台主辦或合辦的學術會議與研討會。",
       "teaching": "教學",
       "teachingSubtitle": "將數碼方法帶入課堂的課程與培訓。",
+      "projects": "項目",
+      "projectsSubtitle": "我們支持一系列數碼人文基礎設施，並透過實驗與探索，推動人文學的發展。",
       "publications": "出版物",
       "publicationsSubtitle": "平台成員的著作、論文與研究成果。",
       "backToConferences": "← 返回所有學術會議",
       "backToTeaching": "← 返回所有教學",
+      "backToProjects": "← 返回所有項目",
       "backToPublications": "← 返回所有出版物",
       "viewPublication": "查看出版物 →",
       "visitWebsite": "訪問會議網站 →",

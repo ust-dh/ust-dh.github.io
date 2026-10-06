@@ -15,6 +15,7 @@
  *   content/partners.json    bilingual partner logos
  *   content/news/*.md        bilingual news posts
  *   content/events/*.md      bilingual events
+ *   content/projects/*.md    bilingual project stories
  *
  * MD frontmatter supports per-language fields (nested keys):
  *   title:  { en: "...", zh: "..." }   (or a plain string for both)
@@ -25,7 +26,7 @@
  * An item appears on a language site only when that language's title
  * AND body are both present (single-language MD files show on one site).
  * ============================================================ */
-import { readFileSync, readdirSync, writeFileSync, mkdirSync, rmSync, statSync } from 'node:fs';
+import { readFileSync, readdirSync, writeFileSync, mkdirSync, rmSync, statSync, existsSync } from 'node:fs';
 import { join, basename, dirname, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -218,6 +219,11 @@ function mdToHtml(src) {
   return out.join('\n');
 }
 
+/* body-markdown images carry site-relative paths; resolve them against the page
+   that renders them (detail pages sit one or two levels below the site root) */
+const resolveBodyImages = (html, prefix) =>
+  html.replace(/(<img\b[^>]*\bsrc=")(?![a-zA-Z][a-zA-Z0-9+.-]*:|\/\/|\/|#|data:)/g, `$1${prefix}`);
+
 /* ---------------- content loading ---------------- */
 
 const config = readJson(join(ROOT, 'site.config.json'));
@@ -229,6 +235,7 @@ const partners = readJson(join(CONTENT, 'partners.json'));
 const slugOf = (f) => basename(f, '.md');
 
 function loadCollection(dir) {
+  if (!existsSync(join(CONTENT, dir))) return [];
   return readdirSync(join(CONTENT, dir))
     .filter((f) => f.endsWith('.md'))
     .map((f) => {
@@ -256,6 +263,8 @@ function loadCollection(dir) {
         authors: meta.authors || '',
         year: meta.year || '',
         link: meta.link || '',
+        group: meta.group || '',
+        order: meta.order ? Number(meta.order) : 0,
         title, summary, tags, location, html,
         body: { en: bodies.en, zh: bodies.zh },
       };
@@ -267,6 +276,7 @@ const allEvents = loadCollection('events');
 const allConferences = loadCollection('conferences');
 const allTeaching = loadCollection('teaching');
 const allPublications = loadCollection('publications');
+const allProjects = loadCollection('projects');
 
 const forLang = (items, lang) => items
   .filter((it) => it.title[lang] && it.body[lang])
@@ -277,6 +287,9 @@ const events = { en: forLang(allEvents, 'en'), zh: forLang(allEvents, 'zh') };
 const conferences = { en: forLang(allConferences, 'en'), zh: forLang(allConferences, 'zh') };
 const teaching = { en: forLang(allTeaching, 'en'), zh: forLang(allTeaching, 'zh') };
 const publications = { en: forLang(allPublications, 'en'), zh: forLang(allPublications, 'zh') };
+/* projects keep the order the live site curates them in (front-matter `order`) */
+const byOrder = (items) => items.slice().sort((a, b) => a.order - b.order);
+const projects = { en: byOrder(forLang(allProjects, 'en')), zh: byOrder(forLang(allProjects, 'zh')) };
 const upcoming = { en: events.en.filter((e) => e.date >= todayISO).sort((a, b) => (a.date > b.date ? 1 : -1)), zh: events.zh.filter((e) => e.date >= todayISO).sort((a, b) => (a.date > b.date ? 1 : -1)) };
 const past = { en: events.en.filter((e) => e.date < todayISO), zh: events.zh.filter((e) => e.date < todayISO) };
 
@@ -530,6 +543,23 @@ const publicationRow = (p, lang, prefix) => {
 </article>`;
 };
 
+/* project card — the same card markup as news, with the term chip teaching uses */
+const projectCard = (p, lang, prefix) => {
+  const href = `projects/${p.slug}.html`;
+  const thumbStyle = p.image ? `style="background-image:url('${prefix}${esc(p.image)}')"` : '';
+  const thumbClass = p.image ? '' : 'thumb-fallback';
+  return `
+<article class="news-card reveal">
+  <a class="news-thumb ${thumbClass}" href="${esc(href)}" aria-hidden="true" ${thumbStyle}></a>
+  <div class="news-body">
+    <div class="news-meta"><span class="tag-row">${tagBadges(p.tags[lang])}</span>${p.term[lang] ? `<span class="term-label">${esc(p.term[lang])}</span>` : ''}</div>
+    <h3><a href="${esc(href)}">${esc(p.title[lang])}</a></h3>
+    <p>${esc(p.summary[lang])}</p>
+    <a class="read-more" href="${esc(href)}">${esc(LANG[lang].pageTitles.readMore)}</a>
+  </div>
+</article>`;
+};
+
 /* conference "big area": image gallery + facts + full introduction —
    the main showcase for each conference */
 /* conference showcase — text left, image gallery right (in a glass panel),
@@ -754,8 +784,14 @@ const aboutSection = (lang) => {
     <h2>${esc(L.heading)}</h2>
     ${L.paragraphs.map((p) => `<p class="lead">${esc(p)}</p>`).join('')}
     <div class="facts">
-      ${L.facts.map((f) => `<div class="fact"><strong>${esc(f.value)}</strong><span>${esc(f.label)}</span></div>`).join('')}
+      ${L.facts.map((f) => `<div class="fact"><strong>${esc(f.value)}</strong><span class="fact-label">${esc(f.label)}${f.star ? '<sup class="fact-star" aria-hidden="true">*</sup>' : ''}</span></div>`).join('')}
     </div>
+    ${(() => {
+      const notes = L.facts.filter((f) => f.note).map((f) => f.note);
+      if (!notes.length) return '';
+      const starred = L.facts.some((f) => f.star) ? '* ' : '';
+      return `<p class="facts-note">${starred}${notes.map((n) => esc(n)).join(' ')}</p>`;
+    })()}
   </div>
 </section>`;
 };
@@ -893,7 +929,7 @@ ${partnersSection(lang, rootPrefix)}`);
     const label = kind === 'news' ? L.pageTitles.news : L.pageTitles.events;
     const backText = kind === 'news' ? L.pageTitles.backToNews : L.pageTitles.backToEvents;
     for (const item of items) {
-      const html = item.html[lang];
+      const html = resolveBodyImages(item.html[lang], detailPrefix);
       const facts = kind === 'events'
         ? `<dl class="article-facts">
              ${item.date ? `<div><dt>${esc(L.pageTitles.facts.date)}</dt><dd>${formatDate(item.date, lang)}</dd></div>` : ''}
@@ -974,6 +1010,51 @@ ${pageBanner(lang, item.title[lang], item.summary[lang],
     }
   }
 
+  /* projects: one list page (grouped as the live site groups them) plus a
+     detail page per project, in the same bilingual style as news/events */
+  {
+    const T = L.pageTitles.projects;
+    const list = projects[lang];
+    const groups = shared.projectGroups || [];
+    const cardGrid = (items) => `<div class="news-grid">${items.map((p) => projectCard(p, lang, rootPrefix)).join('')}</div>`;
+    const grouped = groups.map((g) => {
+      const items = list.filter((p) => p.group === g.key);
+      if (!items.length) return '';
+      return `
+    <h2 class="subgroup">${esc(g.heading[lang])}</h2>
+    ${g.subtitle && g.subtitle[lang] ? `<p class="muted-note">${esc(g.subtitle[lang])}</p>` : ''}
+    ${cardGrid(items)}`;
+    }).join('');
+    const ungrouped = list.filter((p) => !groups.some((g) => g.key === p.group));
+    add('projects.html', depthBase, sub + 'projects.html',
+      `${T} — ${L.name}`, L.pageTitles.projectsSubtitle,
+      `${pageBanner(lang, T, L.pageTitles.projectsSubtitle, `<a href="index.html">Home</a><span aria-hidden="true">›</span><span>${esc(T)}</span>`)}
+<section class="page-body projects-page">
+  <div class="container">
+    ${grouped}
+    ${ungrouped.length ? cardGrid(ungrouped) : ''}
+  </div>
+</section>`);
+    for (const item of list) {
+      const facts = `<dl class="article-facts">
+             ${item.term[lang] ? `<div><dt>${esc(L.pageTitles.facts.term)}</dt><dd>${esc(item.term[lang])}</dd></div>` : ''}
+           </dl>`;
+      const body = `
+${pageBanner(lang, item.title[lang], item.summary[lang],
+  `<a href="${detailPrefix}index.html">Home</a><span aria-hidden="true">›</span><a href="${detailPrefix}projects.html">${esc(T)}</a><span aria-hidden="true">›</span><span>${esc(L.pageTitles.article)}</span>`, true)}
+<section class="page-body">
+  <div class="container article">
+    ${item.image ? `<img class="article-cover" src="${detailPrefix}${esc(item.image)}" alt="" loading="lazy">` : ''}
+    ${facts}
+    ${resolveBodyImages(item.html[lang], detailPrefix)}
+    <p class="back-link"><a href="${detailPrefix}projects.html">${esc(L.pageTitles.backToProjects)}</a></p>
+  </div>
+</section>`;
+      add(`projects/${item.slug}.html`, depthBase + 1, sub + 'projects.html',
+        `${item.title[lang]} — ${L.name}`, item.summary[lang] || L.description, body);
+    }
+  }
+
   return pages;
 }
 
@@ -989,7 +1070,10 @@ for (const page of allPages) {
   writeFileSync(join(ROOT, page.file), layout(page, title, description, page.body));
 }
 
-/* clean stale outputs (pages whose source MD was removed/renamed) */
+/* clean stale outputs (pages whose source MD was removed/renamed).
+   Scoped to this generator's own output: the top-level pages it writes plus the
+   section/language directories below them. Scratch trees (page captures,
+   screenshots, tooling) are never walked, so they can never be deleted. */
 const generated = new Set(allPages.map((p) => p.file.replace(/\//g, sep)));
 function walkHtml(dir) {
   const out = [];
@@ -1000,7 +1084,13 @@ function walkHtml(dir) {
   }
   return out;
 }
-for (const rel of walkHtml(ROOT)) {
+const OWNED_DIRS = ['news', 'events', 'conferences', 'teaching', 'publications', 'projects', shared.zhDir];
+const owned = readdirSync(ROOT).filter((e) => e.endsWith('.html'));
+for (const d of OWNED_DIRS) {
+  const p = join(ROOT, d);
+  if (existsSync(p)) owned.push(...walkHtml(p));
+}
+for (const rel of owned) {
   if (!generated.has(rel)) {
     rmSync(join(ROOT, rel));
     console.log('  cleaned stale:', rel);
@@ -1014,3 +1104,4 @@ for (const lang of ['en', 'zh']) {
 }
 console.log(`news: en=${news.en.length} zh=${news.zh.length} · events: en=${events.en.length} zh=${events.zh.length} (upcoming en=${upcoming.en.length} zh=${upcoming.zh.length})`);
 console.log(`conferences: en=${conferences.en.length} zh=${conferences.zh.length} · teaching: en=${teaching.en.length} zh=${teaching.zh.length} · publications: en=${publications.en.length} zh=${publications.zh.length}`);
+console.log(`projects: en=${projects.en.length} zh=${projects.zh.length}`);

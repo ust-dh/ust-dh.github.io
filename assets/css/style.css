@@ -641,31 +641,59 @@ section { scroll-margin-top: calc(var(--header-h) + 8px); }
   padding-block: clamp(4rem, 10vh, 7rem);
 }
 
-@media (max-height: 700px) {
+@media (max-height: 700px) and (min-width: 768px) {
   .hero-inner { padding-block: 4rem; }
   .hero-copy .hero-sub { display: none; }
 }
 
-/* mobile: hero content must fit (or scroll) inside one viewport */
+/* mobile: the hero stays a full-screen block, but grows with its content so a
+   short screen can never clip the headline or the news card */
 @media (max-width: 767px) {
+  .hero-carousel { min-height: 100svh; }
+  /* .hero-slides is in flow on desktop (min-height: inherit) and would add a
+     whole viewport of height once the static layer is in flow below it — take
+     it out of flow so the copy defines the hero's height while the photos
+     still stretch over all of it. */
+  .hero-slides {
+    position: absolute;
+    inset: 0;
+    min-height: 0;
+  }
+  /* in flow, the static layer defines the height of the hero: on a tall phone
+     that is one viewport, on a short one it is however much the copy needs.
+     (Absolute + overflow was cutting the card off at 360x640.) */
   .hero-static {
-    overflow-y: auto;
-    align-items: flex-start;
+    position: relative;
+    inset: auto;
+    min-height: 100svh;
+    overflow: visible;
+    align-items: center;
     padding-top: calc(var(--topbar-h) + var(--header-h) + 0.75rem);
-    padding-bottom: 5.5rem; /* keep the card clear of the carousel controls */
+    padding-bottom: 6rem; /* keep the card clear of the carousel controls */
   }
+  /* margin-block:auto still centres the block when there is room to spare */
   .hero-inner {
-    padding-block: 0;
-    gap: 1.25rem;
+    margin-block: auto;
+    padding-block: 1rem;
+    gap: 1.4rem;
   }
-  .hero-copy .eyebrow { margin-bottom: 0.5rem; }
+  .hero-copy .eyebrow {
+    margin-bottom: 0.6rem;
+    font-size: 0.9rem;
+  }
   .hero-copy h1 {
-    font-size: clamp(1.55rem, 6.5vw, 2rem);
-    margin-bottom: 0.5rem;
+    font-size: clamp(1.9rem, 8.2vw, 2.5rem);
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
   }
-  .hero-copy .hero-sub { display: none; }
-  .hero-news { min-height: 15rem; }
-  .hero-news p { -webkit-line-clamp: 2; }
+  .hero-copy .hero-sub {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .hero-news { min-height: 0; }
+  .hero-news h2 { font-size: 1.15rem; }
+  .hero-news p { font-size: 0.95rem; -webkit-line-clamp: 3; }
 }
 
 .hero-copy {
@@ -679,11 +707,25 @@ section { scroll-margin-top: calc(var(--header-h) + 8px); }
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--secondary);
-  text-shadow: 0 1px 5px rgba(255, 255, 255, 1), 0 0 38px rgba(255, 255, 255, 0.95);
+  /* the halo follows the glyphs: a tight near field, then a wide, dense far
+     field (no soft patch behind the block, which reads as a blur) */
+  text-shadow:
+    0 1px 2px rgba(255, 255, 255, 1),
+    0 0 10px rgba(255, 255, 255, 1),
+    0 0 28px rgba(255, 255, 255, 0.95),
+    0 0 62px rgba(255, 255, 255, 0.8),
+    0 0 120px rgba(255, 255, 255, 0.6),
+    0 0 190px rgba(255, 255, 255, 0.4);
 }
 .dark .hero-copy .eyebrow {
   color: #bfdbfe;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9), 0 0 18px rgba(0, 0, 0, 0.6);
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 1),
+    0 0 10px rgba(0, 0, 0, 1),
+    0 0 28px rgba(0, 0, 0, 0.95),
+    0 0 62px rgba(0, 0, 0, 0.8),
+    0 0 120px rgba(0, 0, 0, 0.6),
+    0 0 190px rgba(0, 0, 0, 0.4);
 }
 
 .hero-copy h1 {
@@ -692,13 +734,22 @@ section { scroll-margin-top: calc(var(--header-h) + 8px); }
   margin-bottom: 0.9rem;
   color: var(--text-heading);
   text-shadow:
-    0 3px 10px rgba(255, 255, 255, 1),
-    0 0 60px rgba(255, 255, 255, 0.95),
-    0 0 130px rgba(255, 255, 255, 0.6);
+    0 1px 2px rgba(255, 255, 255, 1),
+    0 0 12px rgba(255, 255, 255, 1),
+    0 0 30px rgba(255, 255, 255, 0.95),
+    0 0 65px rgba(255, 255, 255, 0.82),
+    0 0 125px rgba(255, 255, 255, 0.62),
+    0 0 195px rgba(255, 255, 255, 0.4);
 }
 .dark .hero-copy h1 {
   color: #fff;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.85), 0 0 34px rgba(0, 0, 0, 0.55);
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 1),
+    0 0 12px rgba(0, 0, 0, 1),
+    0 0 30px rgba(0, 0, 0, 0.95),
+    0 0 65px rgba(0, 0, 0, 0.82),
+    0 0 125px rgba(0, 0, 0, 0.62),
+    0 0 195px rgba(0, 0, 0, 0.4);
 }
 
 .hero-copy .hero-sub {
@@ -707,11 +758,23 @@ section { scroll-margin-top: calc(var(--header-h) + 8px); }
   font-weight: 500;
   color: var(--text-default);
   margin-bottom: 1.5rem;
-  text-shadow: 0 1px 5px rgba(255, 255, 255, 1), 0 0 34px rgba(255, 255, 255, 0.85);
+  text-shadow:
+    0 1px 2px rgba(255, 255, 255, 1),
+    0 0 9px rgba(255, 255, 255, 1),
+    0 0 26px rgba(255, 255, 255, 0.92),
+    0 0 58px rgba(255, 255, 255, 0.78),
+    0 0 112px rgba(255, 255, 255, 0.58),
+    0 0 175px rgba(255, 255, 255, 0.38);
 }
 .dark .hero-copy .hero-sub {
   color: rgba(255, 255, 255, 0.94);
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85), 0 0 16px rgba(0, 0, 0, 0.5);
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 1),
+    0 0 9px rgba(0, 0, 0, 1),
+    0 0 26px rgba(0, 0, 0, 0.92),
+    0 0 58px rgba(0, 0, 0, 0.78),
+    0 0 112px rgba(0, 0, 0, 0.58),
+    0 0 175px rgba(0, 0, 0, 0.38);
 }
 
 /* single frosted-glass card for the featured news —
@@ -930,6 +993,29 @@ section:not(.band):not(.hero-carousel):not(.page-banner):not(.page-body) {
   font-size: 0.85rem;
   color: var(--text-muted);
   text-shadow: 0 0 12px rgba(1, 97, 239, 0.25);
+}
+/* footnote on the row of facts: a star at the top right of the small label,
+   with the small print under the whole row so a long note never squeezes one
+   column of the layout */
+.fact-label { display: inline-block; position: relative; }
+.fact-star {
+  margin-left: 0.1rem;
+  font-size: 0.95em;
+  line-height: 1;
+  vertical-align: super;
+  color: var(--primary);
+  text-shadow: 0 0 12px rgba(1, 97, 239, 0.45);
+}
+.facts-note {
+  width: 100%;
+  max-width: 42rem;
+  margin: 1.1rem auto 0;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  opacity: 0.85;
+  text-align: center;
+  text-shadow: none;
 }
 
 /* ---------- direction cards ---------- */
@@ -1805,8 +1891,20 @@ section:not(.band):not(.hero-carousel):not(.page-banner):not(.page-body) {
 .hero-copy .eyebrow { animation-delay: 0.15s; }
 .hero-copy h1 { animation-delay: 0.28s; }
 .hero-copy .hero-sub { animation-delay: 0.42s; }
-/* the news card fades in instantly each time its content swaps */
+/* the copy block and the card fly in from the side the slide came from */
+@keyframes fly-in-right {
+  from { opacity: 0; transform: translateX(2.75rem); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fly-in-left {
+  from { opacity: 0; transform: translateX(-2.75rem); }
+  to   { opacity: 1; transform: translateX(0); }
+}
 .hero-news { animation: fade-up 0.5s ease both; }
+.hero-copy.fly-right,
+.hero-news.fly-right { animation: fly-in-right 0.5s ease both; }
+.hero-copy.fly-left,
+.hero-news.fly-left { animation: fly-in-left 0.5s ease both; }
 
 /* list-page banner content fades in on load */
 .page-banner .breadcrumb,

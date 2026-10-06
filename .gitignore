@@ -1,4 +1,16 @@
 ﻿.DS_Store
 Thumbs.db
 *.log
-
+drupal-package/
+_drupal_auto/
+_*.py
+_site_backup/
+_shots/
+_project_src/
+_pylibs/
+.npmcache/
+_inspect_out.txt
+AGENTS.md
+CONVENTIONS.md
+HANDOVER.md
+site.config.json.bak
