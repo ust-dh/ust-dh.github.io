@@ -1,270 +1,685 @@
+
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Humanities and Digital Technologies Platform — HDTP</title>
-<meta name="description" content="The Humanities and Digital Technologies Platform is a collaborative community at HKUST bringing together faculty, library, and students to explore digital humanities skills and develop innovative digital projects.">
-<meta name="robots" content="index,follow">
-<link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
-<script>
-(function () {
-  document.documentElement.classList.add("js");
-  var theme = null;
-  try { theme = localStorage.getItem("theme"); } catch (e) { /* ignore */ }
-  var dark = theme ? theme === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
-  document.documentElement.classList.toggle("dark", dark);
-})();
-</script></head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  
-<div class="hkust-topbar">
-  <details class="more-drawer">
-    <summary class="toggler" aria-label="More about HKUST" title="More about HKUST"><svg class="chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
-    <div class="drawer-content">
-      <div class="drawer-title">More about HKUST</div>
-      <nav class="drawer-links" aria-label="HKUST">
-        <a href="https://hkust.edu.hk/news" target="_blank" rel="noreferrer">University News</a><a href="https://hkust.edu.hk/academics/list" target="_blank" rel="noreferrer">Academic Departments A-Z</a><a href="https://hkust.edu.hk/lifehkust" target="_blank" rel="noreferrer">Life@HKUST</a><a href="https://library.hkust.edu.hk" target="_blank" rel="noreferrer">Library</a><a href="https://hkust.edu.hk/map-directions" target="_blank" rel="noreferrer">Map &amp; Directions</a><a href="https://hkustcareers.ust.hk" target="_blank" rel="noreferrer">Careers at HKUST</a><a href="https://facultyprofiles.ust.hk/" target="_blank" rel="noreferrer">Faculty Profiles</a><a href="https://hkust.edu.hk/about" target="_blank" rel="noreferrer">About HKUST</a>
-      </nav>
+<html lang="en" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+<style>
+@media (max-width: 899px) {
+  .hero-carousel {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 200vh !important;
+    min-height: 200svh !important;
+    padding-top: calc(var(--topbar-h, 0px) + var(--header-h, 0px)) !important;
+  }
+
+  .hero-static {
+    order: 1 !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .hero-static .container,
+  .hero-inner {
+    width: 100% !important;
+    max-width: none !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-copy {
+    width: auto !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transform: none !important;
+    min-height: calc(100vh - var(--topbar-h, 0px) - var(--header-h, 0px) - 1.5rem) !important;
+    min-height: calc(100svh - var(--topbar-h, 0px) - var(--header-h, 0px) - 1.5rem) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .hero-copy > * {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .hero-copy #hero-headline,
+  .hero-copy h1 {
+    margin-bottom: 1rem !important;
+  }
+
+  .hero-slides {
+    order: 3 !important;
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin-left: 0 !important;
+    transform: none !important;
+    aspect-ratio: 3 / 2;
+  }
+
+  .hero-slide {
+    position: relative !important;
+    inset: auto !important;
+  }
+
+  .hero-slide .slide-bg {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+}
+</style>
+
+
+    <meta charset="utf-8" />
+<link rel="shortlink" href="/" />
+<link rel="canonical" href="/" />
+<meta name="Generator" content="Drupal 10 (https://www.drupal.org)" />
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>div#sliding-popup, div#sliding-popup .eu-cookie-withdraw-banner, .eu-cookie-withdraw-tab {background: #0779bf} div#sliding-popup.eu-cookie-withdraw-wrapper { background: transparent; } #sliding-popup h1, #sliding-popup h2, #sliding-popup h3, #sliding-popup p, #sliding-popup label, #sliding-popup div, .eu-cookie-compliance-more-button, .eu-cookie-compliance-secondary-button, .eu-cookie-withdraw-tab { color: #ffffff;} .eu-cookie-withdraw-tab { border-color: #ffffff;}</style>
+<link href="/sites/default/files/hkust_theme_configs/css/styles.css?1791304696" rel="stylesheet" />
+<script src="/sites/default/files/hkust_theme_configs/js/script.js?1791304696"></script>
+
+    <title>Home | Humanities and Digital Technologies Research</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/themes/custom/humatech_dhi/images/favicon.ico" type="image/x-icon">
+
+    <link rel="icon" type="image/png" sizes="512x512" href="/themes/custom/humatech_dhi/images/favicon.png?v=202610051552">
+    <link rel="icon" type="image/png" sizes="192x192" href="/themes/custom/humatech_dhi/images/favicon-192.png?v=202610051552">
+    <link rel="apple-touch-icon" sizes="180x180" href="/themes/custom/humatech_dhi/images/apple-touch-icon.png?v=202610051552">
+    <script>
+      /*
+       * Same behaviour as the static site: mark the document as JS-enabled and
+       * apply the stored colour scheme before the first paint (no flash).
+       * Nothing here depends on jQuery or on Drupal's JS.
+       */
+      (function () {
+        var root = document.documentElement;
+        root.classList.add('js');
+        var theme = null;
+        try { theme = window.localStorage.getItem('theme'); } catch (e) { /* ignore */ }
+        var dark = theme ? theme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        root.classList.toggle('dark', dark);
+      })();
+    </script>
+    <link rel="stylesheet" media="all" href="/sites/default/files/css/css_rIJGwM4HwhaHkbr11lM8JK7d7E0UaWgEEBYUsUHTFlQ.css?delta=0&amp;language=en&amp;theme=humatech_dhi&amp;include=eJxtjUsKwzAMBS9k8JGEPy-xiFSLylrk9jUt3WX1YAbmIajNeTH2qAmXV0PGA6SOo4SsdAibb_FGrsWRRmhZaIP64HzKrEWSLms1WDr9AK0Bxd867yjIpoVRldkuzw8s-e0L-n35AMGLQlU" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_LpQ3XNyQqYOQcZMWnfo3MRwnE3DAleklqDYps7j7BQk.css?delta=1&amp;language=en&amp;theme=humatech_dhi&amp;include=eJxtjUsKwzAMBS9k8JGEPy-xiFSLylrk9jUt3WX1YAbmIajNeTH2qAmXV0PGA6SOo4SsdAibb_FGrsWRRmhZaIP64HzKrEWSLms1WDr9AK0Bxd867yjIpoVRldkuzw8s-e0L-n35AMGLQlU" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_wVj-5wXN568rJ3j8efc9rpBLzB8Uo6hCSUWjjgvcQVc.css?delta=2&amp;language=en&amp;theme=humatech_dhi&amp;include=eJxtjUsKwzAMBS9k8JGEPy-xiFSLylrk9jUt3WX1YAbmIajNeTH2qAmXV0PGA6SOo4SsdAibb_FGrsWRRmhZaIP64HzKrEWSLms1WDr9AK0Bxd867yjIpoVRldkuzw8s-e0L-n35AMGLQlU" />
+
+    
+  </head>
+  <body class="hdtp lang-en hdtp-lang-en user-anonymous">
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+
+                <div id="hdtp-bars">
+    <div class="hkust-topbar">
+
+      <details class="more-drawer">
+        <summary class="toggler" aria-label="More about HKUST" title="More about HKUST"><svg class="chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <div class="drawer-content">
+          <div class="drawer-title">More about HKUST</div>
+          <nav class="drawer-links" aria-label="HKUST">
+            <a href="https://hkust.edu.hk/news" target="_blank" rel="noreferrer">University News</a><a href="https://hkust.edu.hk/academics/list" target="_blank" rel="noreferrer">Academic Departments A-Z</a><a href="https://hkust.edu.hk/lifehkust" target="_blank" rel="noreferrer">Life@HKUST</a><a href="https://library.hkust.edu.hk" target="_blank" rel="noreferrer">Library</a><a href="https://hkust.edu.hk/map-directions" target="_blank" rel="noreferrer">Map &amp; Directions</a><a href="https://hkustcareers.ust.hk" target="_blank" rel="noreferrer">Careers at HKUST</a><a href="https://facultyprofiles.ust.hk/" target="_blank" rel="noreferrer">Faculty Profiles</a><a href="https://hkust.edu.hk/about" target="_blank" rel="noreferrer">About HKUST</a>          </nav>
+        </div>
+      </details>
     </div>
-  </details>
-</div>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="brand">
+          <a href="https://www.ust.hk" class="brand-link" aria-label="HKUST" rel="noreferrer">
+            <img class="brand-img logo-ust" src="/themes/custom/humatech_dhi/images/ust-logo-official.png" alt="HKUST" width="797" height="186" decoding="async">
+          </a>
+          <span class="brand-sep" aria-hidden="true"></span>
+          <a href="/" class="brand-link" aria-label="Humanities and Digital Technologies Research">
+            <img class="brand-img logo-project" src="/themes/custom/humatech_dhi/images/hdt-logo-official.png" alt="Humanities and Digital Technologies Research" width="944" height="209" decoding="async">
+          </a>
+        </div>
+
+        <nav aria-label="Main navigation" class="main-nav" id="main-nav">
+                      <ul class="menu main-menu">
+                                                              <li class="menu-item"><a href="/">Home</a></li>
+                                                              <li class="menu-item"><a href="/news">News</a></li>
+                                                              <li class="menu-item"><a href="/events">Events</a></li>
+                                                              <li class="menu-item"><a href="/conferences">Conferences</a></li>
+                                                              <li class="menu-item"><a href="/teaching">Teaching</a></li>
+                                                              <li class="menu-item"><a href="/projects">Projects</a></li>
+                                                              <li class="menu-item"><a href="/members">Members</a></li>
+                          </ul>
+                  </nav>
+
+        <div class="header-actions">
+                                                                                                          <a href="/zh-hant/home" hreflang="zh-hant" lang="zh-hant" class="search-toggle lang-switch" aria-label="切換至繁體中文" title="Chinese, Traditional">繁</a>
+                    <a href="/search" class="search-toggle" aria-label="Search" title="Search">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          </a>
+          <button type="button" class="theme-toggle" data-aw-toggle-color-scheme aria-label="Toggle between dark and light mode">
+            <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4 1.4-1.4"/></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          </button>
+          <button type="button" class="menu-toggle" data-aw-toggle-menu aria-label="Toggle menu" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span></button>
+        </div>
+      </div>
+    </header>
+    </div><!-- /#hdtp-bars -->
+
+    
+
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
+    
+<main id="main" class="hdtp-main">
+  <a id="main-content" tabindex="-1"></a>
+
   
-<header class="site-header">
-  <div class="header-inner">
-    <a href="index.html" class="brand" aria-label="Humanities and Digital Technologies Platform">
+  
+  
+  <div class="region region-content">
+    <div data-drupal-messages-fallback class="hidden"></div><section class="hero-carousel" data-carousel aria-roledescription="carousel" aria-label="Latest news"><div class="hero-slides"><figure class="hero-slide active" data-slide data-title="HKADH2027 Call for Papers: “Models as Methods, Media, and Engines of Cultural Production”" data-summary="The Hong Kong Association for Digital Humanities annual conference (21–24 January 2027) invites submissions exploring how models function as methods, media, and engines of cultural production." data-date="Aug 27, 2026" data-href="/news/2026-08-27-hkadh2027-call-for-papers" data-tags="Announcement|Call for Papers" data-headline="Empowering technology and everyday life through the humanities" data-sub="The Humanities and Digital Technologies Platform bridges the humanities and technology, leading collaborative research and innovative projects that shape the future of scholarship, culture and society." aria-hidden="false"><img class="slide-bg" src="/sites/default/files/styles/hdtp_hero/public/hdtp/news/hkadh2027.webp?itok=hNPGJJWq" aria-hidden="true" fetchpriority="high"><div class="hero-shade" aria-hidden="true"></div></figure><figure class="hero-slide" data-slide data-title="Student journeys at the 4th Summer College of Corpora and Digital Humanities" data-summary="Two HKUST students report from CDH Summer 2026 in Nanjing: what twelve days of lectures, labs and late-night debugging taught them about language models, databases, and doing humanities with code." data-date="Aug 22, 2026" data-href="/news/student-journeys-4th-summer-college-corpora-and-digital-humanities" data-tags="Students|Teaching" data-headline="Asia&#039;s digital humanities hub" data-sub="The platform is Hong Kong&#039;s only digital humanities platform holding board membership in local, regional, national and Asian digital humanities organisations. It is an organiser and founding member of several regional digital humanities bodies and international conferences, with the broadest digital humanities collaboration network." aria-hidden="true"><img class="slide-bg" src="/sites/default/files/styles/hdtp_hero/public/hdtp/news/dh-summer-college-2026-641.webp?itok=Y-Fl7mC-" aria-hidden="true" fetchpriority="low"><div class="hero-shade" aria-hidden="true"></div></figure><figure class="hero-slide" data-slide data-title="Dr. Steve Ma has been awarded the Guangdong-Hong Kong-Macao University Alliance (GHMUA) Fund" data-summary="Dr. Steve Ma has been awarded the Guangdong-Hong Kong-Macao University Alliance (GHMUA) Fund." data-date="Aug 12, 2026" data-href="/news/2026-08-12-steve-ma-ghmua-fund" data-tags="Research|Funding" data-headline="Top-tier humanities general education" data-sub="The platform runs Asia’s largest digital humanities summer school and offers more than ten courses that combine the humanities with digital technology. Its teaching is ranked first in the university by independent sites such as UST Rankings, with several courses at the top of the general education ranking." aria-hidden="true"><img class="slide-bg" src="/sites/default/files/styles/hdtp_hero/public/hdtp/news/steve-ma-ghmua-fund.jpg.webp?itok=lRXOLJOE" aria-hidden="true" fetchpriority="low"><div class="hero-shade" aria-hidden="true"></div></figure><figure class="hero-slide" data-slide data-title="HKUST and Partners Organize Digital Humanities Event to Expand Interdisciplinary Impact" data-summary="HKUST, in collaboration with Nanjing Normal University, the University of Macau, Beijing Normal-Hong Kong Baptist University and Nanjing Agricultural University, successfully organized the 4th Summer College of Corpora and Digital Humanities (CDH Summer 2026) in Nanjing." data-date="Jul 30, 2026" data-href="/news/2026-07-30-hkust-partners-digital-humanities-event" data-tags="Research|Training" data-headline="Awarded the National Key-Field Language Technology Empowerment Innovation Project Case" data-sub="The National Key-Field Language Technology Empowerment Innovation Project Case is the highest honour in China&#039;s language technology field, recognising projects that have made outstanding contributions to national priorities such as Digital China, &quot;AI+&quot; and building a strong education nation. The project jointly submitted by HKUST received the award, demonstrating the University&#039;s outstanding contribution and influence in language technology, digital humanities and artificial intelligence." aria-hidden="true"><img class="slide-bg" src="/sites/default/files/styles/hdtp_hero/public/hdtp/news/hkust-partners-digital-humanities-event.jpg.webp?itok=GKrTwWnz" aria-hidden="true" fetchpriority="low"><div class="hero-shade" aria-hidden="true"></div></figure></div><div class="hero-static"><div class="container hero-inner"><div class="hero-copy" id="hero-copy"><p class="eyebrow">Humanities and Digital Technologies Platform</p><h1 id="hero-headline">Empowering technology and everyday life through the humanities</h1><p class="hero-sub" id="hero-sub">The Humanities and Digital Technologies Platform bridges the humanities and technology, leading collaborative research and innovative projects that shape the future of scholarship, culture and society.</p></div><div class="hero-news"><div class="news-meta"><span class="tag-row" id="hero-news-tags"></span><time id="hero-news-date"></time></div><h2><a id="hero-news-title" href="#"></a></h2><p id="hero-news-summary"></p><a class="btn" id="hero-news-link" href="#">Read more<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></div></div></div><div class="carousel-controls"><button type="button" class="carousel-arrow" data-carousel-prev aria-label="Previous slide"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg></button><div class="carousel-dots"><button type="button" data-carousel-dot="0" class="active" aria-label="Slide 1"></button><button type="button" data-carousel-dot="1" class="" aria-label="Slide 2"></button><button type="button" data-carousel-dot="2" class="" aria-label="Slide 3"></button><button type="button" data-carousel-dot="3" class="" aria-label="Slide 4"></button></div><button type="button" class="carousel-arrow" data-carousel-next aria-label="Next slide"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button></div></section><section class="band" id="about"><div class="container narrow"><h2>About us</h2><p class="lead">The Humanities and Digital Technologies Platform is a research platform formed by experts in the humanities in response to HKUST&#039;s Strategic Plan 2031. It promotes the development of the humanities in the age of AI and, through interdisciplinary research projects and top-tier humanities education, advances sustainable social development so that science and technology genuinely benefit humanity.</p><p class="lead">The platform has become part of Hong Kong&#039;s digital humanities infrastructure. Working with more than 100 institutions worldwide, it supports Asia&#039;s leading digital humanities teaching and genuinely connects industry, education and society — offering the university a wide range of activities and development support, and giving students interdisciplinary international learning experiences.</p><div class="facts"><div class="fact"><strong>No. 1 in HKUST</strong><span class="fact-label">Digital humanities education<sup class="fact-star" aria-hidden="true">*</sup></span></div><div class="fact"><strong>No. 1 in HK</strong><span class="fact-label">Digital humanities collaboration</span></div><div class="fact"><strong>60+</strong><span class="fact-label">Events per year</span></div></div><p class="facts-note">* Statistics from UST Space, default calculation method, Spring 2026 semester</p></div></section><section id="news"><div class="container"><div class="section-head row"><div><h2>Latest news</h2><p>Announcements, research breakthroughs, and updates from the platform.</p></div><a class="btn ghost" href="/news">View all news</a></div><div class="news-grid">
+
+  <article data-history-node-id="144" about="/news/2026-08-27-hkadh2027-call-for-papers" class="news-card hdtp-news-card">
+    <a class="news-thumb" href="/news/2026-08-27-hkadh2027-call-for-papers" aria-hidden="true" tabindex="-1">
       
-      <img class="brand-img logo-ust" src="assets/img/ust-logo.png" alt="HKUST" width="120" height="37">
-      <span class="brand-sep" aria-hidden="true"></span>
-      <img class="brand-img logo-project" src="assets/img/project-logo.png" alt="Humanities and Digital Technologies Platform" width="256" height="79">
+<div class="field field--name-field-image field--type-image">
+          <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/hdtp_card/public/hdtp/news/hkadh2027.webp?itok=uZDnyYuR" width="800" height="450" alt="HKADH2027 Call for Papers: “Models as Methods, Media, and Engines of Cultural Production”" typeof="foaf:Image" decoding="async" />
+
+
+</div>
+    </div>
     </a>
-    <nav aria-label="Main navigation" class="main-nav" id="main-nav">
-      <ul><li><a href="index.html" class="active">Home</a></li><li><a href="news.html">News</a></li><li><a href="events.html">Events</a></li><li><a href="conferences.html">Conferences</a></li><li><a href="teaching.html">Teaching</a></li><li><a href="projects.html">Projects</a></li><li><a href="publications.html">Publications</a></li><li><a href="members.html">Members</a></li></ul>
-    </nav>
-    <div class="header-actions">
-      <a class="lang-switch" href="zh-hant/index.html" hreflang="zh-Hant" lang="zh-Hant">繁中</a>
-      <button type="button" class="theme-toggle" data-aw-toggle-color-scheme aria-label="Toggle between dark and light mode">
-        <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4 1.4-1.4"/></svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-      </button>
-      <button type="button" class="menu-toggle" data-aw-toggle-menu aria-label="Toggle menu" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span></button>
-    </div>
-  </div>
-</header>
-  <main id="main">
-<section class="hero-carousel" data-carousel aria-roledescription="carousel" aria-label="Latest news">
-  <div class="hero-slides">
-    
-    <figure class="hero-slide active" data-slide
-      data-title="HKADH2027 Call for Papers: “Models as Methods, Media, and Engines of Cultural Production”"
-      data-summary="The Hong Kong Association for Digital Humanities annual conference (21–24 January 2027) invites submissions exploring how models function as methods, media, and engines of cultural production."
-      data-date="Aug 27, 2026"
-      data-href="news/2026-08-27-hkadh2027-call-for-papers.html"
-      data-tags="Announcement|Call for Papers"
-      aria-hidden="false">
-      <img class="slide-bg" src="assets/img/news/hkadh2027.webp" alt="" aria-hidden="true" fetchpriority="high">
-      <div class="hero-shade" aria-hidden="true"></div>
-    </figure>
-    <figure class="hero-slide" data-slide
-      data-title="Student journeys at the 4th Summer College of Corpora and Digital Humanities"
-      data-summary="Two HKUST students report from CDH Summer 2026 in Nanjing: what twelve days of lectures, labs and late-night debugging taught them about language models, databases, and doing humanities with code."
-      data-date="Aug 22, 2026"
-      data-href="news/student-journeys-4th-summer-college-corpora-and-digital-humanities.html"
-      data-tags="Students|Teaching"
-      aria-hidden="true">
-      <img class="slide-bg" src="assets/img/news/dh-summer-college-2026-641.webp" alt="" aria-hidden="true" fetchpriority="low">
-      <div class="hero-shade" aria-hidden="true"></div>
-    </figure>
-    <figure class="hero-slide" data-slide
-      data-title="Dr. Steve Ma has been awarded the Guangdong-Hong Kong-Macao University Alliance (GHMUA) Fund"
-      data-summary="Dr. Steve Ma has been awarded the Guangdong-Hong Kong-Macao University Alliance (GHMUA) Fund."
-      data-date="Aug 12, 2026"
-      data-href="news/2026-08-12-steve-ma-ghmua-fund.html"
-      data-tags="Research|Funding"
-      aria-hidden="true">
-      <img class="slide-bg" src="assets/img/news/steve-ma-ghmua-fund.webp" alt="" aria-hidden="true" fetchpriority="low">
-      <div class="hero-shade" aria-hidden="true"></div>
-    </figure>
-    <figure class="hero-slide" data-slide
-      data-title="HKUST and Partners Organize Digital Humanities Event to Expand Interdisciplinary Impact"
-      data-summary="HKUST, in collaboration with Nanjing Normal University, the University of Macau, Beijing Normal-Hong Kong Baptist University and Nanjing Agricultural University, successfully organized the 4th Summer College of Corpora and Digital Humanities (CDH Summer 2026) in Nanjing."
-      data-date="Jul 30, 2026"
-      data-href="news/2026-07-30-hkust-partners-digital-humanities-event.html"
-      data-tags="Research|Training"
-      aria-hidden="true">
-      <img class="slide-bg" src="assets/img/news/hkust-partners-digital-humanities-event.webp" alt="" aria-hidden="true" fetchpriority="low">
-      <div class="hero-shade" aria-hidden="true"></div>
-    </figure>
-  </div>
-  <!-- static headline layer: never switches; only the news card updates -->
-  <div class="hero-static">
-    <div class="container hero-inner">
-      <div class="hero-copy">
-        <p class="eyebrow">Humanities and Digital Technologies Platform</p>
-        <h1>Explore the potential within humanities and digital innovation</h1>
-        <p class="hero-sub">Uniting digital technology and humanities through creativity — pioneering digital methods, collaborative research, and innovative projects that shape the future of scholarship, culture, and society.</p>
-      </div>
-      <div class="hero-news">
-        <div class="news-meta"><span class="tag-row" id="hero-news-tags"></span><time id="hero-news-date"></time></div>
-        <h2><a id="hero-news-title" href="#"></a></h2>
-        <p id="hero-news-summary"></p>
-        <a class="btn" id="hero-news-link" href="#">Read more →</a>
-      </div>
-    </div>
-  </div>
-  
-  <div class="carousel-controls">
-    <button type="button" class="carousel-arrow" data-carousel-prev aria-label="Previous slide">‹</button>
-    <div class="carousel-dots"><button type="button" data-carousel-dot="0" class="active" aria-label="Slide 1"></button><button type="button" data-carousel-dot="1" class="" aria-label="Slide 2"></button><button type="button" data-carousel-dot="2" class="" aria-label="Slide 3"></button><button type="button" data-carousel-dot="3" class="" aria-label="Slide 4"></button></div>
-    <button type="button" class="carousel-arrow" data-carousel-next aria-label="Next slide">›</button>
-  </div>
-</section>
-
-<section class="band" id="about">
-  <div class="container narrow">
-    <h2>About us</h2>
-    <p class="lead">The Humanities and Digital Technologies Platform is a collaborative community aimed at bringing together faculty, library, and students to explore digital humanities skills and develop innovative digital projects. It bridges the gap between science and the humanities through digital methods and practices.</p><p class="lead">Launched in spring 2022 by the Division of Humanities and the HKUST Library, the platform supports and promotes digital humanities work across the university — coordinating training for students and research assistants, publishing and disseminating digital projects produced by HKUST students and faculty, and collaborating with regional partners through the Hong Kong Digital Humanities consortium series of lectures and workshops.</p>
-    <div class="facts">
-      <div class="fact"><strong>2022</strong><span class="fact-label">Platform launched</span></div><div class="fact"><strong>7+</strong><span class="fact-label">Featured projects</span></div><div class="fact"><strong>20+</strong><span class="fact-label">Faculty &amp; library members</span></div>
-    </div>
-    
-  </div>
-</section>
-
-<section id="news">
-  <div class="container">
-    <div class="section-head row">
-      <div><h2>Latest news</h2><p>Announcements, research breakthroughs, and updates from the platform.</p></div>
-      <a class="btn ghost" href="news.html">View all news →</a>
-    </div>
-    <div class="news-grid">
-<article class="news-card reveal">
-  <a class="news-thumb " href="news/2026-08-27-hkadh2027-call-for-papers.html" aria-hidden="true" style="background-image:url('assets/img/news/hkadh2027.webp')"></a>
-  <div class="news-body">
-    <div class="news-meta"><span class="tag-row"><span class="tag">Announcement</span><span class="tag">Call for Papers</span></span><time datetime="2026-08-27">Aug 27, 2026</time></div>
-    <h3><a href="news/2026-08-27-hkadh2027-call-for-papers.html">HKADH2027 Call for Papers: “Models as Methods, Media, and Engines of Cultural Production”</a></h3>
-    <p>The Hong Kong Association for Digital Humanities annual conference (21–24 January 2027) invites submissions exploring how models function as methods, media, and engines of cultural production.</p>
-    <a class="read-more" href="news/2026-08-27-hkadh2027-call-for-papers.html">Read more →</a>
-  </div>
-</article>
-<article class="news-card reveal">
-  <a class="news-thumb " href="news/student-journeys-4th-summer-college-corpora-and-digital-humanities.html" aria-hidden="true" style="background-image:url('assets/img/news/dh-summer-college-2026-641.webp')"></a>
-  <div class="news-body">
-    <div class="news-meta"><span class="tag-row"><span class="tag">Students</span><span class="tag">Teaching</span></span><time datetime="2026-08-22">Aug 22, 2026</time></div>
-    <h3><a href="news/student-journeys-4th-summer-college-corpora-and-digital-humanities.html">Student journeys at the 4th Summer College of Corpora and Digital Humanities</a></h3>
-    <p>Two HKUST students report from CDH Summer 2026 in Nanjing: what twelve days of lectures, labs and late-night debugging taught them about language models, databases, and doing humanities with code.</p>
-    <a class="read-more" href="news/student-journeys-4th-summer-college-corpora-and-digital-humanities.html">Read more →</a>
-  </div>
-</article>
-<article class="news-card reveal">
-  <a class="news-thumb " href="news/2026-08-12-steve-ma-ghmua-fund.html" aria-hidden="true" style="background-image:url('assets/img/news/steve-ma-ghmua-fund.webp')"></a>
-  <div class="news-body">
-    <div class="news-meta"><span class="tag-row"><span class="tag">Research</span><span class="tag">Funding</span></span><time datetime="2026-08-12">Aug 12, 2026</time></div>
-    <h3><a href="news/2026-08-12-steve-ma-ghmua-fund.html">Dr. Steve Ma has been awarded the Guangdong-Hong Kong-Macao University Alliance (GHMUA) Fund</a></h3>
-    <p>Dr. Steve Ma has been awarded the Guangdong-Hong Kong-Macao University Alliance (GHMUA) Fund.</p>
-    <a class="read-more" href="news/2026-08-12-steve-ma-ghmua-fund.html">Read more →</a>
-  </div>
-</article></div>
-  </div>
-</section>
-
-<section class="band" id="events">
-  <div class="container">
-    <div class="section-head row">
-      <div><h2>Upcoming events</h2><p>Talks, workshops, and training sessions open to the HKUST community and beyond.</p></div>
-      <a class="btn ghost" href="events.html">View all events →</a>
-    </div>
-    <div class="events-list">
-<article class="event-row reveal">
-  <div class="event-date"><span class="event-month">Oct</span><span class="event-day">7</span><span class="event-year">2026</span></div>
-  <div class="event-info">
-    <div class="news-meta"><span class="tag-row"><span class="tag">Talk</span></span><time datetime="2026-10-07">Oct 7, 2026</time></div>
-    <h3><a href="events/2026-10-07-3d-spatial-vision-technology-and-its-cultural-applications.html">3D Spatial Vision Technology and Its Cultural Applications</a></h3>
-    <p class="event-facts"><span><strong>Speaker:</strong> Cui Yan (Director and Chair Professor, Wuyi University)</span><span><strong>Venue:</strong> Rm 2303, Academic Building, HKUST</span><span><strong>Time:</strong> 12:00 – 13:30</span></p>
-    <p class="event-summary">Cui Yan of Wuyi University discusses 3D spatial vision technology and its cultural applications in a public lecture hosted by the Division of Humanities.</p>
-    <a class="read-more" href="events/2026-10-07-3d-spatial-vision-technology-and-its-cultural-applications.html">Details →</a>
-  </div>
-</article>
-<article class="event-row reveal">
-  <div class="event-date"><span class="event-month">Oct</span><span class="event-day">16</span><span class="event-year">2026</span></div>
-  <div class="event-info">
-    <div class="news-meta"><span class="tag-row"><span class="tag">Talk</span></span><time datetime="2026-10-16">Oct 16, 2026</time></div>
-    <h3><a href="events/2026-10-16-discovering-the-shangdi-of-huaxia.html">Discovering the SHANGDI of Huaxia</a></h3>
-    <p class="event-facts"><span><strong>Speaker:</strong> Xin Deyong (Chair Professor, Peking University)</span><span><strong>Venue:</strong> Rm 2611, Academic Building, HKUST</span><span><strong>Time:</strong> 10:00 – 11:30</span></p>
-    <p class="event-summary">Xin Deyong of Peking University examines the Shangdi, the supreme deity of ancient Huaxia, in a public lecture hosted by the Division of Humanities.</p>
-    <a class="read-more" href="events/2026-10-16-discovering-the-shangdi-of-huaxia.html">Details →</a>
-  </div>
-</article></div>
-  </div>
-</section>
-
-<section id="collaborations">
-  <div class="container">
-    <div class="section-head">
-      <h2>Industry &amp; Academic Collaborations</h2>
-      <p>A strong network of resources is a key driver behind our continuous breakthroughs and remarkable achievements. Together, we&#39;ve built a robust, deeply rooted network.</p>
-    </div>
-    
-<div class="logo-wall">
-  <div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/fltrp.png" alt="Foreign Language Teaching and Research Press" loading="lazy"></div><div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/university-of-macau.png" alt="University of Macau" loading="lazy"></div><div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/southampton.svg" alt="University of Southampton" loading="lazy"></div><div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/essex.svg" alt="University of Essex" loading="lazy"></div><div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/peking.png" alt="Peking University" loading="lazy"></div><div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/qmul.png" alt="Queen Mary University of London" loading="lazy"></div><div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/hust.png" alt="Huazhong University of Science and Technology" loading="lazy"></div><div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/western-washington.svg" alt="Western Washington University" loading="lazy"></div><div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/nanjing-normal.png" alt="Nanjing Normal University" loading="lazy"></div><div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/nanjing-agricultural.png" alt="Nanjing Agricultural University" loading="lazy"></div><div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/ntu.png" alt="Nanyang Technological University" loading="lazy"></div><div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/lingnan.png" alt="Lingnan University" loading="lazy"></div><div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/xinjiang.png" alt="Xinjiang University" loading="lazy"></div><div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/harvard.svg" alt="Harvard University" loading="lazy"></div><div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/blcu.png" alt="Beijing Language and Culture University" loading="lazy"></div><div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/hku.svg" alt="University of Hong Kong" loading="lazy"></div><div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/polyu.png" alt="Hong Kong Polytechnic University" loading="lazy"></div><div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/hkbu.png" alt="Hong Kong Baptist University" loading="lazy"></div><div class="logo-tile logo-img-tile"><img class="partner-logo" src="assets/img/partners/bnbu.png" alt="BNU-HKBU United International College" loading="lazy"></div>
-</div>
-<p class="muted-note">Collaborating institutions of the platform — logos where available; update content/partners.json to change them.</p>
-  </div>
-</section></main>
-  
-<footer class="site-footer">
-  <div class="container footer-grid">
-    <div>
-      <a href="index.html" class="brand footer-brand">
-      <img class="brand-img logo-ust" src="assets/img/ust-logo.png" alt="HKUST" width="120" height="37">
-      <span class="brand-sep" aria-hidden="true"></span>
-      <img class="brand-img logo-project" src="assets/img/project-logo.png" alt="Humanities and Digital Technologies Platform" width="256" height="79"></a>
-      <p class="footer-desc">Humanities and Digital Technologies Platform at The Hong Kong University of Science and Technology — Uniting digital technology and humanities through creativity — pioneering digital methods, collaborative research, and innovative projects that shape the future of scholarship, culture, and society.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Contact Us</h4>
-      <p class="contact"><a href="mailto:dhi@ust.hk">dhi@ust.hk</a></p>
-      <p class="contact"><a href="https://digitalhumanities.hkust.edu.hk/" target="_blank" rel="noopener">digitalhumanities.hkust.edu.hk</a></p>
-    </div>
-    <div class="footer-col">
-      <h4>Follow us</h4>
-      <ul class="social"><li><a href="https://www.facebook.com/hkust.library" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a></li><li><a href="https://www.instagram.com/libraryathkust/" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a></li><li><a href="https://www.linkedin.com/school/hkust/" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a></li><li><a href="https://www.youtube.com/user/HKUSTLIB" target="_blank" rel="noopener" aria-label="YouTube">YouTube</a></li></ul>
-    </div>
-  </div>
-</footer>
-  
-<div class="hkust-footer">
-  <a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg></a>
-  <div class="content-locator">
-    <div class="site-col">
-      <div class="hkust-logo">
-        <a href="https://www.ust.hk" target="_blank" rel="noreferrer"><img src="assets/img/hkust/hkust_logo_small.svg" alt="HKUST Logo" width="135" height="36"></a>
-      </div>
-      <div class="site-pages">
-        <a class="page" href="https://dataprivacy.ust.hk/university-data-privacy-policy-statement/" target="_blank" rel="noreferrer">Privacy</a>
-        <a class="page" href="https://hkust.edu.hk/sitemap" target="_blank" rel="noreferrer">Sitemap</a>
-        <div class="copyright">© 2026 The Hong Kong University of Science and Technology. All rights reserved.</div>
-      </div>
-    </div>
-    <div class="social-share-col">
-      <div class="text">Follow HKUST on</div>
-      <div class="icon-wrapper">
-        <a class="page" href="https://www.facebook.com/hkust/" rel="noreferrer"><img src="assets/img/hkust/s-icon-fb.svg" alt="Facebook"></a>
-        <a class="page" href="https://www.linkedin.com/school/hkust/" rel="noreferrer"><img src="assets/img/hkust/s-icon-in.svg" alt="LinkedIn"></a>
-        <a class="page" href="https://www.instagram.com/hkust" rel="noreferrer"><img src="assets/img/hkust/s-icon-ig.svg" alt="Instagram"></a>
-        <a class="page" href="https://www.youtube.com/user/hkust" rel="noreferrer"><img src="assets/img/hkust/s-icon-youtube.svg" alt="YouTube"></a>
-        <a class="page" href="https://hkust.edu.hk/sites/default/files/menu_icons/mainsite_Wechat_Eng_new.jpg" rel="noreferrer"><img src="assets/img/hkust/wechat.png" alt="WeChat"></a>
-      </div>
-    </div>
+    <div class="news-body">
+      
+      <div class="news-meta">
+                  <div class="tag-row">
+<div class="field field--name-field-tags field--type-entity-reference">
+        <div class="field__items">
+        <div class="field__item"><span class="tag">Announcement</span></div>
+      <div class="field__item"><span class="tag">Call for Papers</span></div>
+        </div>
   </div>
 </div>
-  <script src="assets/js/main.js"></script>
-</body>
+                <time datetime="2026-08-27">Aug 27, 2026</time>
+      </div>
+      <h3><a href="/news/2026-08-27-hkadh2027-call-for-papers" rel="bookmark"><span class="field field--name-title field--type-string">HKADH2027 Call for Papers: “Models as Methods, Media, and Engines of Cultural Production”</span>
+</a></h3>
+      
+      
+<div class="field field--name-field-summary field--type-string-long">
+          <div class="field__item">The Hong Kong Association for Digital Humanities annual conference (21–24 January 2027) invites submissions exploring how models function as methods, media, and engines of cultural production.</div>
+    </div>
+
+      <a class="read-more" href="/news/2026-08-27-hkadh2027-call-for-papers">Read more<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </article>
+
+
+  <article data-history-node-id="287" about="/news/student-journeys-4th-summer-college-corpora-and-digital-humanities" class="news-card hdtp-news-card">
+    <a class="news-thumb" href="/news/student-journeys-4th-summer-college-corpora-and-digital-humanities" aria-hidden="true" tabindex="-1">
+      
+<div class="field field--name-field-image field--type-image">
+          <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/hdtp_card/public/hdtp/news/dh-summer-college-2026-641.webp?itok=RLhCwbGY" width="800" height="450" alt="Student journeys at the 4th Summer College of Corpora and Digital Humanities" typeof="foaf:Image" decoding="async" />
+
+
+</div>
+    </div>
+    </a>
+    <div class="news-body">
+      
+      <div class="news-meta">
+                  <div class="tag-row">
+<div class="field field--name-field-tags field--type-entity-reference">
+        <div class="field__items">
+        <div class="field__item"><span class="tag">Students</span></div>
+      <div class="field__item"><span class="tag">Teaching</span></div>
+        </div>
+  </div>
+</div>
+                <time datetime="2026-08-22">Aug 22, 2026</time>
+      </div>
+      <h3><a href="/news/student-journeys-4th-summer-college-corpora-and-digital-humanities" rel="bookmark"><span class="field field--name-title field--type-string">Student journeys at the 4th Summer College of Corpora and Digital Humanities</span>
+</a></h3>
+      
+      
+<div class="field field--name-field-summary field--type-string-long">
+          <div class="field__item">Two HKUST students report from CDH Summer 2026 in Nanjing: what twelve days of lectures, labs and late-night debugging taught them about language models, databases, and doing humanities with code.</div>
+    </div>
+
+      <a class="read-more" href="/news/student-journeys-4th-summer-college-corpora-and-digital-humanities">Read more<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </article>
+
+
+  <article data-history-node-id="236" about="/news/2026-08-12-steve-ma-ghmua-fund" class="news-card hdtp-news-card">
+    <a class="news-thumb" href="/news/2026-08-12-steve-ma-ghmua-fund" aria-hidden="true" tabindex="-1">
+      
+<div class="field field--name-field-image field--type-image">
+          <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/hdtp_card/public/hdtp/news/steve-ma-ghmua-fund.jpg.webp?itok=gXQ-HzHX" width="800" height="450" alt="Dr. Steve Ma has been awarded the Guangdong-Hong Kong-Macao University Alliance (GHMUA) Fund" typeof="foaf:Image" decoding="async" />
+
+
+</div>
+    </div>
+    </a>
+    <div class="news-body">
+      
+      <div class="news-meta">
+                  <div class="tag-row">
+<div class="field field--name-field-tags field--type-entity-reference">
+        <div class="field__items">
+        <div class="field__item"><span class="tag">Research</span></div>
+      <div class="field__item"><span class="tag">Funding</span></div>
+        </div>
+  </div>
+</div>
+                <time datetime="2026-08-12">Aug 12, 2026</time>
+      </div>
+      <h3><a href="/news/2026-08-12-steve-ma-ghmua-fund" rel="bookmark"><span class="field field--name-title field--type-string">Dr. Steve Ma has been awarded the Guangdong-Hong Kong-Macao University Alliance (GHMUA) Fund</span>
+</a></h3>
+      
+      
+<div class="field field--name-field-summary field--type-string-long">
+          <div class="field__item">Dr. Steve Ma has been awarded the Guangdong-Hong Kong-Macao University Alliance (GHMUA) Fund.</div>
+    </div>
+
+      <a class="read-more" href="/news/2026-08-12-steve-ma-ghmua-fund">Read more<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </article>
+</div></div></section><section class="band" id="events"><div class="container"><div class="section-head row"><div><h2>Upcoming events</h2><p>Talks, workshops, and training sessions open to the HKUST community and beyond.</p></div><a class="btn ghost" href="/events">View all events</a></div><div class="events-list">
+
+  <article data-history-node-id="289" about="/events/2026-10-07-3d-spatial-vision-technology-and-its-cultural-applications" class="event-row hdtp-event-row">
+    <div class="event-date" aria-hidden="true">
+      <span class="event-month">Oct</span>
+      <span class="event-day">7</span>
+      <span class="event-year">2026</span>
+    </div>
+    <div class="event-info">
+      
+      <div class="news-meta">
+                  <div class="tag-row">
+<div class="field field--name-field-tags field--type-entity-reference">
+        <div class="field__items">
+        <div class="field__item"><span class="tag">Talk</span></div>
+        </div>
+  </div>
+</div>
+                <time datetime="2026-10-07">Oct 7, 2026</time>
+      </div>
+      <h3><a href="/events/2026-10-07-3d-spatial-vision-technology-and-its-cultural-applications" rel="bookmark"><span class="field field--name-title field--type-string">3D Spatial Vision Technology and Its Cultural Applications</span>
+</a></h3>
+      
+              <div class="event-facts">
+                      <div class="event-fact"><strong>Speaker:</strong>Cui Yan (Director and Chair Professor, Wuyi University)</div>
+                      <div class="event-fact"><strong>Venue:</strong>
+<div class="field field--name-field-venue field--type-string">
+          <div class="field__item">Rm 2303, Academic Building, HKUST</div>
+    </div>
+</div>
+                      <div class="event-fact"><strong>Time:</strong>
+<div class="field field--name-field-time field--type-string">
+          <div class="field__item">12:00 – 13:30</div>
+    </div>
+</div>
+                  </div>
+            
+              <div class="event-summary">
+<div class="field field--name-field-summary field--type-string-long">
+          <div class="field__item">Cui Yan of Wuyi University discusses 3D spatial vision technology and its cultural applications in a public lecture hosted by the Division of Humanities.</div>
+    </div>
+</div>
+            <a class="read-more" href="/events/2026-10-07-3d-spatial-vision-technology-and-its-cultural-applications">Details<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </article>
+
+
+  <article data-history-node-id="288" about="/events/2026-10-16-discovering-the-shangdi-of-huaxia" class="event-row hdtp-event-row">
+    <div class="event-date" aria-hidden="true">
+      <span class="event-month">Oct</span>
+      <span class="event-day">16</span>
+      <span class="event-year">2026</span>
+    </div>
+    <div class="event-info">
+      
+      <div class="news-meta">
+                  <div class="tag-row">
+<div class="field field--name-field-tags field--type-entity-reference">
+        <div class="field__items">
+        <div class="field__item"><span class="tag">Talk</span></div>
+        </div>
+  </div>
+</div>
+                <time datetime="2026-10-16">Oct 16, 2026</time>
+      </div>
+      <h3><a href="/events/2026-10-16-discovering-the-shangdi-of-huaxia" rel="bookmark"><span class="field field--name-title field--type-string">Discovering the SHANGDI of Huaxia</span>
+</a></h3>
+      
+              <div class="event-facts">
+                      <div class="event-fact"><strong>Speaker:</strong>Xin Deyong (Chair Professor, Peking University)</div>
+                      <div class="event-fact"><strong>Venue:</strong>
+<div class="field field--name-field-venue field--type-string">
+          <div class="field__item">Rm 2611, Academic Building, HKUST</div>
+    </div>
+</div>
+                      <div class="event-fact"><strong>Time:</strong>
+<div class="field field--name-field-time field--type-string">
+          <div class="field__item">10:00 – 11:30</div>
+    </div>
+</div>
+                  </div>
+            
+              <div class="event-summary">
+<div class="field field--name-field-summary field--type-string-long">
+          <div class="field__item">Xin Deyong of Peking University examines the Shangdi, the supreme deity of ancient Huaxia, in a public lecture hosted by the Division of Humanities.</div>
+    </div>
+</div>
+            <a class="read-more" href="/events/2026-10-16-discovering-the-shangdi-of-huaxia">Details<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </article>
+</div></div></section><section id="collaborations"><div class="container"><div class="section-head"><div><h2>Industry &amp; Academic Collaborations</h2><p>A strong network of resources is a key driver behind our continuous breakthroughs and remarkable achievements. Together, we&#039;ve built a robust, deeply rooted network.</p></div></div><h3 class="subgroup">Academic Collaborations</h3><div class="logo-wall">
+
+      <div data-history-node-id="214" about="/partners/fltrp" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/fltrp.png.webp?itok=3s2SjYMZ" width="260" height="66" alt="Foreign Language Teaching and Research Press" typeof="foaf:Image" decoding="async" />
+
+
+</div>
+    </div>
+
+    </div>
+  
+
+      <div data-history-node-id="215" about="/partners/um" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/university-of-macau.png.webp?itok=vY1kVDjT" width="260" height="74" alt="University of Macau" typeof="foaf:Image" decoding="async" />
+
+
+</div>
+    </div>
+
+    </div>
+  
+
+      <div data-history-node-id="216" about="/partners/soton" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" width="249" height="110" src="/sites/default/files/hdtp/partners/southampton.svg" alt="University of Southampton" typeof="foaf:Image" decoding="async" />
+
+</div>
+    </div>
+
+    </div>
+  
+
+      <div data-history-node-id="217" about="/partners/essex" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" width="148" height="79" src="/sites/default/files/hdtp/partners/essex.svg" alt="University of Essex" typeof="foaf:Image" decoding="async" />
+
+</div>
+    </div>
+
+    </div>
+  
+
+      <div data-history-node-id="218" about="/partners/pku" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/peking.png.webp?itok=VzTeGjjL" width="260" height="73" alt="Peking University" typeof="foaf:Image" decoding="async" />
+
+
+</div>
+    </div>
+
+    </div>
+  
+
+      <div data-history-node-id="219" about="/partners/qmul" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/qmul.png.webp?itok=bEiFv8Nw" width="260" height="69" alt="Queen Mary University of London" typeof="foaf:Image" decoding="async" />
+
+
+</div>
+    </div>
+
+    </div>
+  
+
+      <div data-history-node-id="220" about="/partners/hust" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/hust.png.webp?itok=VdSBAj80" width="260" height="55" alt="Huazhong University of Science and Technology" typeof="foaf:Image" decoding="async" />
+
+
+</div>
+    </div>
+
+    </div>
+  
+
+      <div data-history-node-id="221" about="/partners/wwu" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" width="169" height="110" src="/sites/default/files/hdtp/partners/western-washington.svg" alt="Western Washington University" typeof="foaf:Image" decoding="async" />
+
+</div>
+    </div>
+
+    </div>
+  
+
+      <div data-history-node-id="222" about="/partners/nnu" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/nanjing-normal.png.webp?itok=8Z57-pqU" width="260" height="56" alt="Nanjing Normal University" typeof="foaf:Image" decoding="async" />
+
+
+</div>
+    </div>
+
+    </div>
+  
+
+      <div data-history-node-id="223" about="/partners/nau" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/nanjing-agricultural.png.webp?itok=Tg9LKhnQ" width="260" height="61" alt="Nanjing Agricultural University" typeof="foaf:Image" decoding="async" />
+
+
+</div>
+    </div>
+
+    </div>
+  
+
+      <div data-history-node-id="224" about="/partners/ntu" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/ntu.png.webp?itok=bLRTRoP7" width="260" height="96" alt="Nanyang Technological University" typeof="foaf:Image" decoding="async" />
+
+
+</div>
+    </div>
+
+    </div>
+  
+
+      <div data-history-node-id="225" about="/partners/lu" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/lingnan.png.webp?itok=6SoMo5Cb" width="260" height="52" alt="Lingnan University" typeof="foaf:Image" decoding="async" />
+
+
+</div>
+    </div>
+
+    </div>
+  
+
+      <div data-history-node-id="226" about="/partners/xju" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/xinjiang.png.webp?itok=ty_tsKng" width="260" height="74" alt="Xinjiang University" typeof="foaf:Image" decoding="async" />
+
+
+</div>
+    </div>
+
+    </div>
+  
+
+      <div data-history-node-id="227" about="/partners/harvard" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" width="260" height="70" src="/sites/default/files/hdtp/partners/harvard.svg" alt="Harvard University" typeof="foaf:Image" decoding="async" />
+
+</div>
+    </div>
+
+    </div>
+  
+
+      <div data-history-node-id="228" about="/partners/blcu" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/blcu.png.webp?itok=fbsMqeyH" width="260" height="70" alt="Beijing Language and Culture University" typeof="foaf:Image" decoding="async" />
+
+
+</div>
+    </div>
+
+    </div>
+  
+
+      <div data-history-node-id="229" about="/partners/hku" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" width="260" height="54" src="/sites/default/files/hdtp/partners/hku.svg" alt="University of Hong Kong" typeof="foaf:Image" decoding="async" />
+
+</div>
+    </div>
+
+    </div>
+  
+
+      <div data-history-node-id="230" about="/partners/polyu" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/polyu.png.webp?itok=1yDX2gAy" width="260" height="50" alt="Hong Kong Polytechnic University" typeof="foaf:Image" decoding="async" />
+
+
+</div>
+    </div>
+
+    </div>
+  
+
+      <div data-history-node-id="231" about="/partners/hkbu" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/hkbu.png.webp?itok=UQwvfumH" width="260" height="54" alt="Hong Kong Baptist University" typeof="foaf:Image" decoding="async" />
+
+
+</div>
+    </div>
+
+    </div>
+  
+
+      <div data-history-node-id="232" about="/partners/bnbu" class="logo-tile logo-img-tile hdtp-partner-tile">
+      
+<div class="field field--name-field-logo field--type-image">
+          <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/bnbu.png.webp?itok=OobJzTaD" width="260" height="68" alt="BNU-HKBU United International College" typeof="foaf:Image" decoding="async" />
+
+
+</div>
+    </div>
+
+    </div>
+  </div><h3 class="subgroup">Industry Collaborations</h3><div class="logo-wall"><div class="logo-tile logo-tile--text"><img src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/industry-bytedance.png.webp?itok=1mghTG83" alt="ByteDance" loading="lazy"></div><div class="logo-tile logo-tile--text"><img src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/industry-zhonghua.png.webp?itok=vZRQulX-" alt="Zhonghua Book Company" loading="lazy"></div><div class="logo-tile logo-tile--text"><img src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/industry-tiktok.png.webp?itok=Tec7Ib0D" alt="Douyin" loading="lazy"></div><div class="logo-tile logo-tile--text"><img src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/industry-alibaba.png.webp?itok=6kHyyXlL" alt="Alibaba Group" loading="lazy"></div><div class="logo-tile logo-tile--text"><img src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/industry-baidu.png.webp?itok=PW3C3QBK" alt="Baidu" loading="lazy"></div><div class="logo-tile logo-tile--text"><img src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/industry-meituan.png.webp?itok=mCbagFbX" alt="Meituan" loading="lazy"></div><div class="logo-tile logo-tile--text"><img src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/industry-toushi.png.webp?itok=vdtshiN3" alt="Nanjing Toushi Technology" loading="lazy"></div><div class="logo-tile logo-tile--text"><img src="/sites/default/files/styles/hdtp_logo/public/hdtp/partners/industry-4dage.png.webp?itok=qjCVPcv7" alt="4D Age" loading="lazy"></div></div></div><p class="muted-note">We have applied for research projects together with these partners, or carried out projects with them.</p></div></section>
+  </div>
+
+</main>
+
+  </div>
+
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a href="/" class="brand footer-brand">
+            <img class="brand-img logo-ust" src="/themes/custom/humatech_dhi/images/ust-logo-official.png" alt="HKUST" width="797" height="186" decoding="async">
+            <span class="brand-sep" aria-hidden="true"></span>
+            <img class="brand-img logo-project" src="/themes/custom/humatech_dhi/images/hdt-logo-official.png" alt="Humanities and Digital Technologies Research" width="944" height="209" decoding="async">
+          </a>
+          <p class="footer-desc">The Humanities and Digital Technologies Platform at The Hong Kong University of Science and Technology advances the humanities in the age of AI. Through interdisciplinary research and top-tier humanities education, it connects industry, education and society, so that science and technology genuinely benefit humanity.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <p class="contact"><a href="mailto:dhi@ust.hk">dhi@ust.hk</a></p>
+          <p class="contact"><a href="/" target="_blank" rel="noopener">Home</a></p>
+        </div>
+        <div class="footer-col">
+          <h4>Follow us</h4>
+          <ul class="social">
+                          <li><a href="https://www.facebook.com/hkust.library" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a></li>
+                          <li><a href="https://www.instagram.com/libraryathkust/" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a></li>
+                          <li><a href="https://www.linkedin.com/school/hkust/" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a></li>
+                          <li><a href="https://www.youtube.com/user/HKUSTLIB" target="_blank" rel="noopener" aria-label="YouTube">YouTube</a></li>
+                      </ul>
+        </div>
+              </div>
+    </footer>
+
+    <div class="hkust-footer">
+      <a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 19V5"/><path d="M6 11l6-6 6 6"/></svg></a>
+      <div class="content-locator">
+        <div class="site-col">
+          <div class="hkust-logo">
+            <a href="https://www.ust.hk" target="_blank" rel="noreferrer"><img src="/themes/custom/humatech_dhi/images/hkust/hkust_logo_small.svg" alt="HKUST Logo" width="135" height="36" decoding="async"></a>
+          </div>
+          <div class="site-pages">
+                          <a class="page" href="https://dataprivacy.ust.hk/university-data-privacy-policy-statement/" target="_blank" rel="noreferrer">Privacy</a>
+                          <a class="page" href="https://hkust.edu.hk/sitemap" target="_blank" rel="noreferrer">Sitemap</a>
+                        <div class="copyright">© 2026 The Hong Kong University of Science and Technology. All rights reserved.</div>
+          </div>
+        </div>
+        <div class="social-share-col">
+          <div class="text">Follow HKUST on</div>
+          <div class="icon-wrapper">
+                          <a class="page" href="https://www.facebook.com/hkust/" rel="noreferrer"><img src="/themes/custom/humatech_dhi/images/hkust/s-icon-fb.svg" alt="Facebook" decoding="async"></a>
+                          <a class="page" href="https://www.linkedin.com/school/hkust/" rel="noreferrer"><img src="/themes/custom/humatech_dhi/images/hkust/s-icon-in.svg" alt="LinkedIn" decoding="async"></a>
+                          <a class="page" href="https://www.instagram.com/hkust" rel="noreferrer"><img src="/themes/custom/humatech_dhi/images/hkust/s-icon-ig.svg" alt="Instagram" decoding="async"></a>
+                          <a class="page" href="https://www.youtube.com/user/hkust" rel="noreferrer"><img src="/themes/custom/humatech_dhi/images/hkust/s-icon-youtube.svg" alt="YouTube" decoding="async"></a>
+                          <a class="page" href="https://hkust.edu.hk/sites/default/files/menu_icons/mainsite_Wechat_Eng_new.jpg" rel="noreferrer"><img src="/themes/custom/humatech_dhi/images/hkust/wechat.png" alt="WeChat" decoding="async"></a>
+                      </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","pathPrefix":"","currentPath":"home","currentPathIsAdmin":false,"isFront":true,"currentLanguage":"en"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"simple_popup_blocks":{"settings":[]},"eu_cookie_compliance":{"cookie_policy_version":"1.0.0","popup_enabled":true,"popup_agreed_enabled":false,"popup_hide_agreed":false,"popup_clicking_confirmation":false,"popup_scrolling_confirmation":false,"popup_html_info":"\u003Cdiv aria-labelledby=\u0022popup-text\u0022  class=\u0022eu-cookie-compliance-banner eu-cookie-compliance-banner-info eu-cookie-compliance-banner--opt-in\u0022\u003E\n  \u003Cdiv class=\u0022popup-content info eu-cookie-compliance-content\u0022\u003E\n        \u003Cdiv id=\u0022popup-text\u0022 class=\u0022eu-cookie-compliance-message\u0022 role=\u0022document\u0022\u003E\n      \u003Ch2\u003EWe use cookies on this site to enhance your user experience\u003C\/h2\u003E\n\u003Cp\u003EBy clicking any link on this page you are giving your consent for us to set cookies.\u003C\/p\u003E\n\n              \u003Cbutton type=\u0022button\u0022 class=\u0022find-more-button eu-cookie-compliance-more-button\u0022\u003EMore info\u003C\/button\u003E\n          \u003C\/div\u003E\n\n    \n    \u003Cdiv id=\u0022popup-buttons\u0022 class=\u0022eu-cookie-compliance-buttons\u0022\u003E\n            \u003Cbutton type=\u0022button\u0022 class=\u0022agree-button eu-cookie-compliance-secondary-button\u0022\u003EOK, I agree\u003C\/button\u003E\n              \u003Cbutton type=\u0022button\u0022 class=\u0022decline-button eu-cookie-compliance-default-button\u0022\u003ENo, thanks\u003C\/button\u003E\n          \u003C\/div\u003E\n  \u003C\/div\u003E\n\u003C\/div\u003E","use_mobile_message":false,"mobile_popup_html_info":"\u003Cdiv aria-labelledby=\u0022popup-text\u0022  class=\u0022eu-cookie-compliance-banner eu-cookie-compliance-banner-info eu-cookie-compliance-banner--opt-in\u0022\u003E\n  \u003Cdiv class=\u0022popup-content info eu-cookie-compliance-content\u0022\u003E\n        \u003Cdiv id=\u0022popup-text\u0022 class=\u0022eu-cookie-compliance-message\u0022 role=\u0022document\u0022\u003E\n      \n              \u003Cbutton type=\u0022button\u0022 class=\u0022find-more-button eu-cookie-compliance-more-button\u0022\u003EMore info\u003C\/button\u003E\n          \u003C\/div\u003E\n\n    \n    \u003Cdiv id=\u0022popup-buttons\u0022 class=\u0022eu-cookie-compliance-buttons\u0022\u003E\n            \u003Cbutton type=\u0022button\u0022 class=\u0022agree-button eu-cookie-compliance-secondary-button\u0022\u003EOK, I agree\u003C\/button\u003E\n              \u003Cbutton type=\u0022button\u0022 class=\u0022decline-button eu-cookie-compliance-default-button\u0022\u003ENo, thanks\u003C\/button\u003E\n          \u003C\/div\u003E\n  \u003C\/div\u003E\n\u003C\/div\u003E","mobile_breakpoint":768,"popup_html_agreed":false,"popup_use_bare_css":false,"popup_height":"auto","popup_width":"100%","popup_delay":1000,"popup_link":"https:\/\/dataprivacy.hkust.edu.hk\/university-data-privacy-policy-statement\/","popup_link_new_window":true,"popup_position":false,"fixed_top_position":true,"popup_language":"en","store_consent":false,"better_support_for_screen_readers":false,"cookie_name":"","reload_page":false,"domain":"","domain_all_sites":false,"popup_eu_only":false,"popup_eu_only_js":false,"cookie_lifetime":100,"cookie_session":0,"set_cookie_session_zero_on_disagree":0,"disagree_do_not_show_popup":false,"method":"opt_in","automatic_cookies_removal":true,"allowed_cookies":"","withdraw_markup":"\u003Cbutton type=\u0022button\u0022 class=\u0022eu-cookie-withdraw-tab\u0022\u003EPrivacy settings\u003C\/button\u003E\n\u003Cdiv aria-labelledby=\u0022popup-text\u0022 class=\u0022eu-cookie-withdraw-banner\u0022\u003E\n  \u003Cdiv class=\u0022popup-content info eu-cookie-compliance-content\u0022\u003E\n    \u003Cdiv id=\u0022popup-text\u0022 class=\u0022eu-cookie-compliance-message\u0022 role=\u0022document\u0022\u003E\n      \u003Ch2\u003EWe use cookies on this site to enhance your user experience\u003C\/h2\u003E\n\u003Cp\u003EYou have given your consent for us to set cookies.\u003C\/p\u003E\n\n    \u003C\/div\u003E\n    \u003Cdiv id=\u0022popup-buttons\u0022 class=\u0022eu-cookie-compliance-buttons\u0022\u003E\n      \u003Cbutton type=\u0022button\u0022 class=\u0022eu-cookie-withdraw-button \u0022\u003EWithdraw consent\u003C\/button\u003E\n    \u003C\/div\u003E\n  \u003C\/div\u003E\n\u003C\/div\u003E","withdraw_enabled":false,"reload_options":0,"reload_routes_list":"","withdraw_button_on_info_popup":false,"cookie_categories":[],"cookie_categories_details":[],"enable_save_preferences_button":true,"cookie_value_disagreed":"0","cookie_value_agreed_show_thank_you":"1","cookie_value_agreed":"2","containing_element":"body","settings_tab_enabled":false,"olivero_primary_button_classes":"","olivero_secondary_button_classes":"","close_button_action":"close_banner","open_by_default":true,"modules_allow_popup":true,"hide_the_banner":false,"geoip_match":true,"unverified_scripts":[]},"user":{"uid":0,"permissionsHash":"34693c6500025249e6d5c180ac56c4b368b67c477dbff314e3de60c0860be894"}}</script>
+<script src="/sites/default/files/js/js_lF9H61uLfn1qHCldUh1VSHZmih-e9pV3SnisOPCGu6c.js?scope=footer&amp;delta=0&amp;language=en&amp;theme=humatech_dhi&amp;include=eJxtydEJwDAIANGFAo4kxkqVmCok7t8MkK-Dd1LIEcPkZKYbfSwgF2xak7aw4qMGr0cnb8vOFszISuwePBZc7AcJ0SiI"></script>
+<script src="/themes/custom/humatech_dhi/js/main.js?v=20261007000000" defer></script>
+<script src="/sites/default/files/js/js_uYb328KC9ZEAwb1mRd4SA5REe_gx2S5zawH5nKaMYLc.js?scope=footer&amp;delta=2&amp;language=en&amp;theme=humatech_dhi&amp;include=eJxtydEJwDAIANGFAo4kxkqVmCok7t8MkK-Dd1LIEcPkZKYbfSwgF2xak7aw4qMGr0cnb8vOFszISuwePBZc7AcJ0SiI"></script>
+
+  </body>
 </html>

@@ -1,0 +1,707 @@
+/* /projects listing: the card columns could not shrink below their content, so the
+   listing overflowed to the right. minmax(0, 1fr) removes that floor. */
+.news-grid { grid-template-columns: minmax(0, 1fr) !important; }
+@media (min-width: 768px) {
+  .news-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+}
+.news-card, .hdtp-project-card { min-width: 0 !important; }
+
+html.js .card,
+html.js .news-card,
+html.js .member,
+html.js .event-row,
+html.js .logo-tile,
+html.js .hdtp-project-card {
+  opacity: 0;
+  transform: translateY(16px);
+}
+html.js .reveal.visible { opacity: 1; transform: none; transition: opacity 0.72s var(--hdtp-ease), transform 0.72s var(--hdtp-ease); }
+
+/* Scroll performance. The repeating card surfaces and tags each forced a backdrop
+   rasterisation every frame, which made scrolling stutter (measured on /events: average
+   scroll latency 45ms -&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;gt; 2.3ms, frames over 50ms 7 -&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;gt; 0). They sit on a flat gradient and
+   are mostly opaque, so the blur was barely visible; their colour, border and inner
+   highlight are unchanged.
+
+   The two top bars are deliberately NOT in this list: their blur is part of the design and
+   stays exactly as the theme declares it. The footer is flattened because it should not
+   carry a blur. */
+.card, .news-card, .event-row, .member, .logo-tile, .feature-band, .feature-glass,
+.conf-entry, .hdtp-project-card, .tag {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.site-footer {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* =========================================================================
+   Topbar: one button, always there.
+   Marker: hdtp-topbar-globe-to-header
+
+   The topbar now holds only the chevron, and the chevron is always visible, on
+   the carousel page as well as everywhere else. It no longer fades with
+   body.is-scrolled, so the only thing that changes on scroll is the bar&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;#039;s own
+   background and bottom border, exactly as the theme defines.
+
+   Opening the chevron expands the topbar downward in normal flow and pushes the
+   page, including the carousel, down with it. See the drawer block.
+
+   Note: this block used to carry rules for the language globe that lived in the
+   topbar. The template no longer renders that element (the language switch is
+   now a plain .search-toggle.lang-switch link inside .header-actions), so those
+   rules were dead and have been removed.
+   ========================================================================= */
+
+/* =========================================================================
+   Topbar drawer expansion, the standard way (reference: shss.hkust.edu.hk).
+   Marker: hdtp-topbar-drawer-push
+
+   Opening the chevron grows the topbar from 25px to 193px and the header, the
+   hero and the rest of the page all move down by the same 168px, with both bars
+   still on screen (topbar 39..232, header immediately below at 232).
+
+   What used to break it was the bars being sticky while the drawer grew: both
+   were out of flow, so the drawer was painted over the page instead of pushing
+   it, and once the page was scrolled the pair ended up above the viewport
+   entirely. So while either drawer is open the two bars sit in normal flow, and
+   the topbar stops being sticky in general -- which is what makes it behave like
+   the topbar on every other page: it scrolls away, and the site header stays.
+
+   !important is needed because the theme declares the topbar sticky with
+   `body:has(.hero-carousel) .hkust-topbar`, and its stylesheet loads after this
+   one.
+   ========================================================================= */
+body:has(.hkust-topbar .lang-drawer[open]) .hkust-topbar,
+body:has(.hkust-topbar .lang-drawer[open]) .site-header,
+body:has(.hkust-topbar .more-drawer[open]) .hkust-topbar,
+body:has(.hkust-topbar .more-drawer[open]) .site-header {
+  /* relative, NOT static: they must stay in flow so the expanding drawer pushes
+     them down, but they must also stay positioned so their z-index keeps them
+     above the hero. The hero is position: relative with a negative top margin
+     (it is meant to sit under the bars) and it comes later in the DOM, so with
+     the bars static the hero painted over them and the logo, the menu and the
+     three header buttons disappeared behind it. Verified by hit test: header
+     centre resolves to the hero while static, to the brand link while relative. */
+  position: relative !important;
+}
+
+/* (The thin bar&amp;amp;amp;amp;amp;amp;amp;amp;#039;s sticky/collapse rules and the header&amp;amp;amp;amp;amp;amp;amp;amp;#039;s top offset live in the
+   hero-bars-opaque block; while a drawer is open both bars go relative there.) */
+
+/* The chevron cell stays above the opened drawer, so the toggle is always the
+   thing under the pointer and clicking it closes the drawer again.
+   NB: no `&amp;amp;amp;amp;amp;amp;amp;amp;gt;` combinator in this file -- the Additional CSS form HTML-escapes it
+   into `&amp;amp;amp;amp;amp;amp;amp;amp;amp;gt;`, which invalidates the whole selector and silently drops the rule. */
+.hkust-topbar .more-drawer .toggler {
+  z-index: 1 !important;
+}
+
+/* The opened drawer is dark blue, and the chevron is black in the light theme,
+   so it disappeared against it. While the drawer is open the chevron follows it
+   to white and drops the white glow that was there for sitting on the hero. */
+.hkust-topbar .more-drawer[open] .toggler {
+  color: #fff;
+  text-shadow: none;
+}
+
+/* Rendering isolation for repeated tiles. Each carries its own image, rounded surface and
+   shadow; without containment a change in one invalidates the whole page. Measured on
+   /members: 36 -&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;gt; 43 fps, p95 frame time 67ms -&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;gt; 50ms, with no visual change. */
+.logo-tile,
+.news-card,
+.event-row,
+.cf-card,
+.member {
+  contain: layout paint style;
+}
+
+.logo-tile img {
+  content-visibility: auto;
+  contain: content;
+}
+
+/* Header language switch: one button that leads to the other language. Same 40x40 box,
+   colours and hover state as the search button beside it.
+   transition:none is deliberate: the theme switch flips instantly, and without this the
+   inherited 0.2s colour transition made the label animate (a visible flash) while the icon
+   buttons changed immediately. */
+.lang-switch.search-toggle {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 2.5rem !important;
+  height: 2.5rem !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0.5rem !important;
+  background: transparent !important;
+  color: var(--text-muted) !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  transition: none !important;
+}
+
+/* Sizes chosen from measurement: the icons draw 16.67px tall including their 1.67px stroke,
+   and a capital letter&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;#039;s ink is much shorter than a CJK glyph at the same font size, so each
+   script gets the size that matches the icons. */
+.lang-switch.search-toggle {
+  font-size: 17px !important;
+}
+
+.lang-switch.search-toggle:lang(en) {
+  font-size: 14.8px !important;
+  letter-spacing: 0 !important;
+}
+
+.lang-switch.search-toggle:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: var(--primary) !important;
+  text-decoration: none !important;
+}
+
+.dark .lang-switch.search-toggle:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* =========================================================================
+   Hero page only -- every rule below carries body:has(.hero-carousel), so no
+   other page is affected.  Marker: hdtp-hero-bars-opaque
+
+   1. Background, border and shadow are tied to scrolling: flat and transparent
+      at the very top, frosted with a line and a shadow from the first pixel of
+      scrolling (body.is-scrolled-any, set by main.js).
+   2. The thin bar and the header are wrapped in #hdtp-bars (html.html.twig) and
+      behave as one bar: pinned as a group, and moved up by the thin bar&amp;#039;s height
+      in one piece when the About us band is reached (body.is-scrolled, also set
+      by main.js).
+   3. On small screens the header&amp;#039;s content is lined up with the carousel&amp;#039;s
+      content, and the carousel keeps one screen height so switching slides can
+      no longer change how tall it is.
+
+   !important is required throughout: the theme sets these same properties with
+   equal specificity from a stylesheet that is loaded after this one.
+   ========================================================================= */
+
+/* ---- 1. background / border / shadow follow scrolling --------------------- */
+
+/* The theme makes the bars transparent over the carousel with !important, so
+   this switches that off; what replaces it is conditioned on scrolling instead.
+   The menu-open case is excluded: opening the burger does not scroll the page, so
+   without that exception this rule stripped the glass off the tab bar exactly when
+   the menu was open, which is not what should happen to the bars -- they keep the
+   treatment they have the rest of the time. */
+body:has(.hero-carousel):not(.is-scrolled-any):not(:has(.main-nav.open)) .hkust-topbar,
+body:has(.hero-carousel):not(.is-scrolled-any):not(:has(.main-nav.open)) .site-header {
+  background-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+/* the ::before is the theme&amp;#039;s own frosted layer for an open menu; while the menu
+   is open it must stay, otherwise the panel behind the header loses its blur */
+body:has(.hero-carousel):not(.is-scrolled-any):not(:has(.main-nav.open)) .site-header::before {
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+body:has(.hero-carousel).is-scrolled-any .hkust-topbar,
+body:has(.hero-carousel).is-scrolled-any .site-header {
+  background-color: rgba(255, 255, 255, 0.78) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  border-bottom-color: var(--border-header) !important;
+}
+.dark body:has(.hero-carousel).is-scrolled-any .hkust-topbar,
+.dark body:has(.hero-carousel).is-scrolled-any .site-header {
+  background-color: rgba(3, 6, 32, 0.72) !important;
+}
+/* the border is hidden at the very top; the accents rule in the theme uses
+   !important, hence the extra :not for specificity */
+body:has(.hero-carousel):not(.is-scrolled-any) .hkust-topbar,
+body:has(.hero-carousel):not(.is-scrolled-any) .site-header {
+  border-bottom-color: transparent !important;
+}
+body:has(.hero-carousel):not(.is-scrolled-any):not(.is-scrolled) .hkust-topbar,
+body:has(.hero-carousel):not(.is-scrolled-any):not(.is-scrolled) .site-header {
+  border-bottom-color: transparent !important;
+}
+body:has(.hero-carousel) .hkust-topbar,
+body:has(.hero-carousel) .site-header {
+  box-shadow: none !important;
+}
+body:has(.hero-carousel).is-scrolled-any .site-header {
+  box-shadow: 0 8px 30px rgba(2, 12, 48, 0.1) !important;
+}
+body:has(.hero-carousel):not(.is-scrolled-any) .hkust-topbar .toggler {
+  border-inline-color: transparent !important;
+}
+body:has(.hero-carousel).is-scrolled-any .hkust-topbar .toggler {
+  border-inline-color: var(--border-header) !important;
+}
+
+/* ---- 2. the two bars as one group ----------------------------------------- */
+
+body:has(.hero-carousel) #hdtp-bars {
+  position: sticky !important;
+  top: 0 !important;
+  /* a positive z-index, because with `auto` the group still loses to the hero
+     carousel: both paint in the same layer and the carousel comes later in the
+     document, so it covered the bars. */
+  z-index: 60 !important;
+  transition: transform 0.35s ease;
+  will-change: transform;
+}
+/* relative, not static: the bars stay in flow so the group can be translated as
+   a whole, and they stay positioned so their z-index keeps them above the hero
+   and the cards. */
+body:has(.hero-carousel) .hkust-topbar,
+body:has(.hero-carousel) .site-header {
+  position: relative !important;
+  top: auto !important;
+}
+body:has(.hero-carousel) .hkust-topbar {
+  z-index: 60 !important;
+}
+body:has(.hero-carousel) .site-header {
+  z-index: 50 !important;
+}
+body:has(.hero-carousel).is-scrolled #hdtp-bars {
+  transform: translateY(calc(-1 * var(--topbar-h)));
+}
+
+/* ---- 3. small screens ----------------------------------------------------- */
+
+@media (max-width: 899px) {
+  /* --hero-inset is declared on .hero-carousel and resolves against its own
+     containing block, so on anything else it comes out as 0 -- which is how the
+     header and the carousel drifted apart a few pixels wider than the phone.
+     Rather than rely on that variable crossing elements, both sides are given
+     the same expression: the header directly, and the carousel through the
+     variable it already uses. At phone widths the two both come out as 1.5rem;
+     where the centring term starts to bite they grow together. */
+  body:has(.hero-carousel) {
+    --hero-inset: calc(max(0px, (100% - 80rem) / 2) + 1.5rem);
+  }
+  body:has(.hero-carousel) .header-inner {
+    padding-inline: calc(max(0px, (100% - 80rem) / 2) + 1.5rem) !important;
+  }
+}
+/* narrow phones: keep both at the plain 1.5rem inset the carousel uses */
+@media (max-width: 767px) {
+  body:has(.hero-carousel) {
+    --hero-inset: 1.5rem;
+  }
+  body:has(.hero-carousel) .header-inner {
+    padding-inline: 1.5rem !important;
+    /* The header&amp;#039;s row is a few pixels wider than the carousel&amp;#039;s content box on
+       the narrowest phones, which pushed the buttons out past that edge. The gap
+       is tightened first; whatever still does not fit is folded away below. */
+    gap: 0.5rem !important;
+  }
+  body:has(.hero-carousel) .header-actions {
+    gap: 0.25rem !important;
+  }
+  /* The carousel&amp;#039;s content box is the reference: the brand may give way, the
+     buttons stay put, so the row always ends exactly on that edge. */
+  body:has(.hero-carousel) .brand {
+    min-width: 0 !important;
+    flex: 0 1 auto !important;
+    overflow: hidden;
+  }
+  body:has(.hero-carousel) .header-actions {
+    flex: 0 0 auto !important;
+  }
+}
+/* Too narrow for the language button as well: it goes into the menu, which is
+   what the burger is for. Only the smallest phones need this, 375 and up fit. */
+@media (max-width: 374px) {
+  body:has(.hero-carousel) .header-actions a.lang-switch {
+    display: none !important;
+  }
+}
+
+/* The logo file and the burger icon both carry about 12px of blank space of their
+   own (measured: the brand&amp;#039;s painted pixels start 12px inside its box, the
+   burger&amp;#039;s lines sit 12px inside on each side). The boxes line up with the
+   carousel&amp;#039;s content edges, but the artwork looked a little inset from them, so
+   each is nudged out by its own blank margin. */
+body:has(.hero-carousel) .brand {
+  margin-left: -12px;
+}
+body:has(.hero-carousel) .header-actions .menu-toggle {
+  margin-right: -12px;
+}
+
+/* One addition only: once the About us band has been reached on a phone, the tab
+   bar&amp;#039;s content goes back to the normal page content width (the theme&amp;#039;s own
+   1rem inset on small screens) instead of the carousel&amp;#039;s inset. Nothing else in
+   this block is touched. */
+@media (max-width: 899px) {
+  body:has(.hero-carousel).is-scrolled .header-inner {
+    padding-inline: 1rem !important;
+  }
+}
+
+/* Phone home page, first screen: just the three parts of the copy -- the small
+   label, the headline and the body paragraph -- centred vertically on that screen.
+   Nothing is clamped, faded or otherwise trimmed; the card, the picture and the
+   controls stay below, on the following screen. */
+@media (max-width: 899px) {
+  /* the section is two screens: the first holds the copy, the second holds the
+     carousel. The inner box is given the full two screens so each half can centre
+     its own contents. */
+  body:has(.hero-carousel) .hero-carousel {
+    height: 200svh !important;
+    min-height: 200svh !important;
+  }
+  body:has(.hero-carousel) .hero-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 200svh !important;
+    min-height: 0 !important;
+    /* the theme gives this box side padding, which would inset the copy and the
+       card by 16px and make them narrower than the picture; the section&amp;#039;s own
+       padding already provides the correct inset */
+    padding-inline: 0 !important;
+  }
+  /* second screen: the text card, the picture card and the controls, centred in it.
+     Card widths are untouched; only their type and spacing are set. */
+  body:has(.hero-carousel) .hero-news {
+    margin-top: 4.5rem !important;
+    margin-bottom: 0.75rem !important;
+    position: static !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    flex: 0 0 auto !important;
+    /* the slide-in animation (fill mode &amp;quot;both&amp;quot;) was leaving the card translated by
+       16px, which made it sit off-centre and look narrower than the picture. No
+       animation and no residual transform: it sits square above the picture. */
+    animation: none !important;
+    transform: none !important;
+    width: auto !important;
+    left: auto !important;
+    right: auto !important;
+  }
+  body:has(.hero-carousel) .hero-slides {
+    margin-top: 1rem !important;
+    margin-bottom: auto !important;
+  }
+  body:has(.hero-carousel) .hero-inner &amp;gt; .carousel-controls {
+    position: static !important;
+    flex: 0 0 auto !important;
+    margin-top: 0.75rem !important;
+    margin-bottom: 0 !important;
+  }
+  /* the type inside the two cards, a little smaller so they fit one screen */
+  body:has(.hero-carousel) .hero-news {
+    padding: 1rem !important;
+  }
+  body:has(.hero-carousel) .hero-news .news-meta,
+  body:has(.hero-carousel) .hero-news time {
+    font-size: 0.78rem !important;
+  }
+  body:has(.hero-carousel) .hero-news .tag {
+    font-size: 0.68rem !important;
+    padding: 0.2rem 0.5rem !important;
+  }
+  body:has(.hero-carousel) .hero-news h2,
+  body:has(.hero-carousel) .hero-news h2 a {
+    font-size: 1rem !important;
+    line-height: 1.3 !important;
+  }
+  body:has(.hero-carousel) .hero-news p {
+    font-size: 0.84rem !important;
+    line-height: 1.45 !important;
+  }
+  body:has(.hero-carousel) .hero-news .btn {
+    font-size: 0.84rem !important;
+    padding: 0.5rem 0.9rem !important;
+  }
+  /* the card is a flex column: its heading and summary must keep their own height,
+     otherwise the flex layout squashes them into each other */
+  body:has(.hero-carousel) .hero-news &amp;gt; * {
+    flex: 0 0 auto !important;
+  }
+  /* first screen: just the copy, exactly one screen tall, centred in it */
+  body:has(.hero-carousel) .hero-copy {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    /* exactly one screen, never taller and never allowed to shrink: that is what
+       makes it &amp;quot;the first screen&amp;quot; no matter how long a slide&amp;#039;s text is */
+    height: 100svh !important;
+    min-height: 100svh !important;
+    max-height: 100svh !important;
+    flex: 0 0 100svh !important;
+    overflow: hidden;
+    /* The bars cover the top strip of the carousel, so the visible area of the two
+       screens is not symmetric: the measured residual after centring both halves is
+       about 5px, which this trims off the first screen&amp;#039;s lower padding (8 x
+       --topbar-h is ~51px; 46px here). Both halves then sit centred. */
+    padding-bottom: 46px !important;
+  }
+  body:has(.hero-carousel) .hero-copy .hero-sub {
+    display: block !important;
+    overflow: visible !important;
+  }
+  body:has(.hero-carousel) .hero-copy .eyebrow {
+    display: block !important;
+  }
+}
+
+/* ---- 4. the burger menu ---------------------------------------------- */
+
+/* Why the panel is hung under the bar group rather than styled in place:
+   .main-nav is a child of .site-header, which is positioned, so the panel&amp;#039;s
+   backdrop is limited to the header&amp;#039;s own contents and its blur can never reach
+   the page. The thin top bar and the tab bar blur correctly because they sit in
+   the page&amp;#039;s root context. main.js therefore moves the panel out of the header to
+   sit straight after #hdtp-bars, and these rules place it under the bars and keep
+   it there as they shrink. The blur itself is the theme&amp;#039;s own
+   .main-nav.open rule -- the same 20px / saturate(160%) the bars use. */
+@media (max-width: 767px) {
+  #hdtp-bars {
+    position: relative;
+    z-index: 40;
+  }
+  #main-nav.hdtp-menu-hosted {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 30 !important;
+    margin: 0 !important;
+  }
+}
+
+/* While the menu is open the header carries exactly the same glass the thin top
+   bar has, declared the same way -- translucent background plus blur on the
+   element itself -- and the theme&amp;#039;s ::before layer is switched off so nothing
+   double-paints or shows as flat white. */
+body:has(.hero-carousel):has(.main-nav.open) .site-header {
+  background-color: rgba(255, 255, 255, 0.78) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+}
+.dark body:has(.hero-carousel):has(.main-nav.open) .site-header {
+  background-color: rgba(3, 6, 32, 0.72) !important;
+}
+body:has(.hero-carousel):has(.main-nav.open) .site-header::before {
+  content: none !important;
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* The panel itself: the theme has two rules of equal weight for this element --
+   .main-nav { background: rgba(255,255,255,0.9) } and
+   .main-nav.open { background: rgba(255,255,255,0.78); backdrop-filter: blur(20px) }
+   -- and the flat 0.9 one was what showed once the panel moved out of the header,
+   which is the pure white fill. Both are pinned here to the bars&amp;#039; glass. */
+body:has(.hero-carousel) .main-nav,
+body:has(.hero-carousel) .main-nav.open {
+  background-color: rgba(255, 255, 255, 0.78) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+}
+.dark body:has(.hero-carousel) .main-nav,
+.dark body:has(.hero-carousel) .main-nav.open {
+  background-color: rgba(3, 6, 32, 0.72) !important;
+}
+
+/* Menu rows: slightly tighter than the theme&amp;#039;s 0.95rem. The row&amp;#039;s side inset is
+   carried by the list, so the links keep only their vertical padding and the menu
+   content edges line up with the tab bar&amp;#039;s content edges -- and follow them when
+   that inset changes (the bar&amp;#039;s inset is 1.5rem before and 1rem after the About us
+   trigger on phones, and the wide-screen expression on larger viewports). */
+body:has(.hero-carousel) .main-nav,
+body:has(.hero-carousel) .main-nav.open {
+  padding-inline: 0 !important;
+}
+body:has(.hero-carousel) .main-nav.open a {
+  padding-top: 0.72rem !important;
+  padding-bottom: 0.72rem !important;
+  padding-inline: 0 !important;
+}
+/* The menu&amp;#039;s own side inset: the same expression the tab bar&amp;#039;s content inset uses,
+   so the menu&amp;#039;s content edges are the bar&amp;#039;s content edges. (--hero-inset is NOT
+   used here: it is declared on .hero-carousel and resolves to 0 anywhere else.) */
+body:has(.hero-carousel) .main-nav.open ul.menu {
+  padding-inline: max(0px, (100% - 80rem) / 2 + 1.5rem) !important;
+}
+@media (max-width: 767px) {
+  body:has(.hero-carousel):not(.is-scrolled) .main-nav.open ul.menu {
+    padding-inline: 1.5rem !important;
+  }
+  body:has(.hero-carousel).is-scrolled .main-nav.open ul.menu {
+    padding-inline: 1rem !important;
+  }
+}
+
+/* The row of the two buttons uses the very same inset expression as the menu list
+   above, kept in a variable so the character&amp;#039;s offset below can be derived from it
+   -- that is what makes the alignment follow the inset instead of being a fixed
+   number that goes stale when the inset changes. */
+body:has(.hero-carousel) .main-nav li.hdtp-menu-actions-row {
+  --hdtp-row-inset: max(0px, (100% - 80rem) / 2 + 1.5rem);
+  padding-inline: var(--hdtp-row-inset) !important;
+}
+@media (max-width: 767px) {
+  body:has(.hero-carousel):not(.is-scrolled) .main-nav li.hdtp-menu-actions-row {
+    --hdtp-row-inset: 1.5rem;
+    padding-inline: var(--hdtp-row-inset) !important;
+  }
+  body:has(.hero-carousel).is-scrolled .main-nav li.hdtp-menu-actions-row {
+    --hdtp-row-inset: 1rem;
+    padding-inline: var(--hdtp-row-inset) !important;
+  }
+}
+/* The character must sit on the bar&amp;#039;s content edge. The row&amp;#039;s inset pushes the
+   button right by that amount, and inside a 2.25rem box the centred glyph sits
+   9.5px right of the button&amp;#039;s edge, so the button is pulled back by the inset plus
+   half a box plus that 9.5px -- all expressed on the same variable the row&amp;#039;s inset
+   uses, so the two track each other for any value of it. */
+/* The character must sit on the bar&amp;#039;s content edge. The row&amp;#039;s inset shifts the
+   whole row, and inside a 2.25rem box the centred glyph sits 9.5px right of the
+   button&amp;#039;s edge, so the button has to be pulled back by the inset PLUS that 9.5px
+   (measured: at a 24px inset the box must sit at 14.5px for the glyph to land on
+   24px). The inset term keeps the alignment correct when the inset changes. */
+body:has(.hero-carousel) .main-nav li.hdtp-menu-actions-row a:first-child {
+  margin-left: calc(-9.5px - var(--hdtp-row-inset)) !important;
+}
+body:has(.hero-carousel) .main-nav li.hdtp-menu-actions-row a:nth-of-type(2) {
+  margin-left: 0.25rem !important;
+}
+
+/* The language switch and the search button are moved here by main.js when the
+   header is too narrow for them (&amp;lt;= 374px); they take the last row of the menu,
+   laid out as a row of their own. */
+body:has(.hero-carousel) .main-nav li.hdtp-menu-actions-row {
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.25rem;
+  /* the row is sized by its own content: the inherited line-height was adding
+     ~1.3px of extra content height (and the old bottom padding 8px), which pushed
+     the two buttons off the middle. Zeroing line-height and keeping the padding
+     symmetrical puts them dead centre. */
+  height: auto !important;
+  min-height: 0 !important;
+  line-height: 0 !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  border-top: 1px solid var(--border-header, rgba(2, 12, 48, 0.12));
+}
+body:has(.hero-carousel) .main-nav li.hdtp-menu-actions-row a,
+body:has(.hero-carousel) .main-nav li.hdtp-menu-actions-row a.lang-switch,
+body:has(.hero-carousel) .main-nav li.hdtp-menu-actions-row a.search-toggle {
+  display: inline-flex !important;
+  /* both buttons are exactly the same box, in both directions; only the glyph
+     inside differs. min-width is set too because the theme&amp;#039;s own min-width would
+     otherwise widen the language button past the icon button. */
+  width: 2.25rem !important;
+  min-width: 2.25rem !important;
+  max-width: 2.25rem !important;
+  height: 2.25rem !important;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+  /* the left edge of the first button is set separately just below, so only the
+     other three sides are zeroed here */
+  margin-top: 0 !important;
+  margin-right: 0 !important;
+  margin-bottom: 0 !important;
+  border-radius: 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none !important;
+  color: var(--text-default);
+  /* plain, like the language button: no fill and no outline of its own */
+  background: transparent !important;
+  border: 0 !important;
+}
+/* the icon must not be able to grow the box past that height */
+body:has(.hero-carousel) .main-nav li.hdtp-menu-actions-row a svg {
+  width: 1.15rem !important;
+  height: 1.15rem !important;
+  flex: none;
+}
+
+body:has(.hero-carousel) .main-nav li.hdtp-menu-actions-row a:hover,
+body:has(.hero-carousel) .main-nav li.hdtp-menu-actions-row a:focus-visible {
+  background: rgba(1, 97, 239, 0.1) !important;
+}
+
+/* ---------------------------------------------------------------------------
+   Normal pages: the tab bar stays pinned, the thin top bar goes out of view.
+
+   The bar group is the sticky element. Pinning it with top = minus the top bar&#039;s real
+   height leaves the tab bar exactly on the top edge and the thin bar just above it, out
+   of sight. Above that offset nothing moves, so the first screen is unchanged.
+
+   The height is measured live by main.js and published as --hdtp-topbar-real; it is not
+   --topbar-h (1.5rem/24px) and not the admin toolbar&#039;s displacement (39px).
+
+   The two bars inside are relative on purpose: only one element should be sticky, and two
+   nested sticky elements do not behave predictably.
+   --------------------------------------------------------------------------- */
+
+body:not(:has(.hero-carousel)) #hdtp-bars {
+  position: sticky;
+  top: calc(-1 * var(--hdtp-topbar-real, 25px));
+  z-index: 60;
+}
+
+body:not(:has(.hero-carousel)) #hdtp-bars .hkust-topbar,
+body:not(:has(.hero-carousel)) #hdtp-bars .site-header {
+  position: relative;
+  top: auto;
+}
+
+/* ==== hdtp-card-gap ==== */
+/* Fix: the text card and the picture card were overlapping on the phone home page
+   (card bottom 1407, picture top 1395). Give the picture a clear gap below the
+   card. Nothing above is edited; this only adds spacing. */
+@media (max-width: 899px) {
+  body:has(.hero-carousel) .hero-slides {
+    margin-top: 1.5rem !important;
+  }
+}
+
+/* ==== /hdtp-card-gap ==== */
+
+/* ---------------------------------------------------------------------------
+   The menu's content edge follows the tab bar's content edge.
+
+   The bar sets its inset with the expression below, so the menu list is given the very same
+   one. Both then move together whenever the viewport, the page (hero or not) or the scroll
+   state changes; nothing here is a fixed number.
+
+   The theme pads each open-menu row's link by 1.5rem, so the list carries the difference.
+   On the home page the rows are already flush (their padding is 0), so the list carries the
+   whole inset there, mirroring the rule that already exists for the carousel pages.
+   --------------------------------------------------------------------------- */
+
+@media (max-width: 639px) {
+  #main-nav ul.menu {
+    padding-inline: max(0rem, calc((100% - 80rem) / 2 + 1rem - 1.5rem)) !important;
+  }
+  body:has(.hero-carousel) #main-nav ul.menu {
+    padding-inline: max(1rem, calc((100% - 80rem) / 2 + 1rem)) !important;
+  }
+}
+
+@media (min-width: 640px) {
+  #main-nav ul.menu {
+    padding-inline: max(0rem, calc((100% - 80rem) / 2 + 1.5rem - 1.5rem)) !important;
+  }
+  body:has(.hero-carousel) #main-nav ul.menu {
+    padding-inline: max(1.5rem, calc((100% - 80rem) / 2 + 1.5rem)) !important;
+  }
+}

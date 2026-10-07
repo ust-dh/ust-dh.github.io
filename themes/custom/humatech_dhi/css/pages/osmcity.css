@@ -1,0 +1,289 @@
+.oc-page {
+--oc-paper: #f7f9f8;
+--oc-tint: #eef3f1;
+--oc-ink: #16202a;
+--oc-quiet: rgba(22, 32, 42, 0.66);
+--oc-rule: rgba(22, 32, 42, 0.16);
+--oc-mint: #0f8a5f;
+background: var(--oc-paper);
+color: var(--oc-ink);
+}
+:root.dark .oc-page, .dark .oc-page {
+--oc-paper: #0d1317;
+--oc-tint: #121a20;
+--oc-ink: #e8efec;
+--oc-quiet: rgba(232, 239, 236, 0.66);
+--oc-rule: rgba(232, 239, 236, 0.16);
+--oc-mint: #6ee7a8;
+}
+.oc-page .container { max-width: 80rem; margin: 0 auto; padding-inline: 1.5rem;}
+.oc-page .oc-head { padding: clamp(1.5rem, 3vw, 2.25rem) 0 clamp(1.25rem, 2.5vw, 1.75rem); border-bottom: 1px solid var(--oc-rule);}
+.oc-page .oc-crumb { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.9rem; font-size: 0.8rem;}
+.oc-page .oc-crumb a { color: var(--oc-quiet); text-decoration: none;}
+.oc-page .oc-crumb a:hover { color: var(--oc-mint);}
+.oc-page .oc-crumb svg { color: var(--oc-mint);}
+.oc-page .oc-kicker, .oc-page .oc-label {
+margin: 0 0 0.6rem; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--oc-mint);
+}
+.oc-page .oc-label { margin-bottom: 0.9rem;}
+.oc-page .oc-title { margin: 0 0 0.7rem; max-width: 46rem; font-size: clamp(1.5rem, 3vw, 2.3rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em;}
+.oc-page .oc-lead { margin: 0 0 1.25rem; max-width: 46rem; font-size: 1rem; line-height: 1.65; color: var(--oc-quiet);}
+.oc-page .oc-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--oc-rule);}
+.oc-page .oc-strip li { padding-top: 0.75rem;}
+.oc-page .oc-strip li + li { padding-left: 1.25rem; border-left: 1px solid var(--oc-rule);}
+.oc-page .oc-strip b { display: block; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: clamp(1.1rem, 1.9vw, 1.5rem); font-weight: 700; line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums;}
+.oc-page .oc-strip span { display: block; margin-top: 0.25rem; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--oc-quiet);}
+.oc-page .oc-block { padding: clamp(2rem, 4vw, 3.25rem) 0; border-bottom: 1px solid var(--oc-rule);}
+.oc-page .oc-block--tint { background: var(--oc-tint);}
+.oc-page .oc-claim { margin: 0 0 1.1rem; max-width: 46rem; font-size: clamp(1.15rem, 2.1vw, 1.55rem); font-weight: 700; line-height: 1.25; letter-spacing: -0.02em;}
+.oc-page .oc-text { margin: 0; font-size: 1rem; line-height: 1.75; color: var(--oc-ink); opacity: 0.9;}
+.oc-page .oc-text--wide { max-width: 58rem; margin-bottom: 1.5rem;}
+.oc-page .oc-cols { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(1.75rem, 4vw, 3.5rem); align-items: start;}
+.oc-page .oc-facts { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--oc-rule);}
+.oc-page .oc-facts--wide { grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); margin-top: 0.5rem;}
+.oc-page .oc-facts > div { padding: 0.7rem 0.9rem 0.75rem 0; border-bottom: 1px solid var(--oc-rule);}
+.oc-page .oc-facts dt { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--oc-mint);}
+.oc-page .oc-facts dd { margin: 0.25rem 0 0; font-size: 0.98rem; font-variant-numeric: tabular-nums;}
+.oc-page .oc-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums;}
+.oc-page .oc-table th, .oc-page .oc-table td { padding: 0.6rem 0 0.6rem 0; text-align: left; border-bottom: 1px solid var(--oc-rule); font-size: 0.98rem;}
+.oc-page .oc-table th { width: 52%; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.66rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--oc-quiet);}
+.oc-page .oc-table td { font-weight: 600;}
+.oc-page .oc-keys { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 0; border-top: 1px solid var(--oc-rule);}
+.oc-page .oc-keys li { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: 0.15rem 0.7rem; padding: 0.85rem 1rem 0.9rem 0; border-bottom: 1px solid var(--oc-rule);}
+.oc-page .oc-keys kbd {
+grid-row: span 2; align-self: start; display: grid; place-items: center; width: 1.7rem; height: 1.7rem;
+border: 1px solid var(--oc-rule); border-bottom-width: 2px; border-radius: 0.3rem;
+font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.8rem; font-weight: 700;
+}
+.oc-page .oc-keys b { font-size: 0.98rem; font-weight: 700;}
+.oc-page .oc-keys span { font-size: 0.85rem; line-height: 1.5; color: var(--oc-quiet);}
+.oc-page .oc-notes { margin: 1.25rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.45rem;}
+.oc-page .oc-notes li { position: relative; padding-left: 1.1rem; font-size: 0.95rem; line-height: 1.65; color: var(--oc-quiet);}
+.oc-page .oc-notes li::before { content: ''; position: absolute; left: 0; top: 0.62rem; width: 0.5rem; height: 1px; background: var(--oc-mint);}
+.oc-page .oc-bars { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.85rem;}
+.oc-page .oc-bars li { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr) auto; gap: 0.5rem 0.9rem; align-items: center;}
+.oc-page .oc-bar-z { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.72rem; letter-spacing: 0.1em; color: var(--oc-quiet);}
+.oc-page .oc-bar-track { position: relative; display: grid; gap: 2px;}
+.oc-page .oc-bar-track i { display: block; height: 0.5rem; width: var(--oc-w, 0%);}
+.oc-page .oc-bar-before { background: repeating-linear-gradient(135deg, var(--oc-rule) 0 4px, transparent 4px 8px);}
+.oc-page .oc-bar-after { background: var(--oc-mint);}
+.oc-page .oc-bar-num { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.76rem; font-variant-numeric: tabular-nums; white-space: nowrap;}
+.oc-page .oc-bar-num s { color: var(--oc-quiet); text-decoration-thickness: 1px;}
+.oc-page .oc-bar-note { grid-column: 2 / -1; font-size: 0.82rem; color: var(--oc-quiet);}
+.oc-page .oc-legend { display: flex; align-items: center; gap: 0.5rem; margin: 1.25rem 0 0; font-size: 0.78rem; letter-spacing: 0.06em; color: var(--oc-quiet);}
+.oc-page .oc-swatch { display: inline-block; width: 1.4rem; height: 0.5rem;}
+.oc-page .oc-swatch--before { background: repeating-linear-gradient(135deg, var(--oc-rule) 0 4px, transparent 4px 8px);}
+.oc-page .oc-swatch--after { background: var(--oc-mint);}
+.oc-page .oc-stack { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; border-top: 2px solid var(--oc-mint);}
+.oc-page .oc-stack li { display: grid; grid-template-columns: 8rem minmax(0, 1fr); gap: 1.25rem; padding: 0.9rem 0 1rem; border-bottom: 1px solid var(--oc-rule);}
+.oc-page .oc-stack b { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--oc-mint);}
+.oc-page .oc-stack span { font-size: 0.96rem; line-height: 1.65;}
+.oc-page .oc-checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1.25rem;}
+.oc-page .oc-checks > div { padding: 1rem 1.15rem 1.1rem; border: 1px solid var(--oc-rule);}
+.oc-page .oc-checks span { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--oc-mint);}
+.oc-page .oc-checks p { margin: 0.5rem 0 0; font-size: 0.96rem; line-height: 1.7;}
+.oc-page .oc-limits { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.75rem; max-width: 62rem;}
+.oc-page .oc-limits li { position: relative; padding-left: 1.6rem; font-size: 0.96rem; line-height: 1.7;}
+.oc-page .oc-limits li::before { content: ''; position: absolute; left: 0; top: 0.75rem; width: 0.9rem; height: 1px; background: var(--oc-rule);}
+.oc-page .oc-foot { padding: 1.5rem 0 3rem;}
+.oc-page .oc-foot-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;}
+.oc-page .oc-repo:hover { background: var(--oc-mint); border-color: var(--oc-mint); color: #06120c;}
+.oc-page .oc-foot .hdtp-back-btn { background: transparent; border-color: var(--oc-rule); color: var(--oc-ink);}
+@media (max-width: 900px) {
+.oc-page .oc-cols { grid-template-columns: 1fr;}
+.oc-page .oc-strip { grid-template-columns: 1fr;}
+.oc-page .oc-strip li + li { padding-left: 0; border-left: 0; border-top: 1px solid var(--oc-rule); padding-top: 0.7rem;}
+.oc-page .oc-stack li { grid-template-columns: 1fr; gap: 0.3rem;}
+}
+.oc-page { position: relative; counter-reset: ocblock;}
+.oc-page::before {
+content: '';
+position: absolute;
+inset: 0;
+pointer-events: none;
+background-image:
+repeating-linear-gradient(to right, var(--oc-rule) 0 1px, transparent 1px 5%),
+repeating-linear-gradient(to bottom, var(--oc-rule) 0 1px, transparent 1px 5%),
+repeating-linear-gradient(to right, rgba(15, 138, 95, 0.22) 0 1px, transparent 1px 25%);
+opacity: 0.5;
+-webkit-mask-image: linear-gradient(180deg, #000 0 60%, transparent 100%);
+mask-image: linear-gradient(180deg, #000 0 60%, transparent 100%);
+}
+.oc-page > * { position: relative;}
+.oc-page .oc-head { overflow: hidden;}
+.oc-page .oc-head::after {
+content: '';
+position: absolute;
+right: -4rem;
+top: -6rem;
+width: min(34rem, 46%);
+aspect-ratio: 1;
+pointer-events: none;
+border-radius: 50%;
+background:
+radial-gradient(circle, transparent 0 18%, rgba(15, 138, 95, 0.16) 18% calc(18% + 1px), transparent calc(18% + 1px) 34%),
+radial-gradient(circle, transparent 0 34%, rgba(15, 138, 95, 0.14) 34% calc(34% + 1px), transparent calc(34% + 1px) 50%),
+radial-gradient(circle, transparent 0 50%, rgba(15, 138, 95, 0.12) 50% calc(50% + 1px), transparent calc(50% + 1px) 66%),
+radial-gradient(circle, transparent 0 66%, rgba(15, 138, 95, 0.1) 66% calc(66% + 1px), transparent calc(66% + 1px) 82%),
+radial-gradient(circle, transparent 0 82%, rgba(15, 138, 95, 0.08) 82% calc(82% + 1px), transparent calc(82% + 1px) 100%);
+opacity: 0.9;
+}
+.oc-page .oc-strip { position: relative;}
+.oc-page .oc-strip::after {
+content: '';
+position: absolute;
+left: 0;
+bottom: -1.4rem;
+width: 11rem;
+height: 0.45rem;
+background-image:
+repeating-linear-gradient(to right, var(--oc-ink) 0 1.375rem, transparent 1.375rem 2.75rem),
+repeating-linear-gradient(to right, var(--oc-ink) 0 1.375rem, transparent 1.375rem 2.75rem);
+background-size: 100% 100%, 100% 55%;
+background-repeat: no-repeat;
+background-position: 0 0, 1.375rem 100%;
+border: 1px solid var(--oc-ink);
+box-sizing: border-box;
+}
+.oc-page .oc-head { padding-bottom: clamp(2.25rem, 4vw, 3.25rem);}
+.oc-page .oc-label { display: flex; align-items: center; gap: 0.85rem;}
+.oc-page .oc-label::after {
+content: '';
+flex: 1 1 auto;
+height: 7px;
+background-image:
+repeating-linear-gradient(to right, var(--oc-rule) 0 1px, transparent 1px 1.4rem),
+repeating-linear-gradient(to right, var(--oc-mint) 0 1px, transparent 1px 7rem);
+background-size: 100% 100%, 100% 100%;
+background-repeat: no-repeat;
+}
+.oc-page .oc-block { position: relative; counter-increment: ocblock; padding-left: clamp(0rem, 5vw, 5.5rem);}
+.oc-page .oc-block::before {
+content: counter(ocblock, decimal-leading-zero);
+position: absolute;
+left: 1.5rem;
+top: clamp(2rem, 4vw, 3.25rem);
+font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+font-size: clamp(2.6rem, 5.5vw, 4.5rem);
+font-weight: 800;
+line-height: 0.85;
+letter-spacing: -0.04em;
+color: transparent;
+-webkit-text-stroke: 1.25px var(--oc-mint);
+opacity: 0.5;
+pointer-events: none;
+}
+@media (max-width: 900px) {
+.oc-page .oc-block { padding-left: 0;}
+.oc-page .oc-block::before { position: static; display: block; margin-bottom: 0.5rem; opacity: 0.4;}
+}
+.oc-page .oc-keys li,
+.oc-page .oc-checks > div,
+.oc-page .oc-facts > div {
+clip-path: polygon(0 0, calc(100% - 0.7rem) 0, 100% 0.7rem, 100% 100%, 0 100%);
+}
+.oc-page .oc-checks > div { padding-top: 1.1rem;}
+.oc-page .oc-stack li { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 0.7rem), calc(100% - 0.7rem) 100%, 0 100%);}
+.oc-page .oc-bars { position: relative; padding-top: 0.4rem;}
+.oc-page .oc-bar-track::before {
+content: '';
+position: absolute;
+inset: 0;
+pointer-events: none;
+background-image: repeating-linear-gradient(to right, var(--oc-rule) 0 1px, transparent 1px 25%);
+opacity: 0.8;
+}
+.oc-page .oc-bars li { grid-template-columns: 2.6rem minmax(0, 1fr) auto;}
+.oc-page .oc-keys kbd { transition: transform 0.18s ease, border-color 0.18s ease;}
+.oc-page .oc-keys li:hover kbd { transform: translateY(-2px); border-color: var(--oc-mint);}
+.oc-page .oc-bar-after { transition: width 0.6s ease;}
+.oc-page .oc-facts dt, .oc-page .oc-stack b { position: relative;}
+.oc-page .oc-claim { position: relative; padding-top: 0.6rem;}
+.oc-page .oc-claim::before {
+content: '';
+position: absolute;
+left: 0; top: 0;
+width: 2.75rem; height: 2px;
+background: var(--oc-mint);
+}
+@media (prefers-reduced-motion: reduce) {
+.oc-page .oc-keys kbd, .oc-page .oc-bar-after { transition: none;}
+}
+.oc-page .oc-head { padding: clamp(3rem, 6vw, 5rem) 0 clamp(3.5rem, 7vw, 6rem);}
+.oc-page .oc-title { font-size: clamp(2.1rem, 4.4vw, 3.6rem); max-width: 38rem; line-height: 1.04;}
+.oc-page .oc-lead { font-size: 1.1rem; max-width: 38rem; margin-bottom: 1.75rem;}
+.oc-page .oc-kicker { font-size: 0.72rem; letter-spacing: 0.24em;}
+.oc-page .oc-strip { margin-top: 0.5rem;}
+.oc-page .oc-strip b { font-size: clamp(1.6rem, 3.2vw, 2.4rem); color: var(--oc-ink);}
+.oc-page .oc-strip li { padding-top: 1rem; position: relative;}
+.oc-page .oc-strip li::after { content: ''; position: absolute; left: 0; top: 0; width: 2.5rem; height: 3px; background: var(--oc-mint);}
+.oc-page .oc-strip li + li::after { left: 1.25rem;}
+.oc-page .oc-strip::after { width: 15rem; height: 0.6rem; bottom: -2rem;}
+.oc-page .oc-head > .container::after {
+width: min(36rem, 50%);
+opacity: 1;
+background-image:
+linear-gradient(112deg, transparent 0 44%, rgba(15, 138, 95, 0.34) 44% 51%, transparent 51%),
+linear-gradient(90deg, rgba(22, 32, 42, 0.55) 0 2px, transparent 2px 100%),
+linear-gradient(0deg, rgba(22, 32, 42, 0.55) 0 2px, transparent 2px 100%),
+repeating-linear-gradient(to right, rgba(22, 32, 42, 0.26) 0 1px, transparent 1px 2.25rem),
+repeating-linear-gradient(to bottom, rgba(22, 32, 42, 0.26) 0 1px, transparent 1px 2.25rem),
+linear-gradient(rgba(22, 32, 42, 0.14), rgba(22, 32, 42, 0.14)),
+linear-gradient(rgba(15, 138, 95, 0.2), rgba(15, 138, 95, 0.2)),
+linear-gradient(rgba(22, 32, 42, 0.1), rgba(22, 32, 42, 0.1)),
+linear-gradient(rgba(15, 138, 95, 0.12), rgba(15, 138, 95, 0.12));
+background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 40% 24%, 26% 34%, 20% 16%, 30% 12%;
+background-position: 0 0, 0 62%, 38% 0, 0 0, 0 0, 6% 10%, 54% 40%, 26% 70%, 62% 78%;
+-webkit-mask-image: linear-gradient(90deg, transparent 0, #000 22%);
+mask-image: linear-gradient(90deg, transparent 0, #000 22%);
+}
+.oc-page .oc-head > .container::before { width: min(36rem, 50%); opacity: 0.8;}
+.oc-page .oc-block { padding-left: clamp(0rem, 7.5vw, 8.5rem);}
+.oc-page .oc-block::before { left: 1.5rem; font-size: clamp(4rem, 9.5vw, 9rem); -webkit-text-stroke-width: 1.75px; opacity: 0.65;}
+.oc-page .oc-block::after { left: calc(1.5rem + 2.4rem); top: calc(clamp(2rem, 4vw, 3.25rem) + clamp(4rem, 9.5vw, 9rem) * 0.85 + 1.1rem);}
+.oc-page .oc-label { font-size: 0.74rem; letter-spacing: 0.24em;}
+.oc-page .oc-claim { font-size: clamp(1.3rem, 2.5vw, 1.85rem);}
+.oc-page .oc-keys { border-top: 3px solid var(--oc-mint);}
+.oc-page .oc-keys li { grid-template-columns: 3.4rem minmax(0, 1fr); padding: 1.25rem 1.35rem 1.3rem 0;}
+.oc-page .oc-keys kbd {
+width: 3rem; height: 3rem; font-size: 1.3rem; border-radius: 0.45rem;
+border-width: 1px 1px 3px; background: var(--oc-paper); box-shadow: 0 4px 0 0 rgba(22, 32, 42, 0.14);
+}
+.oc-page .oc-keys b { font-size: 1.12rem;}
+.oc-page .oc-keys span { font-size: 0.9rem;}
+.oc-page .oc-block--plate::before { -webkit-text-stroke-color: #6ee7a8; opacity: 0.75;}
+.oc-page .oc-block--tint { position: relative; overflow: hidden;}
+.oc-page .oc-block--tint::after {
+content: '';
+position: absolute;
+right: -6rem; bottom: -8rem;
+width: min(24rem, 34%);
+aspect-ratio: 1;
+border-radius: 50%;
+pointer-events: none;
+opacity: 0.75;
+background:
+radial-gradient(circle, transparent 0 24%, rgba(15, 138, 95, 0.16) 24% calc(24% + 1px), transparent calc(24% + 1px) 42%),
+radial-gradient(circle, transparent 0 42%, rgba(15, 138, 95, 0.13) 42% calc(42% + 1px), transparent calc(42% + 1px) 60%),
+radial-gradient(circle, transparent 0 60%, rgba(15, 138, 95, 0.11) 60% calc(60% + 1px), transparent calc(60% + 1px) 78%),
+radial-gradient(circle, transparent 0 78%, rgba(15, 138, 95, 0.09) 78% calc(78% + 1px), transparent calc(78% + 1px) 96%);
+}
+.oc-page .oc-block--tint > .container { position: relative; z-index: 2;}
+@media (max-width: 900px) {
+.oc-page .oc-block { padding-left: 0;}
+.oc-page .oc-block::after { display: none;}
+.oc-page .oc-head > .container::after, .oc-page .oc-head > .container::before { display: none;}
+}
+.oc-page .oc-block { padding-left: 0; border-left: 0; border-image: none;}
+.oc-page .oc-block::before {
+position: static;
+display: block;
+margin: 0 0 0.55rem;
+font-size: clamp(2.4rem, 5vw, 4rem);
+line-height: 0.9;
+opacity: 0.55;
+}
+.oc-page .oc-block::after { display: none;}
+.oc-page .oc-head > .container::before,
+.oc-page .oc-head > .container::after { right: 0;}

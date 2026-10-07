@@ -1,0 +1,204 @@
+.aw-page {
+--aw-void: #05070d; --aw-deep: #0a0f1a; --aw-ink: #eef4ff;
+--aw-quiet: rgba(238, 244, 255, 0.62); --aw-rule: rgba(238, 244, 255, 0.14);
+--aw-amber: #ffb020; --aw-cyan: #38e1e8;
+--aw-body: 1rem; --aw-label: 0.66rem; --aw-kicker: 0.68rem;
+background: var(--aw-void); color: var(--aw-ink); position: relative;
+}
+:root:not(.dark) .aw-page {
+--aw-void: #f4f7ff; --aw-deep: #e7ecfa; --aw-ink: #0a1020;
+--aw-quiet: rgba(10, 16, 32, 0.62); --aw-rule: rgba(10, 16, 32, 0.14);
+--aw-amber: #a35a00; --aw-cyan: #0b7d84;
+}
+.aw-page .aw-hero { position: relative; overflow: hidden; background: linear-gradient(180deg, var(--aw-deep) 0%, var(--aw-void) 100%);}
+.aw-page .aw-scale {
+position: absolute; left: 0; right: 0; top: 0; height: 34%; pointer-events: none;
+background-image:
+repeating-linear-gradient(to right, var(--aw-rule) 0 1px, transparent 1px 2.5%),
+repeating-linear-gradient(to right, rgba(255, 176, 32, 0.5) 0 2px, transparent 2px 12.5%);
+background-size: 100% 14px, 100% 26px; background-position: 0 100%, 0 100%; background-repeat: no-repeat;
+-webkit-mask-image: linear-gradient(180deg, transparent 0 40%, #000 100%);
+mask-image: linear-gradient(180deg, transparent 0 40%, #000 100%);
+}
+.aw-page .aw-needle {
+position: absolute; top: 0; bottom: 0; left: 18%; width: 2px;
+background: linear-gradient(180deg, transparent, var(--aw-amber) 30%, var(--aw-amber) 70%, transparent);
+box-shadow: 0 0 12px 1px rgba(255, 176, 32, 0.5);
+animation: awSweep 19s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes awSweep { 0%, 100% { transform: translateX(0);} 50% { transform: translateX(min(58rem, 50vw));} }
+@keyframes awPulse { 0%, 100% { opacity: 1;} 50% { opacity: 0.5;} }
+@keyframes awDrift { to { background-position: 47px 50%, -29px 50%, 23px 50%;} }
+.aw-page .aw-hero-inner { position: relative; z-index: 2; max-width: 80rem; margin: 0 auto; padding: clamp(1.4rem, 2.8vw, 2.15rem) 1.5rem clamp(1.15rem, 2.3vw, 1.8rem);}
+.aw-page .aw-crumb { display: flex; align-items: center; gap: 0.55rem; margin: 0 0 1.1rem; font-size: 0.8rem;}
+.aw-page .aw-crumb a { color: var(--aw-quiet); text-decoration: none;}
+.aw-page .aw-crumb a:hover { color: var(--aw-cyan);}
+.aw-page .aw-crumb svg { color: var(--aw-cyan); opacity: 0.8;}
+.aw-page .aw-onair {
+display: inline-flex; align-items: center; gap: 0.55rem; margin: 0 0 0.9rem; padding: 0.3rem 0.7rem;
+border: 1px solid rgba(255, 176, 32, 0.5); border-radius: 9999px;
+font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.6rem; font-weight: 700;
+letter-spacing: 0.24em; text-transform: uppercase; color: var(--aw-amber);
+}
+.aw-page .aw-onair i { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--aw-amber); animation: awPulse 2.4s ease-in-out infinite;}
+.aw-page .aw-kicker { margin: 0 0 0.65rem; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: var(--aw-label); letter-spacing: 0.2em; text-transform: uppercase; color: var(--aw-cyan);}
+.aw-page .aw-title { margin: 0 0 0.9rem; max-width: 48rem; font-size: clamp(1.85rem, 4vw, 3.2rem); font-weight: 800; line-height: 1.02; letter-spacing: -0.04em;}
+.aw-page .aw-lead { margin: 0 0 1.5rem; max-width: 44rem; font-size: clamp(1rem, 1.3vw, 1.08rem); line-height: 1.6; color: var(--aw-quiet);}
+.aw-page .aw-dial { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--aw-rule);}
+.aw-page .aw-dial li { position: relative; display: grid; gap: 0.2rem; padding: 0.9rem 1.5rem 0 0;}
+.aw-page .aw-dial li + li { padding-left: 1.5rem; border-left: 1px solid var(--aw-rule);}
+.aw-page .aw-dial b { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: clamp(1.35rem, 2.4vw, 1.95rem); font-weight: 700; line-height: 1; letter-spacing: -0.03em; color: var(--aw-amber); font-variant-numeric: tabular-nums;}
+.aw-page .aw-dial span { font-size: var(--aw-label); letter-spacing: 0.06em; color: var(--aw-quiet);}
+.aw-page .aw-wave { position: relative; height: clamp(4.5rem, 9vw, 7.5rem); overflow: hidden; background: var(--aw-void);}
+.aw-page .aw-wave-bars {
+position: absolute; inset: 0;
+background-image:
+repeating-linear-gradient(to right, rgba(56, 225, 232, 0.55) 0 3px, transparent 3px 11px),
+repeating-linear-gradient(to right, rgba(56, 225, 232, 0.25) 0 5px, transparent 5px 29px),
+repeating-linear-gradient(to right, rgba(255, 176, 32, 0.35) 0 2px, transparent 2px 47px);
+background-size: 100% 34%, 100% 62%, 100% 88%;
+background-position: 0 50%, 0 50%, 0 50%; background-repeat: no-repeat;
+animation: awDrift 26s linear infinite;
+}
+.aw-page .aw-block-title {
+position: relative; display: flex; align-items: center; gap: 0.7rem; margin: 0 0 1.35rem;
+font-family: ui-monospace, Menlo, Consolas, monospace; font-size: var(--aw-kicker); font-weight: 700;
+letter-spacing: 0.22em; text-transform: uppercase; color: var(--aw-cyan);
+}
+.aw-page .aw-block-title::before { content: ''; width: 0.9rem; height: 2px; background: var(--aw-amber);}
+.aw-page .aw-block-title::after { content: ''; flex: 1 1 auto; height: 1px; background: linear-gradient(90deg, var(--aw-rule), transparent);}
+.aw-page .aw-note, .aw-page .aw-trace-body, .aw-page .aw-features li, .aw-page .aw-check-grid p,
+.aw-page .aw-specs dd, .aw-page .aw-edu-paras p { font-size: var(--aw-body); line-height: 1.75;}
+.aw-page .aw-stations { padding: clamp(2rem, 4vw, 3.25rem) 0; background: var(--aw-deep);}
+.aw-page .aw-stations .container, .aw-page .aw-log .container, .aw-page .aw-standalone .container,
+.aw-page .aw-education .container, .aw-page .aw-checks .container, .aw-page .aw-handset-grid, .aw-page .aw-foot {
+max-width: 80rem; margin: 0 auto; padding-inline: 1.5rem;
+}
+.aw-page .aw-bands { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.25rem;}
+.aw-page .aw-bands li { display: grid; gap: 0.35rem; padding: 1.05rem 1.15rem; border: 1px solid var(--aw-rule);}
+.aw-page .aw-band-count { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 700; line-height: 1; color: var(--aw-amber); font-variant-numeric: tabular-nums;}
+.aw-page .aw-band-region { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em;}
+.aw-page .aw-band-note { font-size: var(--aw-label); letter-spacing: 0.18em; text-transform: uppercase; color: var(--aw-quiet);}
+.aw-page .aw-band-track { display: block; margin-top: 0.6rem; height: 3px; background: var(--aw-rule);}
+.aw-page .aw-band-track i { display: block; width: var(--aw-pct, 0%); height: 100%; background: linear-gradient(90deg, var(--aw-cyan), var(--aw-amber));}
+.aw-page .aw-note { margin: 1.5rem 0 0; max-width: 54rem; color: var(--aw-quiet);}
+.aw-page .aw-log { padding: clamp(2.25rem, 4.5vw, 3.5rem) 0; background: var(--aw-void);}
+.aw-page .aw-recorder { border-top: 1px solid var(--aw-rule);}
+.aw-page .aw-trace { position: relative; padding: clamp(1.35rem, 2.5vw, 1.85rem) 0 clamp(1.35rem, 2.5vw, 1.85rem) 3.1rem; border-bottom: 1px solid var(--aw-rule);}
+.aw-page .aw-trace::before { content: ''; position: absolute; left: 0; top: clamp(1.5rem, 2.7vw, 2rem); width: 2.5rem; height: 2px; background: linear-gradient(90deg, var(--aw-amber), rgba(255, 176, 32, 0));}
+.aw-page .aw-trace::after { content: ''; position: absolute; left: 0; top: clamp(1.5rem, 2.7vw, 2rem); width: 0.4rem; height: 0.4rem; border-radius: 50%; background: var(--aw-amber); box-shadow: 0 0 10px 1px rgba(255, 176, 32, 0.6);}
+.aw-page .aw-trace-body { max-width: 54rem;}
+.aw-page .aw-trace-body p { margin: 0;}
+.aw-page .aw-handset { padding: clamp(2rem, 4vw, 3.25rem) 0 clamp(2.25rem, 4.5vw, 3.75rem); background: var(--aw-deep);}
+.aw-page .aw-handset-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2.5rem, 5vw, 4.5rem); align-items: center;}
+.aw-page .aw-handset-note { margin: 0; max-width: 34rem; font-size: clamp(1.05rem, 1.8vw, 1.35rem); font-weight: 700; line-height: 1.4;}
+.aw-page .aw-specs { margin: 1.75rem 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 0; border-top: 1px solid var(--aw-rule);}
+.aw-page .aw-specs > div { padding: 0.7rem 0.9rem 0.75rem 0; border-bottom: 1px solid var(--aw-rule);}
+.aw-page .aw-specs dt { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: var(--aw-label); letter-spacing: 0.18em; text-transform: uppercase; color: var(--aw-cyan);}
+.aw-page .aw-specs dd { margin: 0.25rem 0 0; font-variant-numeric: tabular-nums;}
+.aw-page .aw-device {
+position: relative; justify-self: end; width: min(100%, 23rem); aspect-ratio: 4 / 5; padding: 7% 6% 6%;
+border: 1px solid var(--aw-rule); border-radius: 1.4rem;
+background: linear-gradient(160deg, #131a2b 0%, #080c15 100%);
+box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+display: grid; grid-template-rows: auto 1fr auto auto; gap: 6%;
+}
+.aw-page .aw-device-led { justify-self: end; width: 0.45rem; height: 0.45rem; border-radius: 50%; background: var(--aw-amber); box-shadow: 0 0 10px 2px rgba(255, 176, 32, 0.7);}
+.aw-page .aw-device-screen { position: relative; display: grid; place-items: center; gap: 0.4rem; border: 1px solid rgba(56, 225, 232, 0.35); border-radius: 0.5rem; background: radial-gradient(120% 120% at 30% 20%, rgba(56, 225, 232, 0.18), rgba(5, 7, 13, 0.9) 70%); overflow: hidden;}
+.aw-page .aw-screen-line { width: 62%; height: 1px; background: rgba(238, 244, 255, 0.35);}
+.aw-page .aw-screen-wave { width: 78%; height: 2.5rem; background-image: repeating-linear-gradient(to right, rgba(56, 225, 232, 0.8) 0 2px, transparent 2px 7px); background-size: 100% 45%; background-position: 0 50%; background-repeat: no-repeat;}
+.aw-page .aw-screen-name { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.78rem; letter-spacing: 0.24em; color: var(--aw-amber);}
+.aw-page .aw-device-keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5%;}
+.aw-page .aw-device-keys i { display: block; height: 1.6rem; border: 1px solid var(--aw-rule); border-radius: 0.4rem; background: linear-gradient(180deg, #1b2334, #0b1019);}
+.aw-page .aw-device-grille { height: 2.2rem; background-image: radial-gradient(circle, rgba(238, 244, 255, 0.28) 0 1.5px, transparent 1.6px); background-size: 0.7rem 0.7rem;}
+.aw-page .aw-standalone { padding: clamp(2rem, 4vw, 3.25rem) 0; background: var(--aw-void);}
+.aw-page .aw-features { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 0; border-top: 1px solid var(--aw-rule);}
+.aw-page .aw-features li { position: relative; padding: 1rem 1.25rem 1.05rem 1.75rem; border-bottom: 1px solid var(--aw-rule);}
+.aw-page .aw-features li::before { content: ''; position: absolute; left: 0.4rem; top: 1.5rem; width: 0.55rem; height: 0.55rem; border: 1px solid var(--aw-cyan); transform: rotate(45deg);}
+.aw-page .aw-education { padding: clamp(2.25rem, 4.5vw, 3.75rem) 0; background: linear-gradient(180deg, rgba(255, 176, 32, 0.08), rgba(255, 176, 32, 0)); border-top: 1px solid rgba(255, 176, 32, 0.35); border-bottom: 1px solid rgba(255, 176, 32, 0.35);}
+.aw-page .aw-claim { margin: 0 0 1.6rem; max-width: 44rem; font-size: clamp(1.4rem, 2.6vw, 2rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; color: var(--aw-amber);}
+.aw-page .aw-edu-paras { display: grid; gap: 0.95rem; max-width: 62rem;}
+.aw-page .aw-edu-paras p { margin: 0;}
+.aw-page .aw-edu-paras p:first-child { font-size: 1.08rem; line-height: 1.7;}
+.aw-page .aw-checks { padding: clamp(2rem, 4vw, 3.25rem) 0; background: var(--aw-deep);}
+.aw-page .aw-check-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1.25rem;}
+.aw-page .aw-check-grid > div { padding: 1rem 1.15rem; border: 1px solid var(--aw-rule);}
+.aw-page .aw-check-k { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: var(--aw-label); letter-spacing: 0.18em; text-transform: uppercase; color: var(--aw-cyan); font-variant-numeric: tabular-nums;}
+.aw-page .aw-check-grid p { margin: 0.55rem 0 0;}
+.aw-page .aw-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem; padding-top: 1.75rem; padding-bottom: 3rem;}
+.aw-page .aw-quote { margin: 0; max-width: 46rem; font-size: clamp(1rem, 1.45vw, 1.18rem); font-weight: 300; line-height: 1.5;}
+.aw-page .aw-foot .hdtp-back-btn { background: transparent; border-color: var(--aw-rule); color: var(--aw-ink);}
+@media (max-width: 900px) {
+.aw-page .aw-handset-grid { grid-template-columns: 1fr;}
+.aw-page .aw-device { justify-self: start; width: min(100%, 22rem);}
+.aw-page .aw-dial li + li { padding-left: 0; border-left: 0; border-top: 1px solid var(--aw-rule); padding-top: 1.1rem;}
+}
+@media (prefers-reduced-motion: reduce) {
+.aw-page .aw-needle, .aw-page .aw-onair i, .aw-page .aw-wave-bars { animation: none !important;}
+}
+.member-grid {
+grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr));
+gap: 0.9rem;
+grid-auto-rows: 1fr;
+}
+.member {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+justify-content: flex-start;
+min-height: 7.5rem;
+padding: 1.15rem 1.15rem 1.1rem;
+transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+.member::before {
+content: '';
+width: 1.5rem;
+height: 2px;
+border-radius: 2px;
+background: var(--primary);
+opacity: 0.9;
+margin-bottom: 0.75rem;
+}
+.member-info .member-name,
+.member-info > strong {
+display: block;
+margin: 0;
+font-size: 1.05rem;
+font-weight: 700;
+line-height: 1.22;
+letter-spacing: -0.012em;
+color: var(--text-heading);
+}
+.member-info .member-name .field--name-title {
+font-size: inherit;
+line-height: inherit;
+font-weight: inherit;
+color: inherit;
+}
+.member-info .member-role { display: block; margin: 0.4rem 0 0;}
+.member-info .member-role .field,
+.member-info .member-role .field__item,
+.member-info .field--name-field-role,
+.member-info .field--name-field-role .field__item {
+margin: 0;
+font-size: 0.84rem;
+font-weight: 400;
+line-height: 1.45;
+color: var(--text-muted);
+}
+.member-info .member-role .field__item {
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
+}
+.member-info .field__label { display: none;}
+.member-info p { margin: 0.4rem 0 0; font-size: 0.84rem; line-height: 1.45; color: var(--text-muted);}
+.member:hover {
+border-color: color-mix(in srgb, var(--primary) 42%, transparent);
+transform: translateY(-2px);
+}
+@media (max-width: 600px) {
+.member-grid { grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: 0.75rem;}
+.member { min-height: 6.75rem; padding: 1rem 1rem 0.95rem;}
+}

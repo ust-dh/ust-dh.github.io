@@ -1,0 +1,431 @@
+
+<!DOCTYPE html>
+<html lang="zh-hant" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+<style>
+@media (max-width: 899px) {
+  .hero-carousel {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 200vh !important;
+    min-height: 200svh !important;
+    padding-top: calc(var(--topbar-h, 0px) + var(--header-h, 0px)) !important;
+  }
+
+  .hero-static {
+    order: 1 !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .hero-static .container,
+  .hero-inner {
+    width: 100% !important;
+    max-width: none !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-copy {
+    width: auto !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transform: none !important;
+    min-height: calc(100vh - var(--topbar-h, 0px) - var(--header-h, 0px) - 1.5rem) !important;
+    min-height: calc(100svh - var(--topbar-h, 0px) - var(--header-h, 0px) - 1.5rem) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .hero-copy > * {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .hero-copy #hero-headline,
+  .hero-copy h1 {
+    margin-bottom: 1rem !important;
+  }
+
+  .hero-slides {
+    order: 3 !important;
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin-left: 0 !important;
+    transform: none !important;
+    aspect-ratio: 3 / 2;
+  }
+
+  .hero-slide {
+    position: relative !important;
+    inset: auto !important;
+  }
+
+  .hero-slide .slide-bg {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+}
+</style>
+
+
+    <meta charset="utf-8" />
+<meta name="description" content="數碼人文學生項目（2025 年秋季）。本項目為 HUMA5630「數碼人文」課程的課程項目。金宇澄小說《繁花》書封" />
+<link rel="canonical" href="/zh-hant/projects/application-of-ner-models-in-literature-field" />
+<meta name="Generator" content="Drupal 10 (https://www.drupal.org)" />
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>div#sliding-popup, div#sliding-popup .eu-cookie-withdraw-banner, .eu-cookie-withdraw-tab {background: #0779bf} div#sliding-popup.eu-cookie-withdraw-wrapper { background: transparent; } #sliding-popup h1, #sliding-popup h2, #sliding-popup h3, #sliding-popup p, #sliding-popup label, #sliding-popup div, .eu-cookie-compliance-more-button, .eu-cookie-compliance-secondary-button, .eu-cookie-withdraw-tab { color: #ffffff;} .eu-cookie-withdraw-tab { border-color: #ffffff;}</style>
+<link rel="alternate" hreflang="en" href="/projects/application-of-ner-models-in-literature-field" />
+<link rel="alternate" hreflang="zh-hant" href="/zh-hant/projects/application-of-ner-models-in-literature-field" />
+<link href="/sites/default/files/hkust_theme_configs/css/styles.css?1791305200" rel="stylesheet" />
+<script src="/sites/default/files/hkust_theme_configs/js/script.js?1791305200"></script>
+
+    <title>命名實體辨識模型在文學領域的應用 | Humanities and Digital Technologies Research</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/themes/custom/humatech_dhi/images/favicon.ico" type="image/x-icon">
+
+    <link rel="icon" type="image/png" sizes="512x512" href="/themes/custom/humatech_dhi/images/favicon.png?v=202610051552">
+    <link rel="icon" type="image/png" sizes="192x192" href="/themes/custom/humatech_dhi/images/favicon-192.png?v=202610051552">
+    <link rel="apple-touch-icon" sizes="180x180" href="/themes/custom/humatech_dhi/images/apple-touch-icon.png?v=202610051552">
+    <script>
+      /*
+       * Same behaviour as the static site: mark the document as JS-enabled and
+       * apply the stored colour scheme before the first paint (no flash).
+       * Nothing here depends on jQuery or on Drupal's JS.
+       */
+      (function () {
+        var root = document.documentElement;
+        root.classList.add('js');
+        var theme = null;
+        try { theme = window.localStorage.getItem('theme'); } catch (e) { /* ignore */ }
+        var dark = theme ? theme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        root.classList.toggle('dark', dark);
+      })();
+    </script>
+    <link rel="stylesheet" media="all" href="/sites/default/files/css/css_rIJGwM4HwhaHkbr11lM8JK7d7E0UaWgEEBYUsUHTFlQ.css?delta=0&amp;language=zh-hant&amp;theme=humatech_dhi&amp;include=eJxtjUsKwzAMBS9k8JGEPy-xiFSLylrk9jUt3WX1YAbmIajNeTH2qAmXV0PGA6SOo4SsdAibb_FGrsWRRmhZaIP64HzKrEWSLms1WDr9AK0Bxd867yjIpoVRldkuzw8s-e0L-n35AMGLQlU" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_LpQ3XNyQqYOQcZMWnfo3MRwnE3DAleklqDYps7j7BQk.css?delta=1&amp;language=zh-hant&amp;theme=humatech_dhi&amp;include=eJxtjUsKwzAMBS9k8JGEPy-xiFSLylrk9jUt3WX1YAbmIajNeTH2qAmXV0PGA6SOo4SsdAibb_FGrsWRRmhZaIP64HzKrEWSLms1WDr9AK0Bxd867yjIpoVRldkuzw8s-e0L-n35AMGLQlU" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_wVj-5wXN568rJ3j8efc9rpBLzB8Uo6hCSUWjjgvcQVc.css?delta=2&amp;language=zh-hant&amp;theme=humatech_dhi&amp;include=eJxtjUsKwzAMBS9k8JGEPy-xiFSLylrk9jUt3WX1YAbmIajNeTH2qAmXV0PGA6SOo4SsdAibb_FGrsWRRmhZaIP64HzKrEWSLms1WDr9AK0Bxd867yjIpoVRldkuzw8s-e0L-n35AMGLQlU" />
+
+    
+  </head>
+  <body class="hdtp lang-zh-hant hdtp-lang-zh-hant user-anonymous path-node">
+    <a class="skip-link" href="#main">跳至內容</a>
+    
+
+                <div id="hdtp-bars">
+    <div class="hkust-topbar">
+
+      <details class="more-drawer">
+        <summary class="toggler" aria-label="更多關於科大" title="更多關於科大"><svg class="chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <div class="drawer-content">
+          <div class="drawer-title">更多關於科大</div>
+          <nav class="drawer-links" aria-label="HKUST">
+            <a href="https://hkust.edu.hk/news" target="_blank" rel="noreferrer">大學新聞</a><a href="https://hkust.edu.hk/academics/list" target="_blank" rel="noreferrer">學系一覽</a><a href="https://hkust.edu.hk/lifehkust" target="_blank" rel="noreferrer">科大生活</a><a href="https://library.hkust.edu.hk" target="_blank" rel="noreferrer">圖書館</a><a href="https://hkust.edu.hk/map-directions" target="_blank" rel="noreferrer">地圖及交通</a><a href="https://hkustcareers.ust.hk" target="_blank" rel="noreferrer">科大職位</a><a href="https://facultyprofiles.ust.hk/" target="_blank" rel="noreferrer">教職員名錄</a><a href="https://hkust.edu.hk/about" target="_blank" rel="noreferrer">關於科大</a>          </nav>
+        </div>
+      </details>
+    </div>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="brand">
+          <a href="https://www.ust.hk" class="brand-link" aria-label="HKUST" rel="noreferrer">
+            <img class="brand-img logo-ust" src="/themes/custom/humatech_dhi/images/ust-logo-official.png" alt="HKUST" width="797" height="186" decoding="async">
+          </a>
+          <span class="brand-sep" aria-hidden="true"></span>
+          <a href="/zh-hant" class="brand-link" aria-label="Humanities and Digital Technologies Research">
+            <img class="brand-img logo-project" src="/themes/custom/humatech_dhi/images/hdt-logo-official.png" alt="Humanities and Digital Technologies Research" width="944" height="209" decoding="async">
+          </a>
+        </div>
+
+        <nav aria-label="主導覽" class="main-nav" id="main-nav">
+                      <ul class="menu main-menu">
+                                                                                                                  <li class="menu-item"><a href="/zh-hant">首頁</a></li>
+                                                                                                <li class="menu-item"><a href="/zh-hant/news">新聞</a></li>
+                                                                                                <li class="menu-item"><a href="/zh-hant/events">活動</a></li>
+                                                                                                <li class="menu-item"><a href="/zh-hant/conferences">會議</a></li>
+                                                                                                <li class="menu-item"><a href="/zh-hant/teaching">教學</a></li>
+                                                                                                                  <li class="menu-item"><a href="/zh-hant/projects">項目</a></li>
+                                                                                                <li class="menu-item"><a href="/zh-hant/members">成員</a></li>
+                          </ul>
+                  </nav>
+
+        <div class="header-actions">
+                                                                                                          <a href="/projects/application-of-ner-models-in-literature-field" hreflang="en" lang="en" class="search-toggle lang-switch" aria-label="Switch to English" title="English">EN</a>
+                    <a href="/zh-hant/search" class="search-toggle" aria-label="搜尋" title="搜尋">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          </a>
+          <button type="button" class="theme-toggle" data-aw-toggle-color-scheme aria-label="切換深色/淺色模式">
+            <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4 1.4-1.4"/></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          </button>
+          <button type="button" class="menu-toggle" data-aw-toggle-menu aria-label="切換選單" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span></button>
+        </div>
+      </div>
+    </header>
+    </div><!-- /#hdtp-bars -->
+
+    
+
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
+    
+<main id="main" class="hdtp-main">
+  <a id="main-content" tabindex="-1"></a>
+
+  
+  
+  
+  <div class="region region-content">
+    <div data-drupal-messages-fallback class="hidden"></div><div class="mtpc_project mtpc_pagetitle page_id_273"><h1>命名實體辨識模型在文學領域的應用</h1></div>
+
+
+      
+<article data-history-node-id="273" about="/zh-hant/projects/application-of-ner-models-in-literature-field" class="node node--project project-page ner-page">
+  
+
+  <section class="ner-hero">
+    <div class="container">
+      <nav class="ner-crumb" aria-label="麪包屑導覽">
+        <a href="/zh-hant">首頁</a>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg><a href="/zh-hant/projects">項目</a>      </nav>
+
+      <p class="ner-kicker">2025 秋季 · HUMA5630 · 命名實體識別</p>
+      <h1 class="ner-title"><span class="field field--name-title field--type-string">命名實體辨識模型在文學領域的應用</span>
+</h1>
+      <p class="ner-standfirst">三個模型，一部中文小說。這個計劃教機器在現當代文學裡標出人、地與作品，然後問：讀者只能感覺到的東西，機器看得見多少？</p>
+              <div class="ner-specimen">
+          <p class="ner-specimen-label">一行文字,四類實體</p>
+          <p class="ner-line">
+            在<span class="ner-tag ner-tag--loc">上海<i>LOC</i></span>,<span class="ner-tag ner-tag--loc">淮海路<i>LOC</i></span>與<span class="ner-tag ner-tag--loc">國泰戲院<i>LOC</i></span>之間，<span class="ner-tag ner-tag--per">金宇澄<i>PER</i></span>寫下<span class="ner-tag ner-tag--work">《繁花》<i>WORK</i></span>。          </p>
+          <p class="ner-gloss">在上海淮海路與國泰戲院之間，金宇澄寫下《繁花》。</p>                      <ul class="ner-legend">
+                              <li><i class="ner-dot ner-dot--per"></i><b>PER</b><span>人物</span></li>
+                              <li><i class="ner-dot ner-dot--loc"></i><b>LOC</b><span>地名</span></li>
+                              <li><i class="ner-dot ner-dot--org"></i><b>ORG</b><span>機構</span></li>
+                              <li><i class="ner-dot ner-dot--work"></i><b>WORK</b><span>作品</span></li>
+                          </ul>
+                  </div>
+          </div>
+  </section>
+
+      <section class="ner-results">
+      <div class="container">
+        <p class="ner-block-title">三個模型,同一份訓練資料</p>
+        <div class="ner-table-wrap">
+          <table class="ner-table">
+            <thead>
+              <tr>
+                <th scope="col" rowspan="2" class="ner-th-model">模型</th>
+                <th scope="col" rowspan="2">準確率</th>
+                <th scope="col" colspan="3" class="ner-th-group">詞級 token</th>
+                <th scope="col" colspan="3" class="ner-th-group">實體級 entity</th>
+              </tr>
+              <tr>
+                <th>P</th><th>R</th><th>F1</th><th>P</th><th>R</th><th>F1</th>
+              </tr>
+            </thead>
+            <tbody>
+                              <tr class="ner-row">
+                  <th scope="row">CRF</th>
+                  <td>0.8526</td>
+                  <td>0.5619</td>
+                  <td>0.4883</td>
+                  <td class="ner-f1"><span style="--ner-f1: 52%">0.5156</span></td>
+                  <td>0.6926</td>
+                  <td>0.6049</td>
+                  <td class="ner-f1"><span style="--ner-f1: 65%">0.6458</span></td>
+                </tr>
+                              <tr class="ner-row">
+                  <th scope="row">BERT-Tiny</th>
+                  <td>0.8698</td>
+                  <td>0.5648</td>
+                  <td>0.5248</td>
+                  <td class="ner-f1"><span style="--ner-f1: 54%">0.5420</span></td>
+                  <td>0.6037</td>
+                  <td>0.6370</td>
+                  <td class="ner-f1"><span style="--ner-f1: 62%">0.6199</span></td>
+                </tr>
+                              <tr class="ner-row ner-row--best">
+                  <th scope="row">BERT-Base</th>
+                  <td>0.8939</td>
+                  <td>0.6299</td>
+                  <td>0.6024</td>
+                  <td class="ner-f1"><span style="--ner-f1: 60%">0.6011</span></td>
+                  <td>0.6908</td>
+                  <td>0.7242</td>
+                  <td class="ner-f1"><span style="--ner-f1: 71%">0.7071</span></td>
+                </tr>
+                          </tbody>
+          </table>
+        </div>
+        <p class="ner-table-note">三個模型共用同一份訓練資料：約 4,800 句、近一百萬行。詞級以每個詞計分，實體級以整個實體計分；準確率兩級相同，所以只列一次。</p>              </div>
+    </section>
+  
+  <section class="ner-body">
+    <div class="container ner-measure">
+              <figure class="ner-plate ner-plate--lead">
+          <img src="/sites/default/files/hdtp/projects/application-of-ner-models-in-literature-field--1.jpg" alt="The Application of NER Models in the Literature Field" fetchpriority="high" decoding="async">
+          <figcaption>計劃影像</figcaption>
+        </figure>
+      
+      <div class="ner-text"><p>數碼人文學生項目（2025 年秋季）。本項目為 HUMA5630「數碼人文」課程的課程項目。</p><p><em>金宇澄小說《繁花》書封</em></p></div>
+              <article class="ner-section">
+                      <h2 class="ner-heading"><span class="ner-heading-no">01</span>關於本項目</h2>
+                    <div class="ner-text"><ul><li>本項目旨在為中國現當代文學建立命名實體辨識（NER）模型，藉此探索 NER 在輔助文學研究方面的價值。</li><li>以中文文本為輸入，期望模型能逐字掃描文本，並辨識其中的人物、地點、概念、時間等實體。這就是命名實體辨識（NER）任務。</li></ul></div>
+                      <figure class="ner-plate">
+              <img src="/sites/default/files/hdtp/projects/application-of-ner-models-in-literature-field--2.jpg" alt="The Application of NER Models in the Literature Field" loading="lazy" decoding="async">
+              <figcaption>圖 01</figcaption>
+            </figure>
+                  </article>
+              <article class="ner-section">
+                      <h2 class="ner-heading"><span class="ner-heading-no">02</span>可能應用：地理批評</h2>
+                    <div class="ner-text"><ul><li>一種針對文學文本的空間批評方法。</li><li>結合中國文學與地理研究的跨學科成果。</li><li>我們可運用 NER 協助辨識文學作品中的地名，從而建構特定文學的地理空間，並理解該地方的文學記憶。</li></ul></div>
+                      <figure class="ner-plate">
+              <img src="/sites/default/files/hdtp/projects/application-of-ner-models-in-literature-field--3.jpg" alt="The Application of NER Models in the Literature Field" loading="lazy" decoding="async">
+              <figcaption>圖 02</figcaption>
+            </figure>
+                  </article>
+              <article class="ner-section">
+                      <h2 class="ner-heading"><span class="ner-heading-no">03</span>CRF 模型</h2>
+                    <div class="ner-text"><ul><li>CRF 的全稱是條件隨機場（Conditional Random Fields，CRF），是一種用於序列資料標註與切分的機率圖模型。它屬於判別式模型，即直接為給定輸入序列下的輸出標註序列的條件機率建模，而不對輸入的整體分佈建模。</li><li>簡單來說，CRF 透過考慮相鄰標籤之間的依賴關係，為每一個位置賦予最合理的標籤。</li></ul></div>
+                  </article>
+              <article class="ner-section">
+                      <h2 class="ner-heading"><span class="ner-heading-no">04</span>BERT 模型</h2>
+                    <div class="ner-text"><h3>BERT-Tiny</h3><ul><li>採用開源模型 <a href="https://huggingface.co/ckiplab/bert-tiny-chinese-ner">https://huggingface.co/ckiplab/bert-tiny-chinese-ner</a>，該模型由 CKIP Lab 以 BERT-Tiny Chinese 微調而成，支援繁體中文。</li><li>BERT 模型基本資料：12M 參數、4 層、隱藏層維度為 312；</li><li>額外分類層：312 維 → 73 維，將詞元分類為 73 個實體標籤。</li></ul><h3>BERT-Base</h3><ul><li>採用開源模型 <a href="https://huggingface.co/ckiplab/bert-base-chinese-ner">https://huggingface.co/ckiplab/bert-base-chinese-ner</a>，該模型由 CKIP Lab 基於 BERT Base Chinese 微調，支援繁體中文。</li><li>BERT 模型基本資料：110M 參數、12 層、隱藏層維度為 768；</li><li>額外分類層：768 維 → 73 維，將詞元分類為 73 個實體標籤。</li></ul><ul><li>CRF 模型 —— 訓練耗時：15 分鐘；推論速度（token/s）：約 9407</li><li>BERT-Tiny —— 訓練耗時：15 分鐘；推論速度（token/s）：約 14940</li><li>BERT-Base —— 訓練耗時：約 1 小時；推論速度（token/s）：約 3715</li></ul></div>
+                  </article>
+              <article class="ner-section">
+                      <h2 class="ner-heading"><span class="ner-heading-no">05</span>結果比較</h2>
+                    <div class="ner-text"><ul><li>CRF 模型的訓練環境（使用 CPU）：Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz（8G）</li><li>bert-tiny 及 bert-base 模型的微調環境（使用 GPU）：NVIDIA GeForce RTX 4090（24G）</li><li>訓練集數量：約 4800 句，合共 100 萬行</li></ul></div>
+                  </article>
+              <article class="ner-section">
+                      <h2 class="ner-heading"><span class="ner-heading-no">06</span>詞元</h2>
+                    <div class="ner-text"><ul><li><strong>CRF</strong> —— 準確度 0.8526；精確度 0.5619；召回率 0.4883；F1 分數 0.5156</li><li><strong>bert-tiny</strong> —— 準確度 0.8698；精確度 0.5648；召回率 0.5248；F1 分數 0.5420</li><li><strong>bert-base</strong> —— 準確度 0.8939；精確度 0.6299；召回率 0.6024；F1 分數 0.6011</li></ul><p><em>Transformer、GPT 與 BERT 架構的比較。圖片由作者根據《Attention is All You Need》論文中的 Transformer 架構圖改編</em></p></div>
+                  </article>
+              <article class="ner-section">
+                      <h2 class="ner-heading"><span class="ner-heading-no">07</span>實體</h2>
+                    <div class="ner-text"><p><em>BERT 嵌入過程概覽。圖片取自 BERT 論文</em></p><ul><li><strong>CRF</strong> —— 準確度 0.8526；精確度 0.6926；召回率 0.6049；F1 分數 0.6458</li><li><strong>bert-tiny</strong> —— 準確度 0.8698；精確度 0.6037；召回率 0.6370；F1 分數 0.6199</li><li><strong>bert-base</strong> —— 準確度 0.8939；精確度 0.6908；召回率 0.7242；F1 分數 0.7071</li></ul><h3>實際應用</h3><p>運用 NER，我們可以更精確、更有系統地建構文學中的地理空間。</p><p>例如，我們可以自動擷取實體：迅速辨識文本中的地名，如「<strong>lan</strong>」、「<strong>曹楊新村</strong>」和「<strong>蘇州河</strong>」，避免人手標註時有所遺漏。</p><p>我們也可以建構空間關係網絡：透過辨識地名的共現關係（例如「<strong>淮海路</strong>」與「<strong>國泰電影院</strong>」經常同時出現），揭示上海「<strong>上只角</strong>」（盧灣區）與「<strong>下只角</strong>」（華溪區）的空間分化，有助於「<strong>地理與文學</strong>」層面的空間層級分析。</p><p>透過分析某一地區文學中常見的地名（例如廣州的「<strong>Jiuzhou</strong>」與「<strong>西關</strong>」，以及成都的「<strong>茶館</strong>」與「<strong>錦里</strong>」），可以提取該城市的「<strong>文學地標</strong>」，為地方文化品牌建設提供素材（例如以「<strong>邊城</strong>」作為湘西旅遊文化的文學 IP）。</p><p>具體例子：《<strong>Yan Food Diary</strong>》與《<strong>Like a Seal and a Jade</strong>》均於近年出版，兩者都聚焦嶺南的城市文學。透過 NER 實體辨識發現，兩者在書寫嶺南時都反覆出現相同地名，例如「<strong>Jiuzhou</strong>」同時見於兩部文學作品之中。</p></div>
+                  </article>
+              <article class="ner-section">
+                      <h2 class="ner-heading"><span class="ner-heading-no">08</span>學生</h2>
+                    <div class="ner-text"><ul><li><strong>WU Wen-shin</strong> — <em>中國文化文學碩士</em></li><li><strong>LIANG Xiaojing</strong> — <em>中國文化文學碩士</em></li><li><strong>LI Jialu</strong> — <em>社會科學文學碩士</em></li><li><strong>TSOI Sin Yu</strong> — <em>中國文化文學碩士</em></li></ul></div>
+                  </article>
+              <article class="ner-section">
+                      <h2 class="ner-heading"><span class="ner-heading-no">09</span>GitHub 代碼庫</h2>
+                    <div class="ner-text"><p>詳細代碼及項目文檔請見以下連結。</p><p><a href="https://github.com/Wenz0101/NER-Zh">GitHub 代碼庫</a></p></div>
+                  </article>
+          </div>
+  </section>
+
+      <section class="ner-tokens">
+      <div class="container">
+        <p class="ner-block-title">模型從文學裡拉出來的地名</p>
+        <ul class="ner-token-field"><li>九洲</li><li>西關</li><li>茶館</li><li>錦里</li><li>邊城</li><li>蘇州河</li><li>曹楊新村</li><li>淮海路</li><li>國泰戲院</li><li>弄</li></ul>
+        <p class="ner-table-note">模型在這些小說裡認出的地名，也是把「文本記住的地理」畫成地圖的原料。</p>      </div>
+    </section>
+  
+      <section class="ner-quote">
+      <div class="container ner-quote-inner">
+        <p class="ner-quote-label">發現</p>
+        <blockquote class="ner-quote-text">「九洲」在兩部小說裡都出現。兩本寫嶺南的書，反覆用到同一批地名：這種重複，讀者容易錯過，標註器卻一抓就中。</blockquote>
+        <p class="ner-quote-source">實際用途 · 文學地理學</p>      </div>
+    </section>
+  
+  
+  <section class="ner-foot">
+    <div class="container ner-foot-inner">
+      <span class="ner-foot-mark" aria-hidden="true">NER · CRF · BERT</span>
+                    <a class="ner-back" href="https://digitalhumanities.hkust.edu.hk/student-projects-2025/application-of-ner-models-in-literature-field/" rel="noopener">原項目頁面 ↗</a>
+              <a class="ner-back" href="/zh-hant/projects"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg><span>返回所有項目</span></a>
+          </div>
+  </section>
+
+  
+</article>
+
+  </div>
+
+</main>
+
+  </div>
+
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a href="/zh-hant" class="brand footer-brand">
+            <img class="brand-img logo-ust" src="/themes/custom/humatech_dhi/images/ust-logo-official.png" alt="HKUST" width="797" height="186" decoding="async">
+            <span class="brand-sep" aria-hidden="true"></span>
+            <img class="brand-img logo-project" src="/themes/custom/humatech_dhi/images/hdt-logo-official.png" alt="Humanities and Digital Technologies Research" width="944" height="209" decoding="async">
+          </a>
+          <p class="footer-desc">香港科技大學人文及數碼科技研究平台，致力在人工智能時代推動人文學的發展。平台透過跨學科研究與頂尖的人文教育，連結產業、教育與社會，讓科學技術真正造福人類。</p>
+        </div>
+        <div class="footer-col">
+          <h4>聯絡我們</h4>
+          <p class="contact"><a href="mailto:dhi@ust.hk">dhi@ust.hk</a></p>
+          <p class="contact"><a href="/" target="_blank" rel="noopener">Home</a></p>
+        </div>
+        <div class="footer-col">
+          <h4>關注我們</h4>
+          <ul class="social">
+                          <li><a href="https://www.facebook.com/hkust.library" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a></li>
+                          <li><a href="https://www.instagram.com/libraryathkust/" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a></li>
+                          <li><a href="https://www.linkedin.com/school/hkust/" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a></li>
+                          <li><a href="https://www.youtube.com/user/HKUSTLIB" target="_blank" rel="noopener" aria-label="YouTube">YouTube</a></li>
+                      </ul>
+        </div>
+              </div>
+    </footer>
+
+    <div class="hkust-footer">
+      <a href="#" class="back-to-top" aria-label="返回頂部" title="返回頂部"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 19V5"/><path d="M6 11l6-6 6 6"/></svg></a>
+      <div class="content-locator">
+        <div class="site-col">
+          <div class="hkust-logo">
+            <a href="https://www.ust.hk" target="_blank" rel="noreferrer"><img src="/themes/custom/humatech_dhi/images/hkust/hkust_logo_small.svg" alt="HKUST Logo" width="135" height="36" decoding="async"></a>
+          </div>
+          <div class="site-pages">
+                          <a class="page" href="https://dataprivacy.ust.hk/university-data-privacy-policy-statement/" target="_blank" rel="noreferrer">私隱政策</a>
+                          <a class="page" href="https://hkust.edu.hk/sitemap" target="_blank" rel="noreferrer">網站地圖</a>
+                        <div class="copyright">© 2026 香港科技大學 版權所有。</div>
+          </div>
+        </div>
+        <div class="social-share-col">
+          <div class="text">關注科大</div>
+          <div class="icon-wrapper">
+                          <a class="page" href="https://www.facebook.com/hkust/" rel="noreferrer"><img src="/themes/custom/humatech_dhi/images/hkust/s-icon-fb.svg" alt="Facebook" decoding="async"></a>
+                          <a class="page" href="https://www.linkedin.com/school/hkust/" rel="noreferrer"><img src="/themes/custom/humatech_dhi/images/hkust/s-icon-in.svg" alt="LinkedIn" decoding="async"></a>
+                          <a class="page" href="https://www.instagram.com/hkust" rel="noreferrer"><img src="/themes/custom/humatech_dhi/images/hkust/s-icon-ig.svg" alt="Instagram" decoding="async"></a>
+                          <a class="page" href="https://www.youtube.com/user/hkust" rel="noreferrer"><img src="/themes/custom/humatech_dhi/images/hkust/s-icon-youtube.svg" alt="YouTube" decoding="async"></a>
+                          <a class="page" href="https://hkust.edu.hk/sites/default/files/menu_icons/mainsite_Wechat_Eng_new.jpg" rel="noreferrer"><img src="/themes/custom/humatech_dhi/images/hkust/wechat.png" alt="WeChat" decoding="async"></a>
+                      </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","pathPrefix":"zh-hant\/","currentPath":"node\/273","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"zh-hant"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"simple_popup_blocks":{"settings":[]},"eu_cookie_compliance":{"cookie_policy_version":"1.0.0","popup_enabled":true,"popup_agreed_enabled":false,"popup_hide_agreed":false,"popup_clicking_confirmation":false,"popup_scrolling_confirmation":false,"popup_html_info":"\u003Cdiv aria-labelledby=\u0022popup-text\u0022  class=\u0022eu-cookie-compliance-banner eu-cookie-compliance-banner-info eu-cookie-compliance-banner--opt-in\u0022\u003E\n  \u003Cdiv class=\u0022popup-content info eu-cookie-compliance-content\u0022\u003E\n        \u003Cdiv id=\u0022popup-text\u0022 class=\u0022eu-cookie-compliance-message\u0022 role=\u0022document\u0022\u003E\n      \u003Ch2\u003EWe use cookies on this site to enhance your user experience\u003C\/h2\u003E\n\u003Cp\u003EBy clicking any link on this page you are giving your consent for us to set cookies.\u003C\/p\u003E\n\n              \u003Cbutton type=\u0022button\u0022 class=\u0022find-more-button eu-cookie-compliance-more-button\u0022\u003EMore info\u003C\/button\u003E\n          \u003C\/div\u003E\n\n    \n    \u003Cdiv id=\u0022popup-buttons\u0022 class=\u0022eu-cookie-compliance-buttons\u0022\u003E\n            \u003Cbutton type=\u0022button\u0022 class=\u0022agree-button eu-cookie-compliance-secondary-button\u0022\u003EOK, I agree\u003C\/button\u003E\n              \u003Cbutton type=\u0022button\u0022 class=\u0022decline-button eu-cookie-compliance-default-button\u0022\u003ENo, thanks\u003C\/button\u003E\n          \u003C\/div\u003E\n  \u003C\/div\u003E\n\u003C\/div\u003E","use_mobile_message":false,"mobile_popup_html_info":"\u003Cdiv aria-labelledby=\u0022popup-text\u0022  class=\u0022eu-cookie-compliance-banner eu-cookie-compliance-banner-info eu-cookie-compliance-banner--opt-in\u0022\u003E\n  \u003Cdiv class=\u0022popup-content info eu-cookie-compliance-content\u0022\u003E\n        \u003Cdiv id=\u0022popup-text\u0022 class=\u0022eu-cookie-compliance-message\u0022 role=\u0022document\u0022\u003E\n      \n              \u003Cbutton type=\u0022button\u0022 class=\u0022find-more-button eu-cookie-compliance-more-button\u0022\u003EMore info\u003C\/button\u003E\n          \u003C\/div\u003E\n\n    \n    \u003Cdiv id=\u0022popup-buttons\u0022 class=\u0022eu-cookie-compliance-buttons\u0022\u003E\n            \u003Cbutton type=\u0022button\u0022 class=\u0022agree-button eu-cookie-compliance-secondary-button\u0022\u003EOK, I agree\u003C\/button\u003E\n              \u003Cbutton type=\u0022button\u0022 class=\u0022decline-button eu-cookie-compliance-default-button\u0022\u003ENo, thanks\u003C\/button\u003E\n          \u003C\/div\u003E\n  \u003C\/div\u003E\n\u003C\/div\u003E","mobile_breakpoint":768,"popup_html_agreed":false,"popup_use_bare_css":false,"popup_height":"auto","popup_width":"100%","popup_delay":1000,"popup_link":"https:\/\/dataprivacy.hkust.edu.hk\/university-data-privacy-policy-statement\/","popup_link_new_window":true,"popup_position":false,"fixed_top_position":true,"popup_language":"zh-hant","store_consent":false,"better_support_for_screen_readers":false,"cookie_name":"","reload_page":false,"domain":"","domain_all_sites":false,"popup_eu_only":false,"popup_eu_only_js":false,"cookie_lifetime":100,"cookie_session":0,"set_cookie_session_zero_on_disagree":0,"disagree_do_not_show_popup":false,"method":"opt_in","automatic_cookies_removal":true,"allowed_cookies":"","withdraw_markup":"\u003Cbutton type=\u0022button\u0022 class=\u0022eu-cookie-withdraw-tab\u0022\u003EPrivacy settings\u003C\/button\u003E\n\u003Cdiv aria-labelledby=\u0022popup-text\u0022 class=\u0022eu-cookie-withdraw-banner\u0022\u003E\n  \u003Cdiv class=\u0022popup-content info eu-cookie-compliance-content\u0022\u003E\n    \u003Cdiv id=\u0022popup-text\u0022 class=\u0022eu-cookie-compliance-message\u0022 role=\u0022document\u0022\u003E\n      \u003Ch2\u003EWe use cookies on this site to enhance your user experience\u003C\/h2\u003E\n\u003Cp\u003EYou have given your consent for us to set cookies.\u003C\/p\u003E\n\n    \u003C\/div\u003E\n    \u003Cdiv id=\u0022popup-buttons\u0022 class=\u0022eu-cookie-compliance-buttons\u0022\u003E\n      \u003Cbutton type=\u0022button\u0022 class=\u0022eu-cookie-withdraw-button \u0022\u003EWithdraw consent\u003C\/button\u003E\n    \u003C\/div\u003E\n  \u003C\/div\u003E\n\u003C\/div\u003E","withdraw_enabled":false,"reload_options":0,"reload_routes_list":"","withdraw_button_on_info_popup":false,"cookie_categories":[],"cookie_categories_details":[],"enable_save_preferences_button":true,"cookie_value_disagreed":"0","cookie_value_agreed_show_thank_you":"1","cookie_value_agreed":"2","containing_element":"body","settings_tab_enabled":false,"olivero_primary_button_classes":"","olivero_secondary_button_classes":"","close_button_action":"close_banner","open_by_default":true,"modules_allow_popup":true,"hide_the_banner":false,"geoip_match":true,"unverified_scripts":[]},"user":{"uid":0,"permissionsHash":"34693c6500025249e6d5c180ac56c4b368b67c477dbff314e3de60c0860be894"}}</script>
+<script src="/sites/default/files/js/js_AQMjWqRmc-agWxSbDtvR-JKi1ZaN7C-GyCQEAGonoag.js?scope=footer&amp;delta=0&amp;language=zh-hant&amp;theme=humatech_dhi&amp;include=eJxty0EOwCAIAMEP2fAkopRUWhRS8f_11ounTSZZnkhmj_BKc5XciYE3mOpsOZgqnlXgUitZfxsSDP7azRRHsxDrach6Gd18OhY1egZs7AM8rDQA"></script>
+<script src="/themes/custom/humatech_dhi/js/main.js?v=20261007000000" defer></script>
+<script src="/modules/custom/humatech_site/js/project-motion.js?v=1.x" defer></script>
+<script src="/sites/default/files/js/js_uYb328KC9ZEAwb1mRd4SA5REe_gx2S5zawH5nKaMYLc.js?scope=footer&amp;delta=3&amp;language=zh-hant&amp;theme=humatech_dhi&amp;include=eJxty0EOwCAIAMEP2fAkopRUWhRS8f_11ounTSZZnkhmj_BKc5XciYE3mOpsOZgqnlXgUitZfxsSDP7azRRHsxDrach6Gd18OhY1egZs7AM8rDQA"></script>
+
+  </body>
+</html>

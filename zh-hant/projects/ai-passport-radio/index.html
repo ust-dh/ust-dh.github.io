@@ -1,0 +1,379 @@
+
+<!DOCTYPE html>
+<html lang="zh-hant" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+<style>
+@media (max-width: 899px) {
+  .hero-carousel {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 200vh !important;
+    min-height: 200svh !important;
+    padding-top: calc(var(--topbar-h, 0px) + var(--header-h, 0px)) !important;
+  }
+
+  .hero-static {
+    order: 1 !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .hero-static .container,
+  .hero-inner {
+    width: 100% !important;
+    max-width: none !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-copy {
+    width: auto !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transform: none !important;
+    min-height: calc(100vh - var(--topbar-h, 0px) - var(--header-h, 0px) - 1.5rem) !important;
+    min-height: calc(100svh - var(--topbar-h, 0px) - var(--header-h, 0px) - 1.5rem) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .hero-copy > * {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .hero-copy #hero-headline,
+  .hero-copy h1 {
+    margin-bottom: 1rem !important;
+  }
+
+  .hero-slides {
+    order: 3 !important;
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin-left: 0 !important;
+    transform: none !important;
+    aspect-ratio: 3 / 2;
+  }
+
+  .hero-slide {
+    position: relative !important;
+    inset: auto !important;
+  }
+
+  .hero-slide .slide-bg {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+}
+</style>
+
+
+    <meta charset="utf-8" />
+<meta name="description" content="HDT CoLab · 2026 秋季 · ESP-IDF 5.5.3、ESP32-C3、240×320 屏幕、8 MB Flash 這台裝置 AI Passport 是一台小型手持裝置：ESP32-C3、240×320 屏幕、三顆按鍵（上、下、OK）、一個揚聲器與 8 MB Flash。它原本是為兒童設計的隨身夥伴，而這正是它適合作為教學平台的原因：它是一台青少年可以握在手上的電腦，而且一次只做一件事。 三個地區、四十九個電台 香港六個 RTHK 頻道；新加坡十七個 Mediacorp 電台；馬來西亞二十六個來自 Astro Radio 與 RTM。固件同時鏈接了 MP3 與 AAC 解碼器，播放中的曲目資訊從 ICY metadata 中解出，收藏可跨重啟保留，長按上或下即可切換地區。目錄中每一個位址在收錄前都實測過：HTTP 200，且去除 ICY 後至少五個有效幀頭 —— 這樣才能擋掉那些「回應正常、卻一聲不響」的連結。" />
+<link rel="canonical" href="/zh-hant/projects/ai-passport-radio" />
+<meta name="Generator" content="Drupal 10 (https://www.drupal.org)" />
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>div#sliding-popup, div#sliding-popup .eu-cookie-withdraw-banner, .eu-cookie-withdraw-tab {background: #0779bf} div#sliding-popup.eu-cookie-withdraw-wrapper { background: transparent; } #sliding-popup h1, #sliding-popup h2, #sliding-popup h3, #sliding-popup p, #sliding-popup label, #sliding-popup div, .eu-cookie-compliance-more-button, .eu-cookie-compliance-secondary-button, .eu-cookie-withdraw-tab { color: #ffffff;} .eu-cookie-withdraw-tab { border-color: #ffffff;}</style>
+<link rel="alternate" hreflang="en" href="/projects/ai-passport-radio" />
+<link rel="alternate" hreflang="zh-hant" href="/zh-hant/projects/ai-passport-radio" />
+<link href="/sites/default/files/hkust_theme_configs/css/styles.css?1791305198" rel="stylesheet" />
+<script src="/sites/default/files/hkust_theme_configs/js/script.js?1791305198"></script>
+
+    <title>AI Passport Radio：為青少年而設的獨立收音機 | Humanities and Digital Technologies Research</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/themes/custom/humatech_dhi/images/favicon.ico" type="image/x-icon">
+
+    <link rel="icon" type="image/png" sizes="512x512" href="/themes/custom/humatech_dhi/images/favicon.png?v=202610051552">
+    <link rel="icon" type="image/png" sizes="192x192" href="/themes/custom/humatech_dhi/images/favicon-192.png?v=202610051552">
+    <link rel="apple-touch-icon" sizes="180x180" href="/themes/custom/humatech_dhi/images/apple-touch-icon.png?v=202610051552">
+    <script>
+      /*
+       * Same behaviour as the static site: mark the document as JS-enabled and
+       * apply the stored colour scheme before the first paint (no flash).
+       * Nothing here depends on jQuery or on Drupal's JS.
+       */
+      (function () {
+        var root = document.documentElement;
+        root.classList.add('js');
+        var theme = null;
+        try { theme = window.localStorage.getItem('theme'); } catch (e) { /* ignore */ }
+        var dark = theme ? theme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        root.classList.toggle('dark', dark);
+      })();
+    </script>
+    <link rel="stylesheet" media="all" href="/sites/default/files/css/css_rIJGwM4HwhaHkbr11lM8JK7d7E0UaWgEEBYUsUHTFlQ.css?delta=0&amp;language=zh-hant&amp;theme=humatech_dhi&amp;include=eJxtjlEKwzAMQy8UmiMZJ1EbU2cxdbLR269s7GPQL8ETDwmTcu-74IpmKvzIiLiBVLDy1BFWFfOrOBATO0KdjQdypVIlbtoT6z8z3rD46Me5sBwvfiK0YTlN0UJfgUZFw892uUZB1m0aJe1593jDgp8-0D4v3rc-Trw" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_o_ETQSw1EcyHRCsiDlZi5PMcnD_Wk9QSquns-ywVRow.css?delta=1&amp;language=zh-hant&amp;theme=humatech_dhi&amp;include=eJxtjlEKwzAMQy8UmiMZJ1EbU2cxdbLR269s7GPQL8ETDwmTcu-74IpmKvzIiLiBVLDy1BFWFfOrOBATO0KdjQdypVIlbtoT6z8z3rD46Me5sBwvfiK0YTlN0UJfgUZFw892uUZB1m0aJe1593jDgp8-0D4v3rc-Trw" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_wVj-5wXN568rJ3j8efc9rpBLzB8Uo6hCSUWjjgvcQVc.css?delta=2&amp;language=zh-hant&amp;theme=humatech_dhi&amp;include=eJxtjlEKwzAMQy8UmiMZJ1EbU2cxdbLR269s7GPQL8ETDwmTcu-74IpmKvzIiLiBVLDy1BFWFfOrOBATO0KdjQdypVIlbtoT6z8z3rD46Me5sBwvfiK0YTlN0UJfgUZFw892uUZB1m0aJe1593jDgp8-0D4v3rc-Trw" />
+
+    
+  </head>
+  <body class="hdtp lang-zh-hant hdtp-lang-zh-hant user-anonymous path-node">
+    <a class="skip-link" href="#main">跳至內容</a>
+    
+
+                <div id="hdtp-bars">
+    <div class="hkust-topbar">
+
+      <details class="more-drawer">
+        <summary class="toggler" aria-label="更多關於科大" title="更多關於科大"><svg class="chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <div class="drawer-content">
+          <div class="drawer-title">更多關於科大</div>
+          <nav class="drawer-links" aria-label="HKUST">
+            <a href="https://hkust.edu.hk/news" target="_blank" rel="noreferrer">大學新聞</a><a href="https://hkust.edu.hk/academics/list" target="_blank" rel="noreferrer">學系一覽</a><a href="https://hkust.edu.hk/lifehkust" target="_blank" rel="noreferrer">科大生活</a><a href="https://library.hkust.edu.hk" target="_blank" rel="noreferrer">圖書館</a><a href="https://hkust.edu.hk/map-directions" target="_blank" rel="noreferrer">地圖及交通</a><a href="https://hkustcareers.ust.hk" target="_blank" rel="noreferrer">科大職位</a><a href="https://facultyprofiles.ust.hk/" target="_blank" rel="noreferrer">教職員名錄</a><a href="https://hkust.edu.hk/about" target="_blank" rel="noreferrer">關於科大</a>          </nav>
+        </div>
+      </details>
+    </div>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="brand">
+          <a href="https://www.ust.hk" class="brand-link" aria-label="HKUST" rel="noreferrer">
+            <img class="brand-img logo-ust" src="/themes/custom/humatech_dhi/images/ust-logo-official.png" alt="HKUST" width="797" height="186" decoding="async">
+          </a>
+          <span class="brand-sep" aria-hidden="true"></span>
+          <a href="/zh-hant" class="brand-link" aria-label="Humanities and Digital Technologies Research">
+            <img class="brand-img logo-project" src="/themes/custom/humatech_dhi/images/hdt-logo-official.png" alt="Humanities and Digital Technologies Research" width="944" height="209" decoding="async">
+          </a>
+        </div>
+
+        <nav aria-label="主導覽" class="main-nav" id="main-nav">
+                      <ul class="menu main-menu">
+                                                                                                                  <li class="menu-item"><a href="/zh-hant">首頁</a></li>
+                                                                                                <li class="menu-item"><a href="/zh-hant/news">新聞</a></li>
+                                                                                                <li class="menu-item"><a href="/zh-hant/events">活動</a></li>
+                                                                                                <li class="menu-item"><a href="/zh-hant/conferences">會議</a></li>
+                                                                                                <li class="menu-item"><a href="/zh-hant/teaching">教學</a></li>
+                                                                                                                  <li class="menu-item"><a href="/zh-hant/projects">項目</a></li>
+                                                                                                <li class="menu-item"><a href="/zh-hant/members">成員</a></li>
+                          </ul>
+                  </nav>
+
+        <div class="header-actions">
+                                                                                                          <a href="/projects/ai-passport-radio" hreflang="en" lang="en" class="search-toggle lang-switch" aria-label="Switch to English" title="English">EN</a>
+                    <a href="/zh-hant/search" class="search-toggle" aria-label="搜尋" title="搜尋">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          </a>
+          <button type="button" class="theme-toggle" data-aw-toggle-color-scheme aria-label="切換深色/淺色模式">
+            <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4 1.4-1.4"/></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          </button>
+          <button type="button" class="menu-toggle" data-aw-toggle-menu aria-label="切換選單" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span></button>
+        </div>
+      </div>
+    </header>
+    </div><!-- /#hdtp-bars -->
+
+    
+
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
+    
+<main id="main" class="hdtp-main">
+  <a id="main-content" tabindex="-1"></a>
+
+  
+  
+  
+  <div class="region region-content">
+    <div data-drupal-messages-fallback class="hidden"></div><div class="mtpc_project mtpc_pagetitle page_id_278"><h1>AI Passport Radio：為青少年而設的獨立收音機</h1></div>
+
+
+          
+<link rel="stylesheet" href="/themes/custom/humatech_dhi/css/pages/airwave.css">
+<article data-history-node-id="278" about="/zh-hant/projects/ai-passport-radio" class="node node--project project-page aw-page">
+  
+
+  <section class="aw-hero">
+    <span class="aw-scale" aria-hidden="true"></span>
+    <span class="aw-needle" aria-hidden="true"></span>
+    <div class="container aw-hero-inner">
+      <nav class="aw-crumb" aria-label="麪包屑導覽">
+        <a href="/zh-hant">首頁</a>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg><a href="/zh-hant/projects">項目</a>      </nav>
+      <p class="aw-onair"><i aria-hidden="true"></i>直播中</p>
+      <p class="aw-kicker">HDT CoLab · 嵌入式 · ESP32-C3</p>
+      <h1 class="aw-title"><span class="field field--name-title field--type-string">AI Passport Radio：為青少年而設的獨立收音機</span>
+</h1>
+      <p class="aw-lead">為一台孩子本來就熟悉的手持裝置開發的網絡收音機固件。三個地方、四十九個電台，直接連播廣播機構的串流，中間沒有手機、沒有瀏覽器。</p>              <ol class="aw-dial">
+          <li><b>49</b><span>個電台，三個地區</span></li><li><b>3</b><span>顆按鍵，一塊螢幕</span></li><li><b>8 MB</b><span>Flash，單一應用</span></li>        </ol>
+          </div>
+  </section>
+  
+
+  <section class="aw-wave" aria-hidden="true"><span class="aw-wave-bars"></span></section>
+
+      <section class="aw-stations">
+      <div class="container">
+        <p class="aw-block-title">四十九個電台，三個地區</p>
+        <ul class="aw-bands">
+                      <li style="--aw-pct: 12%">
+              <span class="aw-band-count">6</span>
+              <span class="aw-band-region">香港</span>
+              <span class="aw-band-note">RTHK 頻道</span>
+              <span class="aw-band-track" aria-hidden="true"><i></i></span>
+            </li>
+                      <li style="--aw-pct: 35%">
+              <span class="aw-band-count">17</span>
+              <span class="aw-band-region">新加坡</span>
+              <span class="aw-band-note">Mediacorp 電台</span>
+              <span class="aw-band-track" aria-hidden="true"><i></i></span>
+            </li>
+                      <li style="--aw-pct: 53%">
+              <span class="aw-band-count">26</span>
+              <span class="aw-band-region">馬來西亞</span>
+              <span class="aw-band-note">Astro Radio · RTM</span>
+              <span class="aw-band-track" aria-hidden="true"><i></i></span>
+            </li>
+                  </ul>
+        <p class="aw-note">同時鏈接了 MP3 與 AAC 解碼器，「正在播放」一行讀自 ICY metadata 串流；收藏可跨重啟保留，長按上或下即可切換地區。目錄中每一個位址在收錄前都實測過：HTTP 200，並且至少五個有效 frame header —— 這正是用來擋掉那些「客氣回應卻什麼都播不出來」的連結。</p>      </div>
+    </section>
+  
+      <section class="aw-log">
+      <div class="container">
+        <p class="aw-block-title">播出紀錄</p>
+        <div class="aw-recorder">
+                      <article class="aw-trace"><div class="aw-trace-body"><p>AI Passport 是一台小型手持裝置：ESP32-C3、一塊螢幕、三顆按鍵、一個揚聲器與 8 MB Flash。它一次只做一件事 —— 而這正是它可以被教的原因。</p></div></article>
+                      <article class="aw-trace"><div class="aw-trace-body"><p>Wi-Fi 掃描、網路清單、螢幕鍵盤與密碼輸入全都做在裝置上，不需要手機 App。收藏可跨重啟保留，上次的電台也會自己續播。</p></div></article>
+                  </div>
+      </div>
+    </section>
+  
+  <section class="aw-handset">
+    <div class="container aw-handset-grid">
+      <div class="aw-handset-copy">
+        <p class="aw-block-title">這台裝置</p>
+        <p class="aw-handset-note">AI Passport 是一台小型手持裝置：ESP32-C3、240 × 320 螢幕、三顆按鍵（上、下、確定）、一個揚聲器與 8 MB Flash。它本來就是為孩子設計的隨身裝置 —— 而這正是它能成為教學平台的原因：它是一台孩子可以拿在手上的電腦，而且一次只做一件事。</p>                  <dl class="aw-specs">
+            <div><dt>系統單晶片</dt><dd>ESP32-C3</dd></div><div><dt>螢幕</dt><dd>240 × 320</dd></div><div><dt>按鍵</dt><dd>三顆 —— 上 / 下 / 確定</dd></div><div><dt>Flash</dt><dd>8 MB</dd></div><div><dt>工具鏈</dt><dd>ESP-IDF 5.5.3</dd></div><div><dt>學期</dt><dd>2026 秋</dd></div>          </dl>
+              </div>
+      <div class="aw-device" aria-hidden="true">
+        <span class="aw-device-led"></span>
+        <span class="aw-device-screen">
+          <span class="aw-screen-line"></span>
+          <span class="aw-screen-wave"></span>
+          <span class="aw-screen-name">FM 88.1</span>
+        </span>
+        <span class="aw-device-keys"><i></i><i></i><i></i></span>
+        <span class="aw-device-grille"></span>
+      </div>
+    </div>
+  </section>
+
+      <section class="aw-standalone">
+      <div class="container">
+        <p class="aw-block-title">固件自己能做到的事</p>
+        <ul class="aw-features">
+          <li>Wi-Fi 掃描、網路清單、螢幕鍵盤與密碼輸入全都在裝置上完成 —— 不需要手機 App，也不需要 captive portal。</li><li>螢幕可以關掉，音樂繼續播放。</li><li>睡眠計時器會停止播放、依序關閉周邊，再讓裝置進入 deep sleep。</li><li>下次開機時會恢復並續播上次的電台。</li><li>電量計會讀取剩餘電量。</li><li>因為網路名稱與曲名不一定是 ASCII，裝置內編譯了一套產生的 CJK 字型作為後備。</li>        </ul>
+      </div>
+    </section>
+  
+      <section class="aw-education">
+      <div class="container">
+        <p class="aw-block-title">教育上的意義</p>
+        <p class="aw-claim">把 AI Passport 想成 AI 時代的樹莓派。</p>
+        <div class="aw-edu-paras">
+          <p>它是一台便宜、自足的小電腦：孩子可以單手拿著，也可以在軟體上一層層拆開；它從一開始就是要交到年輕人手上，而不是只給專家。</p><p>這台收音機正是這塊平台能承載什麼的固件示例：board support layer、電台目錄、MP3 與 AAC 解碼路徑、狀態機、含螢幕鍵盤的 Wi-Fi 設定、收藏、睡眠計時器與 CJK 字型 —— 全部以 ESP-IDF 從原始碼編譯進 8 MB Flash。</p><p>對 K-12 電腦科學教育而言，重點正在這裡。一堂課可以把這份示例拆開：改電台目錄、改狀態機、跑 host tests、燒錄自己的版本。嵌入式系統、C、網路、音訊、使用者介面與測試，不再是各自獨立的章節，而是學生**拿在手上的一個程式**。</p><p>因為裝置刻意只做一件事，它也特別好教：它上面沒有任何東西可以通往別處，收音機不需手機或瀏覽器就能播，老師發下去的時候，不必順手把整個下午的網路也發下去。</p>        </div>
+      </div>
+    </section>
+  
+      <section class="aw-checks">
+      <div class="container">
+        <p class="aw-block-title">如何驗證</p>
+        <div class="aw-check-grid">
+          <div><span class="aw-check-k">已驗證</span><p>三個地區的播放、Wi-Fi 掃描、以螢幕鍵盤輸入密碼、收藏、自動關螢幕，以及設定頁與播放頁，都已在實機上驗證。</p></div>
+          <div><span class="aw-check-k">待確認</span><p>睡眠計時器的 deep sleep 交接與雙擊關螢幕手勢已實作，是接下來要在硬體上確認的項目。</p></div>        </div>
+      </div>
+    </section>
+  
+  <section class="aw-foot container">
+    <p class="aw-quote">這台收音機是一份示例。重點在平台，而平台本來就是要讓人寫程式的。</p>    <a class="hdtp-back-btn" href="/zh-hant/projects"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg><span>返回所有項目</span></a>  </section>
+</article>
+
+  </div>
+
+</main>
+
+  </div>
+
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a href="/zh-hant" class="brand footer-brand">
+            <img class="brand-img logo-ust" src="/themes/custom/humatech_dhi/images/ust-logo-official.png" alt="HKUST" width="797" height="186" decoding="async">
+            <span class="brand-sep" aria-hidden="true"></span>
+            <img class="brand-img logo-project" src="/themes/custom/humatech_dhi/images/hdt-logo-official.png" alt="Humanities and Digital Technologies Research" width="944" height="209" decoding="async">
+          </a>
+          <p class="footer-desc">香港科技大學人文及數碼科技研究平台，致力在人工智能時代推動人文學的發展。平台透過跨學科研究與頂尖的人文教育，連結產業、教育與社會，讓科學技術真正造福人類。</p>
+        </div>
+        <div class="footer-col">
+          <h4>聯絡我們</h4>
+          <p class="contact"><a href="mailto:dhi@ust.hk">dhi@ust.hk</a></p>
+          <p class="contact"><a href="/" target="_blank" rel="noopener">Home</a></p>
+        </div>
+        <div class="footer-col">
+          <h4>關注我們</h4>
+          <ul class="social">
+                          <li><a href="https://www.facebook.com/hkust.library" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a></li>
+                          <li><a href="https://www.instagram.com/libraryathkust/" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a></li>
+                          <li><a href="https://www.linkedin.com/school/hkust/" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a></li>
+                          <li><a href="https://www.youtube.com/user/HKUSTLIB" target="_blank" rel="noopener" aria-label="YouTube">YouTube</a></li>
+                      </ul>
+        </div>
+              </div>
+    </footer>
+
+    <div class="hkust-footer">
+      <a href="#" class="back-to-top" aria-label="返回頂部" title="返回頂部"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 19V5"/><path d="M6 11l6-6 6 6"/></svg></a>
+      <div class="content-locator">
+        <div class="site-col">
+          <div class="hkust-logo">
+            <a href="https://www.ust.hk" target="_blank" rel="noreferrer"><img src="/themes/custom/humatech_dhi/images/hkust/hkust_logo_small.svg" alt="HKUST Logo" width="135" height="36" decoding="async"></a>
+          </div>
+          <div class="site-pages">
+                          <a class="page" href="https://dataprivacy.ust.hk/university-data-privacy-policy-statement/" target="_blank" rel="noreferrer">私隱政策</a>
+                          <a class="page" href="https://hkust.edu.hk/sitemap" target="_blank" rel="noreferrer">網站地圖</a>
+                        <div class="copyright">© 2026 香港科技大學 版權所有。</div>
+          </div>
+        </div>
+        <div class="social-share-col">
+          <div class="text">關注科大</div>
+          <div class="icon-wrapper">
+                          <a class="page" href="https://www.facebook.com/hkust/" rel="noreferrer"><img src="/themes/custom/humatech_dhi/images/hkust/s-icon-fb.svg" alt="Facebook" decoding="async"></a>
+                          <a class="page" href="https://www.linkedin.com/school/hkust/" rel="noreferrer"><img src="/themes/custom/humatech_dhi/images/hkust/s-icon-in.svg" alt="LinkedIn" decoding="async"></a>
+                          <a class="page" href="https://www.instagram.com/hkust" rel="noreferrer"><img src="/themes/custom/humatech_dhi/images/hkust/s-icon-ig.svg" alt="Instagram" decoding="async"></a>
+                          <a class="page" href="https://www.youtube.com/user/hkust" rel="noreferrer"><img src="/themes/custom/humatech_dhi/images/hkust/s-icon-youtube.svg" alt="YouTube" decoding="async"></a>
+                          <a class="page" href="https://hkust.edu.hk/sites/default/files/menu_icons/mainsite_Wechat_Eng_new.jpg" rel="noreferrer"><img src="/themes/custom/humatech_dhi/images/hkust/wechat.png" alt="WeChat" decoding="async"></a>
+                      </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","pathPrefix":"zh-hant\/","currentPath":"node\/278","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"zh-hant"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"simple_popup_blocks":{"settings":[]},"eu_cookie_compliance":{"cookie_policy_version":"1.0.0","popup_enabled":true,"popup_agreed_enabled":false,"popup_hide_agreed":false,"popup_clicking_confirmation":false,"popup_scrolling_confirmation":false,"popup_html_info":"\u003Cdiv aria-labelledby=\u0022popup-text\u0022  class=\u0022eu-cookie-compliance-banner eu-cookie-compliance-banner-info eu-cookie-compliance-banner--opt-in\u0022\u003E\n  \u003Cdiv class=\u0022popup-content info eu-cookie-compliance-content\u0022\u003E\n        \u003Cdiv id=\u0022popup-text\u0022 class=\u0022eu-cookie-compliance-message\u0022 role=\u0022document\u0022\u003E\n      \u003Ch2\u003EWe use cookies on this site to enhance your user experience\u003C\/h2\u003E\n\u003Cp\u003EBy clicking any link on this page you are giving your consent for us to set cookies.\u003C\/p\u003E\n\n              \u003Cbutton type=\u0022button\u0022 class=\u0022find-more-button eu-cookie-compliance-more-button\u0022\u003EMore info\u003C\/button\u003E\n          \u003C\/div\u003E\n\n    \n    \u003Cdiv id=\u0022popup-buttons\u0022 class=\u0022eu-cookie-compliance-buttons\u0022\u003E\n            \u003Cbutton type=\u0022button\u0022 class=\u0022agree-button eu-cookie-compliance-secondary-button\u0022\u003EOK, I agree\u003C\/button\u003E\n              \u003Cbutton type=\u0022button\u0022 class=\u0022decline-button eu-cookie-compliance-default-button\u0022\u003ENo, thanks\u003C\/button\u003E\n          \u003C\/div\u003E\n  \u003C\/div\u003E\n\u003C\/div\u003E","use_mobile_message":false,"mobile_popup_html_info":"\u003Cdiv aria-labelledby=\u0022popup-text\u0022  class=\u0022eu-cookie-compliance-banner eu-cookie-compliance-banner-info eu-cookie-compliance-banner--opt-in\u0022\u003E\n  \u003Cdiv class=\u0022popup-content info eu-cookie-compliance-content\u0022\u003E\n        \u003Cdiv id=\u0022popup-text\u0022 class=\u0022eu-cookie-compliance-message\u0022 role=\u0022document\u0022\u003E\n      \n              \u003Cbutton type=\u0022button\u0022 class=\u0022find-more-button eu-cookie-compliance-more-button\u0022\u003EMore info\u003C\/button\u003E\n          \u003C\/div\u003E\n\n    \n    \u003Cdiv id=\u0022popup-buttons\u0022 class=\u0022eu-cookie-compliance-buttons\u0022\u003E\n            \u003Cbutton type=\u0022button\u0022 class=\u0022agree-button eu-cookie-compliance-secondary-button\u0022\u003EOK, I agree\u003C\/button\u003E\n              \u003Cbutton type=\u0022button\u0022 class=\u0022decline-button eu-cookie-compliance-default-button\u0022\u003ENo, thanks\u003C\/button\u003E\n          \u003C\/div\u003E\n  \u003C\/div\u003E\n\u003C\/div\u003E","mobile_breakpoint":768,"popup_html_agreed":false,"popup_use_bare_css":false,"popup_height":"auto","popup_width":"100%","popup_delay":1000,"popup_link":"https:\/\/dataprivacy.hkust.edu.hk\/university-data-privacy-policy-statement\/","popup_link_new_window":true,"popup_position":false,"fixed_top_position":true,"popup_language":"zh-hant","store_consent":false,"better_support_for_screen_readers":false,"cookie_name":"","reload_page":false,"domain":"","domain_all_sites":false,"popup_eu_only":false,"popup_eu_only_js":false,"cookie_lifetime":100,"cookie_session":0,"set_cookie_session_zero_on_disagree":0,"disagree_do_not_show_popup":false,"method":"opt_in","automatic_cookies_removal":true,"allowed_cookies":"","withdraw_markup":"\u003Cbutton type=\u0022button\u0022 class=\u0022eu-cookie-withdraw-tab\u0022\u003EPrivacy settings\u003C\/button\u003E\n\u003Cdiv aria-labelledby=\u0022popup-text\u0022 class=\u0022eu-cookie-withdraw-banner\u0022\u003E\n  \u003Cdiv class=\u0022popup-content info eu-cookie-compliance-content\u0022\u003E\n    \u003Cdiv id=\u0022popup-text\u0022 class=\u0022eu-cookie-compliance-message\u0022 role=\u0022document\u0022\u003E\n      \u003Ch2\u003EWe use cookies on this site to enhance your user experience\u003C\/h2\u003E\n\u003Cp\u003EYou have given your consent for us to set cookies.\u003C\/p\u003E\n\n    \u003C\/div\u003E\n    \u003Cdiv id=\u0022popup-buttons\u0022 class=\u0022eu-cookie-compliance-buttons\u0022\u003E\n      \u003Cbutton type=\u0022button\u0022 class=\u0022eu-cookie-withdraw-button \u0022\u003EWithdraw consent\u003C\/button\u003E\n    \u003C\/div\u003E\n  \u003C\/div\u003E\n\u003C\/div\u003E","withdraw_enabled":false,"reload_options":0,"reload_routes_list":"","withdraw_button_on_info_popup":false,"cookie_categories":[],"cookie_categories_details":[],"enable_save_preferences_button":true,"cookie_value_disagreed":"0","cookie_value_agreed_show_thank_you":"1","cookie_value_agreed":"2","containing_element":"body","settings_tab_enabled":false,"olivero_primary_button_classes":"","olivero_secondary_button_classes":"","close_button_action":"close_banner","open_by_default":true,"modules_allow_popup":true,"hide_the_banner":false,"geoip_match":true,"unverified_scripts":[]},"user":{"uid":0,"permissionsHash":"34693c6500025249e6d5c180ac56c4b368b67c477dbff314e3de60c0860be894"}}</script>
+<script src="/sites/default/files/js/js_AQMjWqRmc-agWxSbDtvR-JKi1ZaN7C-GyCQEAGonoag.js?scope=footer&amp;delta=0&amp;language=zh-hant&amp;theme=humatech_dhi&amp;include=eJxty0EOwCAIAMEP2fAkopRUWhRS8f_11ounTSZZnkhmj_BKc5XciYE3mOpsOZgqnlXgUitZfxsSDP7azRRHsxDrach6Gd18OhY1egZs7AM8rDQA"></script>
+<script src="/themes/custom/humatech_dhi/js/main.js?v=20261007000000" defer></script>
+<script src="/modules/custom/humatech_site/js/project-motion.js?v=1.x" defer></script>
+<script src="/sites/default/files/js/js_uYb328KC9ZEAwb1mRd4SA5REe_gx2S5zawH5nKaMYLc.js?scope=footer&amp;delta=3&amp;language=zh-hant&amp;theme=humatech_dhi&amp;include=eJxty0EOwCAIAMEP2fAkopRUWhRS8f_11ounTSZZnkhmj_BKc5XciYE3mOpsOZgqnlXgUitZfxsSDP7azRRHsxDrach6Gd18OhY1egZs7AM8rDQA"></script>
+
+  </body>
+</html>

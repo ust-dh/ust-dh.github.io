@@ -14,3 +14,6 @@ AGENTS.md
 CONVENTIONS.md
 HANDOVER.md
 site.config.json.bak
+_mirror/
+_old_static/
+_deliver/
