@@ -1,17 +1,18 @@
 /* ============================================================
  * Home page feed: keeps the front page honest without hand edits.
  *
- *   1. The "Latest news" grid mirrors the first six cards of the
- *      language's own news listing (/news/ or /zh-hant/news/), so a
- *      news item added to the listing appears on the home page by
- *      itself.
- *   2. The "Upcoming events" list mirrors the events of /events/ (or
- *      /zh-hant/events/) whose date has not passed, judged against
- *      the visitor's clock, soonest first.
+ *   1. The hero carousel takes the newest stories: the first slides
+ *      get the first news items of the language's own news listing,
+ *      so the banner follows the news list by itself.
+ *   2. The "Latest news" grid mirrors the first three cards of the
+ *      same listing.
+ *   3. The events band shows the next three events. When nothing is
+ *      still to come, it shows the three most recent past events
+ *      under the "Past events" heading instead.
  *
- * Both steps are progressive: the static HTML already holds the
- * current state, and if a fetch fails the markup is left alone.
- * Loaded only on pages that mark their slots with data-home-feed.
+ * Progressive: the static HTML already holds the current state, and
+ * a failed fetch leaves the markup alone. Loaded only on pages that
+ * mark their slots with data-home-feed.
  * ============================================================ */
 (function (window, document) {
   'use strict';
@@ -20,17 +21,24 @@
   }
   window.__hdtpHomeFeed = true;
 
-  var NEWS_LIMIT = 6;
+  var NEWS_LIMIT = 3;
   var EVENT_LIMIT = 3;
   var isZh = (document.documentElement.getAttribute('lang') || 'en').toLowerCase().indexOf('zh') === 0;
   var prefix = isZh ? '/zh-hant' : '';
+  var LABEL = isZh
+    ? { upcoming: '即將舉行的活動', past: '已舉辦的活動' }
+    : { upcoming: 'Upcoming events', past: 'Past events' };
+
   var newsGrid = document.querySelector('[data-home-feed="news"]');
   var eventsList = document.querySelector('[data-home-feed="events"]');
+  var eventsHeading = document.querySelector('#events .section-head h2');
   var emptyNote = document.querySelector('[data-home-empty]');
 
   function toArray(list) {
     return Array.prototype.slice.call(list);
   }
+
+  var heroSlides = toArray(document.querySelectorAll('.hero-slide'));
 
   function today() {
     var now = new Date();
@@ -50,6 +58,12 @@
     return link ? link.getAttribute('href') : '';
   }
 
+  function clear(node) {
+    while (node.firstChild) {
+      node.removeChild(node.firstChild);
+    }
+  }
+
   function fetchPage(path) {
     return fetch(path, { credentials: 'same-origin' }).then(function (response) {
       if (!response.ok) {
@@ -61,32 +75,165 @@
     });
   }
 
-  /* ---- events: only what is still ahead, soonest first ---- */
-  function upcomingEvents(root) {
-    var cutoff = today();
-    return toArray(root.querySelectorAll('.event-row')).filter(function (row) {
-      var date = dateOf(row);
-      return date && date >= cutoff;
-    }).sort(function (a, b) {
-      var left = dateOf(a);
-      var right = dateOf(b);
-      return left < right ? -1 : (left > right ? 1 : 0);
-    }).slice(0, EVENT_LIMIT);
+  /* ---- news cards and the hero carousel ---- */
+  function cardData(card) {
+    var link = card.querySelector('h3 a');
+    var title = card.querySelector('.field--name-title');
+    var summary = card.querySelector('.field--name-field-summary .field__item');
+    var time = card.querySelector('time');
+    var img = card.querySelector('.news-thumb img');
+    return {
+      href: link ? link.getAttribute('href') : '',
+      title: title ? title.textContent.trim() : '',
+      summary: summary ? summary.textContent.trim() : '',
+      date: time ? time.textContent.trim() : '',
+      tags: toArray(card.querySelectorAll('.tag-row .tag')).map(function (tag) {
+        return tag.textContent.trim();
+      }),
+      img: img ? img.getAttribute('src') : ''
+    };
   }
 
-  function renderEvents(upcoming) {
-    while (eventsList.firstChild) {
-      eventsList.removeChild(eventsList.firstChild);
+  function paintHeroCard() {
+    var slide = document.querySelector('.hero-slide.active') || heroSlides[0];
+    if (!slide) {
+      return;
     }
-    upcoming.forEach(function (row) {
+    var href = slide.getAttribute('data-href') || '#';
+    var tags = (slide.getAttribute('data-tags') || '').split('|').filter(Boolean);
+    var title = document.getElementById('hero-news-title');
+    if (title) {
+      title.textContent = slide.getAttribute('data-title') || '';
+      title.setAttribute('href', href);
+    }
+    var summary = document.getElementById('hero-news-summary');
+    if (summary) {
+      summary.textContent = slide.getAttribute('data-summary') || '';
+    }
+    var date = document.getElementById('hero-news-date');
+    if (date) {
+      var dateText = slide.getAttribute('data-date') || '';
+      date.textContent = dateText;
+      date.setAttribute('datetime', dateText);
+    }
+    var link = document.getElementById('hero-news-link');
+    if (link) {
+      link.setAttribute('href', href);
+    }
+    var tagRow = document.getElementById('hero-news-tags');
+    if (tagRow) {
+      clear(tagRow);
+      tags.forEach(function (tag) {
+        var span = document.createElement('span');
+        span.className = 'tag';
+        span.textContent = tag;
+        tagRow.appendChild(span);
+      });
+    }
+  }
+
+  function applyHero(cards) {
+    if (!heroSlides.length || cards.length < heroSlides.length) {
+      return;
+    }
+    var fresh = cards.slice(0, heroSlides.length);
+    var current = heroSlides.map(function (slide) {
+      return slide.getAttribute('data-href') || '';
+    });
+    if (fresh.map(hrefOf).join('|') === current.join('|')) {
+      return;
+    }
+    heroSlides.forEach(function (slide, index) {
+      var data = cardData(fresh[index]);
+      slide.setAttribute('data-title', data.title);
+      slide.setAttribute('data-summary', data.summary);
+      slide.setAttribute('data-date', data.date);
+      slide.setAttribute('data-href', data.href);
+      slide.setAttribute('data-tags', data.tags.join('|'));
+      var img = slide.querySelector('.slide-bg');
+      if (img && data.img) {
+        img.setAttribute('src', data.img);
+      }
+    });
+    paintHeroCard();
+  }
+
+  function applyNewsGrid(cards) {
+    if (!newsGrid) {
+      return;
+    }
+    var fresh = cards.slice(0, NEWS_LIMIT);
+    var current = toArray(newsGrid.querySelectorAll('.news-card')).map(hrefOf);
+    if (fresh.map(hrefOf).join('|') === current.join('|')) {
+      return;
+    }
+    clear(newsGrid);
+    fresh.forEach(function (card) {
+      var node = document.importNode(card, true);
+      // main.js has already wired its scroll reveal, so the cards arrive in
+      // their finished state instead of waiting for an observer.
+      node.classList.add('reveal', 'visible');
+      newsGrid.appendChild(node);
+    });
+  }
+
+  function syncNews() {
+    if (!window.fetch || !window.DOMParser || (!newsGrid && !heroSlides.length)) {
+      return;
+    }
+    fetchPage(prefix + '/news/').then(function (page) {
+      var cards = toArray(page.querySelectorAll('.news-grid > .news-card'));
+      if (!cards.length) {
+        return;
+      }
+      applyHero(cards);
+      applyNewsGrid(cards);
+    }).catch(function () { /* keep the static markup */ });
+  }
+
+  /* ---- events: next three, or the three most recent past ones ---- */
+  function pickEvents(root) {
+    var cutoff = today();
+    var upcoming = [];
+    var past = [];
+    toArray(root.querySelectorAll('.event-row')).forEach(function (row) {
+      var date = dateOf(row);
+      if (!date) {
+        return;
+      }
+      if (date >= cutoff) {
+        upcoming.push(row);
+      } else {
+        past.push(row);
+      }
+    });
+    upcoming.sort(function (a, b) {
+      return dateOf(a) < dateOf(b) ? -1 : 1;
+    });
+    past.sort(function (a, b) {
+      return dateOf(a) > dateOf(b) ? -1 : 1;
+    });
+    if (upcoming.length) {
+      return { rows: upcoming.slice(0, EVENT_LIMIT), past: false };
+    }
+    return { rows: past.slice(0, EVENT_LIMIT), past: true };
+  }
+
+  function renderEvents(pick) {
+    if (!eventsList) {
+      return;
+    }
+    clear(eventsList);
+    pick.rows.forEach(function (row) {
       var node = document.importNode(row, true);
-      // main.js has already wired its scroll reveal, so the cards arrive
-      // in their finished state instead of waiting for an observer.
       node.classList.add('reveal', 'visible');
       eventsList.appendChild(node);
     });
+    if (eventsHeading) {
+      eventsHeading.textContent = pick.past ? LABEL.past : LABEL.upcoming;
+    }
     if (emptyNote) {
-      emptyNote.hidden = upcoming.length > 0;
+      emptyNote.hidden = pick.rows.length > 0;
     }
   }
 
@@ -94,41 +241,15 @@
     if (!eventsList) {
       return;
     }
-    // Trim the static markup first, so a slow or failed fetch never leaves
-    // an expired event on screen.
-    renderEvents(upcomingEvents(eventsList));
+    // Order the static markup first, so a slow or failed fetch never leaves
+    // an out-of-date event on screen.
+    renderEvents(pickEvents(eventsList));
     if (!window.fetch || !window.DOMParser) {
       return;
     }
     fetchPage(prefix + '/events/').then(function (page) {
-      renderEvents(upcomingEvents(page));
+      renderEvents(pickEvents(page));
     }).catch(function () { /* keep the static list */ });
-  }
-
-  /* ---- news: mirror the top cards of the news listing ---- */
-  function syncNews() {
-    if (!newsGrid || !window.fetch || !window.DOMParser) {
-      return;
-    }
-    fetchPage(prefix + '/news/').then(function (page) {
-      var cards = toArray(page.querySelectorAll('.news-grid > .news-card')).slice(0, NEWS_LIMIT);
-      if (!cards.length) {
-        return;
-      }
-      var fresh = cards.map(hrefOf).join('|');
-      var current = toArray(newsGrid.querySelectorAll('.news-card')).map(hrefOf).join('|');
-      if (fresh === current) {
-        return;
-      }
-      while (newsGrid.firstChild) {
-        newsGrid.removeChild(newsGrid.firstChild);
-      }
-      cards.forEach(function (card) {
-        var node = document.importNode(card, true);
-        node.classList.add('reveal', 'visible');
-        newsGrid.appendChild(node);
-      });
-    }).catch(function () { /* keep the static cards */ });
   }
 
   function start() {
