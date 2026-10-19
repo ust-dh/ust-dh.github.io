@@ -1,0 +1,51 @@
+name: Refresh listings
+
+# Rebuilds the home carousel and latest-news cards, the news list, and the upcoming/past split
+# on the events page. Runs when an article page changes and once a day so that events move from
+# "upcoming" to "past" on their own.
+on:
+  push:
+    paths:
+      - 'news/**'
+      - 'events/**'
+      - 'zh-hant/news/**'
+      - 'zh-hant/events/**'
+      - 'tools/build_lists.py'
+  schedule:
+    - cron: '17 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-listings
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    # skip the commit this workflow itself makes, so it cannot loop
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Rebuild the listing pages
+        run: python tools/build_lists.py
+
+      - name: Commit if anything changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html zh-hant/index.html news/index.html zh-hant/news/index.html \
+                  events/index.html zh-hant/events/index.html
+          if git diff --staged --quiet; then
+            echo "listings already up to date"
+          else
+            git commit -m "listings: refresh from published articles"
+            git push
+          fi
