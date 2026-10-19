@@ -264,6 +264,22 @@ def read_more_label(text):
 
 
 # ---------------------------------------------------------------- main
+def set_events_heading(page, lang, has_upcoming):
+    """The home events band heading follows whether anything is still to come."""
+    if lang == 'en':
+        label = 'Upcoming events' if has_upcoming else 'Past events'
+    else:
+        label = '即將舉行的活動' if has_upcoming else '已舉辦的活動'
+    i = page.find('id="events"')
+    if i < 0:
+        return page
+    j = page.find('<h2>', i)
+    k = page.find('</h2>', j)
+    if j < 0 or k < 0:
+        return page
+    return page[:j] + '<h2>' + label + '</h2>' + page[k + 5:]
+
+
 def main():
     today = dt.date.today()
     log = []
