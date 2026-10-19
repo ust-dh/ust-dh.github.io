@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d2038"/>
+      <stop offset="1" stop-color="#122a4d"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#g)"/>
+  <rect width="800" height="450" fill="url(#grid)"/>
+  <rect x="0" y="0" width="800" height="6" fill="#2f6df6"/>
+
+  <g fill="none" stroke="#8fb4ff" stroke-opacity="0.55" stroke-width="3">
+    <path d="M60 300 C 200 250, 300 360, 460 300 S 700 250, 780 300"/>
+    <path d="M60 350 C 210 310, 320 410, 470 350 S 700 320, 780 360"/>
+  </g>
+  <ellipse cx="470" cy="300" rx="118" ry="42" fill="#2f6df6" fill-opacity="0.22" stroke="#2f6df6" stroke-width="2"/>
+  <g stroke="#2f6df6" stroke-width="2" stroke-opacity="0.9">
+    <path d="M420 268 L520 268"/><path d="M410 300 L530 300"/><path d="M420 332 L520 332"/>
+  </g>
+  <circle cx="470" cy="300" r="7" fill="#fff"/>
+  <g stroke="#8fb4ff" stroke-opacity="0.5" stroke-width="2" fill="none">
+    <rect x="96" y="96" width="90" height="62" rx="6"/>
+    <rect x="208" y="96" width="90" height="62" rx="6"/>
+    <rect x="320" y="96" width="90" height="62" rx="6"/>
+  </g>
+
+</svg>
