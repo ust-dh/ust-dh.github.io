@@ -195,11 +195,17 @@ def event_labels(page):
     return out
 
 
-def event_row(item, lang, facts, labels):
+def details_label(page):
+    """The link label used on an event row ('Details' / '詳情')."""
+    m = re.search(r'class="read-more"[^>]*>(.*?)<svg', page, re.S)
+    return strip_tags(m.group(1)) if m else 'Details'
+
+
+def event_row(item, lang, facts, labels, details):
     months = MONTHS_EN if lang == 'en' else MONTHS_ZH
     bits = []
     if facts.get('speaker'):
-        bits.append('<div class="event-fact"><strong>%s</strong> %s</div>' % (
+        bits.append('<div class="event-fact"><strong>%s</strong>%s</div>' % (
             labels['speaker'], html.escape(facts['speaker'])))
     if facts.get('venue'):
         bits.append('<div class="event-fact"><strong>%s</strong>\n'
@@ -211,6 +217,9 @@ def event_row(item, lang, facts, labels):
                     '<div class="field field--name-field-time field--type-string">\n'
                     '          <div class="field__item">%s</div>\n'
                     '    </div>\n</div>' % (labels['time'], html.escape(facts['time'])))
+    arrow = ('<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" '
+             'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" '
+             'focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>')
     row = ('<article about="%s" class="event-row hdtp-event-row">\n'
            '    <div class="event-date" aria-hidden="true">\n'
            '      <span class="event-month">%s</span>\n'
@@ -226,13 +235,18 @@ def event_row(item, lang, facts, labels):
            '                <time datetime="%s">%s</time>\n'
            '      </div>\n'
            '      <h3><a href="%s" rel="bookmark"><span class="field field--name-title field--type-string">%s</span></a></h3>\n'
-           '      <div class="event-facts">%s</div>\n'
-           '      <div class="event-summary">%s</div>\n'
+           '              <div class="event-facts">%s</div>\n'
+           '              <div class="event-summary">\n'
+           '<div class="field field--name-field-summary field--type-string-long">\n'
+           '          <div class="field__item">%s</div>\n'
+           '    </div>\n</div>\n'
+           '            <a class="read-more" href="%s">%s%s</a>\n'
            '    </div>\n'
            '  </article>') % (
         item['href'], months[item['date'].month - 1], item['date'].day, item['date'].year,
         tag_items(item['tags']), item['date'].isoformat(), fmt_date(item['date'], lang),
-        item['href'], html.escape(item['title']), ''.join(bits), html.escape(item['summary']))
+        item['href'], html.escape(item['title']), ''.join(bits), html.escape(item['summary']),
+        item['href'], html.escape(details), arrow)
     assert row.count('<div') == row.count('</div>'), 'event row is unbalanced: %s' % item['href']
     return row
 
@@ -274,6 +288,7 @@ def main():
         page = read(prefix + 'events/index.html')
         rows = ROW_RE.findall(page)
         labels = event_labels(page) if rows else None
+        details = details_label(page)
         if labels:
             blocks = []
             for occ in (1, 2):
@@ -285,7 +300,7 @@ def main():
                     out = []
                     for e in items:
                         f = event_facts(e['rel'], lang)
-                        out.append(event_row(e, lang, f, labels))
+                        out.append(event_row(e, lang, f, labels, details))
                     return '\n'.join(out)
                 page = replace_inner(page, blocks[1], '\n' + rows_for(past) + '\n')
                 up_html = rows_for(upcoming)
@@ -318,7 +333,7 @@ def main():
             rows_home = []
             for e in feed:
                 f = event_facts(e['rel'], lang)
-                rows_home.append(event_row(e, lang, f, labels))
+                rows_home.append(event_row(e, lang, f, labels, details))
             page = replace_inner(page, eb, '\n\n' + '\n\n'.join(rows_home) + '\n\n')
         write(prefix + 'index.html', page)
         log.append('%sindex.html: %d slides, %d cards, %d events' % (
