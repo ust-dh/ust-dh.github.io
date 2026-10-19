@@ -705,3 +705,22 @@ body:not(:has(.hero-carousel)) #hdtp-bars .site-header {
     padding-inline: max(1.5rem, calc((100% - 80rem) / 2 + 1.5rem)) !important;
   }
 }
+
+
+/* project group accent: HDT Borderless
+   The other groups inherit the theme blue; the student group overrides it to violet. This
+   gives the partnership group its own teal so the five group headers read as a set without
+   repeating a colour. */
+.project-group--borderless .project-group-index {
+  color: #0f766e;
+}
+
+.project-group--borderless .project-group-count {
+  background: rgba(15, 118, 110, 0.12);
+  color: #0f766e;
+}
+
+.dark .project-group--borderless .project-group-count {
+  background: rgba(45, 212, 191, 0.18);
+  color: #99f6e4;
+}
