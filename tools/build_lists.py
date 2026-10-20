@@ -394,7 +394,33 @@ def main():
     print('today:', today.isoformat())
     for line in log:
         print(' ', line)
+    print('  sitemap.xml: %d urls' % write_sitemap())
 
+
+
+
+def write_sitemap():
+    """Write sitemap.xml for every published page."""
+    base = 'https://ust-dh.github.io'
+    skip = {'sites', 'themes', 'assets', 'core', 'profiles', 'modules', 'content', 'vendor',
+            'node_modules'}
+    urls = []
+    for root, dirs, files in os.walk(ROOT):
+        dirs[:] = [x for x in dirs if x not in skip and not x.startswith('.')]
+        for f in files:
+            if not f.endswith('.html'):
+                continue
+            rel = os.path.relpath(os.path.join(root, f), ROOT).replace(os.sep, '/')
+            path = rel[:-len('index.html')] if rel.endswith('index.html') else rel
+            urls.append(base + '/' + path)
+    urls.sort()
+    body = '\n'.join('  <url><loc>%s</loc></url>' % u for u in urls)
+    xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+           + body + '\n</urlset>\n')
+    with open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8') as fh:
+        fh.write(xml)
+    return len(urls)
 
 if __name__ == '__main__':
     sys.exit(main())
