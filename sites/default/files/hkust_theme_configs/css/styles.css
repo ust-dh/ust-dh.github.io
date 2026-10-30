@@ -754,3 +754,21 @@ body:not(:has(.hero-carousel)) #hdtp-bars .site-header {
   text-wrap: wrap !important;
   white-space: normal !important;
 }
+
+
+/* hero news card: iOS Safari paints a second copy of a translucent box that has both
+   backdrop-filter and a large shadow, which reads as two cards stacked on top of each other.
+   Giving the card a solid background and no backdrop blur removes the ghost. Position, size and
+   every surrounding layout rule are left untouched. */
+.hero-news,
+.dark .hero-news {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  background: #ffffff !important;
+  box-shadow: 0 10px 24px rgba(2, 12, 48, 0.14) !important;
+}
+
+.dark .hero-news {
+  background: #16233c !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45) !important;
+}
