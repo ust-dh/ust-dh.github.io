@@ -724,3 +724,25 @@ body:not(:has(.hero-carousel)) #hdtp-bars .site-header {
   background: rgba(45, 212, 191, 0.18);
   color: #99f6e4;
 }
+
+
+/* news card titles: two lines, not one.
+   The aggregated theme CSS pins them to a single line with white-space:nowrap, which is what
+   truncated every headline. These rules win by !important and allow a second line. */
+.news-card .news-body h3,
+.news-card .news-body h3 a {
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+  white-space: normal !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+}
+
+/* tag rows on cards: one line only; anything beyond the edge fades out instead of wrapping. */
+.news-card .news-meta .tag-row {
+  flex-wrap: nowrap !important;
+  overflow: hidden !important;
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 3rem), transparent 100%);
+  mask-image: linear-gradient(to right, #000 calc(100% - 3rem), transparent 100%);
+}
