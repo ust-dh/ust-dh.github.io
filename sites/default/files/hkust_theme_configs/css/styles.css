@@ -706,7 +706,6 @@ body:not(:has(.hero-carousel)) #hdtp-bars .site-header {
   }
 }
 
-
 /* project group accent: HDT Borderless
    The other groups inherit the theme blue; the student group overrides it to violet. This
    gives the partnership group its own teal so the five group headers read as a set without
@@ -724,7 +723,6 @@ body:not(:has(.hero-carousel)) #hdtp-bars .site-header {
   background: rgba(45, 212, 191, 0.18);
   color: #99f6e4;
 }
-
 
 /* news card titles: two lines, not one.
    The aggregated theme CSS pins them to a single line with white-space:nowrap, which is what
@@ -747,7 +745,6 @@ body:not(:has(.hero-carousel)) #hdtp-bars .site-header {
   mask-image: linear-gradient(to right, #000 calc(100% - 3rem), transparent 100%);
 }
 
-
 /* card titles: let the first line fill before wrapping.
    The Chinese rules in the aggregated CSS set text-wrap:balance on every h3, which makes the two
    lines equal length instead of filling the first one. */
@@ -756,104 +753,4 @@ body:not(:has(.hero-carousel)) #hdtp-bars .site-header {
 .news-card .news-body h3 .field--name-title {
   text-wrap: wrap !important;
   white-space: normal !important;
-}
-
-
-/* mobile home hero: one column, no absolute children, no fixed viewport heights.
-   Two media blocks for max-width:899px disagreed about the carousel height; the later one set
-   min-height:200svh while the copy also reserved a full viewport, so the news card landed on top
-   of the copy and the image plate. This states the stack once, explicitly. */
-@media (max-width: 899px) {
-  .hero-carousel {
-    display: flex !important;
-    flex-direction: column !important;
-    min-height: 0 !important;
-    gap: 1.25rem !important;
-    padding-top: calc(var(--topbar-h, 0px) + var(--header-h, 0px) + 1.25rem) !important;
-    padding-bottom: 3rem !important;
-  }
-  .hero-static,
-  .hero-inner {
-    display: contents !important;
-  }
-  .hero-copy {
-    order: 1 !important;
-    display: block !important;
-    min-height: 0 !important;
-    margin: 0 !important;
-  }
-  .hero-news {
-    order: 2 !important;
-    position: static !important;
-    inset: auto !important;
-    width: auto !important;
-    max-width: none !important;
-    margin: 0 !important;
-  }
-  .hero-slides {
-    order: 3 !important;
-    position: relative !important;
-    inset: auto !important;
-    width: auto !important;
-    height: auto !important;
-    min-height: 0 !important;
-    margin: 0 !important;
-    aspect-ratio: 3 / 2;
-    overflow: hidden;
-    border-radius: var(--hero-radius, 1rem);
-  }
-}
-
-
-/* mobile home hero, second pass.
-   The aggregated stylesheet declares .hero-copy{display:flex !important; flex-direction:column
-   !important; justify-content:center !important; align-items:flex-start !important} and pins the
-   carousel to min-height:200svh. Among !important declarations the more specific selector wins, so
-   these rules are scoped to main.hdtp-main > .hero-carousel to outrank them. Layout: copy, then the
-   news card, then the image plate, in one column with a single gap. */
-@media (max-width: 899px) {
-  main.hdtp-main .hero-carousel {
-    display: flex !important;
-    flex-direction: column !important;
-    min-height: 0 !important;
-    height: auto !important;
-    gap: 1.25rem !important;
-    padding-top: calc(var(--topbar-h, 0px) + var(--header-h, 0px) + 1.25rem) !important;
-    padding-bottom: 3rem !important;
-  }
-  main.hdtp-main .hero-carousel .hero-static,
-  main.hdtp-main .hero-carousel .hero-inner {
-    display: contents !important;
-  }
-  main.hdtp-main .hero-carousel .hero-copy {
-    order: 1 !important;
-    display: block !important;
-    flex-direction: row !important;
-    justify-content: flex-start !important;
-    align-items: stretch !important;
-    min-height: 0 !important;
-    height: auto !important;
-    margin: 0 !important;
-  }
-  main.hdtp-main .hero-carousel .hero-news {
-    order: 2 !important;
-    position: static !important;
-    inset: auto !important;
-    width: auto !important;
-    max-width: none !important;
-    min-height: 0 !important;
-    margin: 0 !important;
-  }
-  main.hdtp-main .hero-carousel .hero-slides {
-    order: 3 !important;
-    position: relative !important;
-    inset: auto !important;
-    width: auto !important;
-    height: auto !important;
-    min-height: 0 !important;
-    margin: 0 !important;
-    aspect-ratio: 3 / 2;
-    overflow: hidden;
-    border-radius: var(--hero-radius, 1rem);
-  }
 }
