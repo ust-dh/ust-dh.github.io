@@ -757,3 +757,49 @@ body:not(:has(.hero-carousel)) #hdtp-bars .site-header {
   text-wrap: wrap !important;
   white-space: normal !important;
 }
+
+
+/* mobile home hero: one column, no absolute children, no fixed viewport heights.
+   Two media blocks for max-width:899px disagreed about the carousel height; the later one set
+   min-height:200svh while the copy also reserved a full viewport, so the news card landed on top
+   of the copy and the image plate. This states the stack once, explicitly. */
+@media (max-width: 899px) {
+  .hero-carousel {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    gap: 1.25rem !important;
+    padding-top: calc(var(--topbar-h, 0px) + var(--header-h, 0px) + 1.25rem) !important;
+    padding-bottom: 3rem !important;
+  }
+  .hero-static,
+  .hero-inner {
+    display: contents !important;
+  }
+  .hero-copy {
+    order: 1 !important;
+    display: block !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+  }
+  .hero-news {
+    order: 2 !important;
+    position: static !important;
+    inset: auto !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+  .hero-slides {
+    order: 3 !important;
+    position: relative !important;
+    inset: auto !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border-radius: var(--hero-radius, 1rem);
+  }
+}
