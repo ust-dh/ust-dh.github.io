@@ -135,13 +135,12 @@ def article_meta(rel, lang):
     else:
         d = dt.date(int(tm.group(1)), int(tm.group(2)), int(tm.group(3)))
     sm = SUMMARY_RE.search(h)
-    img = None
-    m = re.search(r'<figure class="article-cover">.*?<img[^>]+src="([^"]+)"', h, re.S)
-    if m:
-        img = m.group(1)
-    if not img:
-        m = re.search(r'<img[^>]+src="(/assets/img/(?:news|events)/[^"]+)"', h)
-        img = m.group(1) if m else ''
+    img = ''
+    fig = re.search(r'<figure class="article-cover">(.*?)</figure>', h, re.S)
+    if fig:
+        m = re.search(r'<img[^>]+src="([^"]+)"', fig.group(1))
+        if m:
+            img = m.group(1)
     tags = [strip_tags(x) for x in TAG_RE.findall(h)[:2]]
     return dict(slug=os.path.basename(os.path.dirname(rel)), date=d, title=strip_tags(t.group(1)),
                 summary=strip_tags(sm.group(1)) if sm else '', image=img, tags=tags, html=h)
@@ -190,9 +189,10 @@ def tag_items(tags):
 
 
 def news_card(item, lang, read_more, langattr):
+    src = ' src="%s"' % item['image'] if item.get('image') else ''
     return ('<article about="%s" class="news-card hdtp-news-card">\n'
             '<a class="news-thumb" href="%s" aria-hidden="true" tabindex="-1">\n'
-            '<img loading="lazy" src="%s" width="800" height="450" alt="%s" decoding="async">\n'
+            '<img loading="lazy"%s width="800" height="450" alt="%s" decoding="async">\n'
             '</a>\n<div class="news-body">\n<div class="news-meta">\n'
             '<div class="tag-row" lang="%s"><div class="field__items">%s</div></div>\n'
             '<time datetime="%s">%s</time>\n</div>\n'
@@ -202,7 +202,7 @@ def news_card(item, lang, read_more, langattr):
             'stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" '
             'aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>\n'
             '</div>\n</article>') % (
-        item['href'], item['href'], item['image'], html.escape(item['title'], quote=True), langattr,
+        item['href'], item['href'], src, html.escape(item['title'], quote=True), langattr,
         tag_items(item['tags']), item['date'].isoformat(), fmt_date(item['date'], lang),
         item['href'], html.escape(item['title']), html.escape(item['summary']), item['href'], read_more)
 
@@ -210,15 +210,16 @@ def news_card(item, lang, read_more, langattr):
 def hero_slide(item, lang, panel, active):
     headline, sub = panel
     tags = '|'.join(item['tags'])
+    src = ' src="%s"' % item['image'] if item.get('image') else ''
     return ('<figure class="hero-slide%s" data-slide data-title="%s" data-summary="%s" data-date="%s" '
             'data-href="%s" data-tags="%s" data-headline="%s" data-sub="%s" aria-hidden="%s">'
-            '<img class="slide-bg" src="%s" aria-hidden="true"%s><div class="hero-shade" aria-hidden="true"></div>'
+            '<img class="slide-bg"%s aria-hidden="true"%s><div class="hero-shade" aria-hidden="true"></div>'
             '</figure>') % (
         ' active' if active else '',
         html.escape(item['title'], quote=True), html.escape(item['summary'], quote=True),
         html.escape(fmt_date(item['date'], lang), quote=True), item['href'], html.escape(tags, quote=True),
         html.escape(headline, quote=True), html.escape(sub, quote=True),
-        'false' if active else 'true', item['image'],
+        'false' if active else 'true', src,
         ' fetchpriority="high"' if active else '')
 
 
