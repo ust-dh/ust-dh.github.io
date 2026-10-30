@@ -388,6 +388,7 @@ def main():
                 f = event_facts(e['rel'], lang)
                 rows_home.append(event_row(e, lang, f, labels, details))
             page = replace_inner(page, eb, '\n\n' + '\n\n'.join(rows_home) + '\n\n')
+        page = set_events_heading(page, lang, bool(upcoming))
         write(prefix + 'index.html', page)
         log.append('%sindex.html: %d slides, %d cards, %d events' % (
             prefix, min(HERO_COUNT, len(news)), min(HOME_NEWS_COUNT, len(news)), len(feed) if labels else 0))
