@@ -772,3 +772,35 @@ body:not(:has(.hero-carousel)) #hdtp-bars .site-header {
   background: #16233c !important;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45) !important;
 }
+
+
+/* phones: the image plate must stay in the flow below the card.
+   The desktop rule pins .hero-slides absolutely (top/right/width from custom properties that are
+   unset on mobile), so it lands underneath the news card and reads as a second card. These
+   selectors outrank it. */
+@media (max-width: 899px) {
+  main.hdtp-main .hero-carousel .hero-slides {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 1.5rem 0 0 !important;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    z-index: 0 !important;
+  }
+  main.hdtp-main .hero-carousel .hero-news {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    z-index: 3 !important;
+  }
+}
