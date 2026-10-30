@@ -746,3 +746,14 @@ body:not(:has(.hero-carousel)) #hdtp-bars .site-header {
   -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 3rem), transparent 100%);
   mask-image: linear-gradient(to right, #000 calc(100% - 3rem), transparent 100%);
 }
+
+
+/* card titles: let the first line fill before wrapping.
+   The Chinese rules in the aggregated CSS set text-wrap:balance on every h3, which makes the two
+   lines equal length instead of filling the first one. */
+.news-card .news-body h3,
+.news-card .news-body h3 a,
+.news-card .news-body h3 .field--name-title {
+  text-wrap: wrap !important;
+  white-space: normal !important;
+}
